@@ -6,6 +6,8 @@ const db = require("./db");
 const csurf = require("csurf");
 const cookieSession = require("cookie-session");
 const { compare, hash } = require("./bc");
+const cryptoRandomString = require("crypto-random-string");
+const ses = require("./ses");
 
 app.use(
     cookieSession({
@@ -69,7 +71,6 @@ app.post("/register", (req, res) => {
 
 app.post("/login", (req, res) => {
     const { email, pw } = req.body;
-    console.log("req.body: ", req.body);
     if (!pw || !email) {
         console.log("invalid input into fields");
         res.json({
@@ -101,6 +102,88 @@ app.post("/login", (req, res) => {
                 });
             });
     }
+});
+
+app.post("/reset/email", (req, res) => {
+    const { email } = req.body;
+    db.checkExist(email)
+        .then(({ rows }) => {
+            if (rows.length == 0) {
+                res.json({
+                    error: true,
+                    msg: "No user with such email!",
+                    view: 1,
+                });
+            } else {
+                const secretCode = cryptoRandomString({
+                    length: 6,
+                });
+                return db
+                    .createResetCode(email, secretCode)
+                    .then(({ rows }) => {
+                        return ses
+                            .sendEmail(
+                                "thorsten.staender@wagestolz.de",
+                                `your Reset code: ${rows[0].code}`,
+                                "Reset your password"
+                            )
+                            .then(() => {
+                                res.json({
+                                    error: false,
+                                    view: 2,
+                                });
+                            })
+                            .catch((err) =>
+                                console.log("error in ses.sendEmail: ", err)
+                            );
+                    })
+                    .catch((err) =>
+                        console.log("error in createResetCode: ", err)
+                    );
+            }
+        })
+        .catch((err) => {
+            console.log("error in db.checkExist(): ", err);
+        });
+});
+
+app.post("/reset/verify", (req, res) => {
+    const { code, pw } = req.body;
+    db.validateResetCode()
+        .then(({ rows }) => {
+            let match = rows.find((item) => item.code === code);
+            if (match) {
+                return hash(pw)
+                    .then((hashedPw) => {
+                        return db
+                            .updatePw(hashedPw, match.email)
+                            .then(() => {
+                                console.log(
+                                    "successfully updated pw in database table users"
+                                );
+                                res.json({
+                                    error: false,
+                                    view: 3,
+                                });
+                            })
+                            .catch((err) => {
+                                console.log("error in db.updatePw(): ", err);
+                            });
+                    })
+                    .catch((err) => {
+                        console.log("error in hash(): ", err);
+                    });
+            } else {
+                res.json({
+                    error: true,
+                    msg: "Code is invalid!",
+                    view: 2,
+                });
+            }
+        })
+        .catch((err) => {
+            console.log("error in db.validateResetCode(): ", err);
+        });
 });
 
 app.get("*", function (req, res) {

@@ -39,31 +39,33 @@ export default class Registration extends Component {
         return (
             <>
                 {this.state.error && <p>something went wrong!</p>}
-                <input
-                    type="text"
-                    placeholder="first name"
-                    name="first"
-                    onChange={this.handleChange}
-                />
-                <input
-                    type="text"
-                    placeholder="last name"
-                    name="last"
-                    onChange={this.handleChange}
-                />
-                <input
-                    type="email"
-                    placeholder="email"
-                    name="email"
-                    onChange={this.handleChange}
-                />
-                <input
-                    type="password"
-                    placeholder="password"
-                    name="pw"
-                    onChange={this.handleChange}
-                />
-                <button onClick={this.handleClick}>Register</button>
+                <div className="register-form">
+                    <input
+                        type="text"
+                        placeholder="first name"
+                        name="first"
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="last name"
+                        name="last"
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type="email"
+                        placeholder="email"
+                        name="email"
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type="password"
+                        placeholder="password"
+                        name="pw"
+                        onChange={this.handleChange}
+                    />
+                    <button onClick={this.handleClick}>Register</button>
+                </div>
                 <p>
                     Already a member? <Link to="/login">Log in</Link>
                 </p>
@@ -71,5 +73,3 @@ export default class Registration extends Component {
         );
     }
 }
-
-// a) <button onClick={this.incrementCount}>Click Me!</button>

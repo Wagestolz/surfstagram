@@ -35,25 +35,30 @@ export default class Registration extends Component {
     }
     render() {
         return (
-            <div>
+            <>
                 {this.state.error && <p>something went wrong!</p>}
-                <input
-                    type="email"
-                    placeholder="email"
-                    name="email"
-                    onChange={this.handleChange}
-                />
-                <input
-                    type="password"
-                    placeholder="password"
-                    name="pw"
-                    onChange={this.handleChange}
-                />
-                <button onClick={this.handleClick}>Login</button>
+                <div className="login-form">
+                    <input
+                        type="email"
+                        placeholder="email"
+                        name="email"
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type="password"
+                        placeholder="password"
+                        name="pw"
+                        onChange={this.handleChange}
+                    />
+                    <button onClick={this.handleClick}>Login</button>
+                </div>
                 <p>
                     Not a member? <Link to="/">Sign up</Link>
                 </p>
-            </div>
+                <p>
+                    forgot your password? <Link to="/reset">click here</Link>
+                </p>
+            </>
         );
     }
 }

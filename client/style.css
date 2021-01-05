@@ -5,3 +5,15 @@ body {
 .logo {
     width: 300px;
 }
+
+.register-form {
+    display: grid;
+    max-width: 300px;
+    gap: 0.5rem;
+}
+
+.login-form {
+    display: grid;
+    max-width: 300px;
+    gap: 0.5rem;
+}
