@@ -6,8 +6,6 @@ export default class Registration extends Component {
     constructor() {
         super();
         this.state = {
-            first: null,
-            last: null,
             email: null,
             pw: null,
             error: false,
@@ -23,7 +21,7 @@ export default class Registration extends Component {
     handleClick() {
         console.log("handle click fired", this.state);
         axios
-            .post("/register", this.state)
+            .post("/login", this.state)
             .then((res) => {
                 this.setState({
                     error: res.data.error,
@@ -37,20 +35,8 @@ export default class Registration extends Component {
     }
     render() {
         return (
-            <>
+            <div>
                 {this.state.error && <p>something went wrong!</p>}
-                <input
-                    type="text"
-                    placeholder="first name"
-                    name="first"
-                    onChange={this.handleChange}
-                />
-                <input
-                    type="text"
-                    placeholder="last name"
-                    name="last"
-                    onChange={this.handleChange}
-                />
                 <input
                     type="email"
                     placeholder="email"
@@ -63,11 +49,11 @@ export default class Registration extends Component {
                     name="pw"
                     onChange={this.handleChange}
                 />
-                <button onClick={this.handleClick}>Register</button>
+                <button onClick={this.handleClick}>Login</button>
                 <p>
-                    Already a member? <Link to="/login">Log in</Link>
+                    Not a member? <Link to="/">Sign up</Link>
                 </p>
-            </>
+            </div>
         );
     }
 }

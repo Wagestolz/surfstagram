@@ -10,3 +10,7 @@ module.exports.addUser = (firstName, LastName, emailAdress, hashedPw) => {
         [firstName, LastName, emailAdress, hashedPw]
     );
 };
+
+module.exports.checkLogin = (email) => {
+    return db.query(`SELECT password, id FROM users WHERE email = $1`, [email]);
+};
