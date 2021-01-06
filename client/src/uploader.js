@@ -27,7 +27,6 @@ export default class Uploader extends Component {
         }
     }
     handleFileChange(e) {
-        console.log(e.target.files[0]);
         this.setState({
             image: e.target.files[0],
         });

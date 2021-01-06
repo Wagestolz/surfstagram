@@ -232,6 +232,11 @@ app.post("/deleteimg", s3.delete, (req, res) => {
         });
 });
 
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.sendStatus(200);
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

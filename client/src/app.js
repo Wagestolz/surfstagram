@@ -18,6 +18,7 @@ export default class App extends Component {
         this.toggleUploader = this.toggleUploader.bind(this);
         this.setImage = this.setImage.bind(this);
         this.deleteImg = this.deleteImg.bind(this);
+        this.logout = this.logout.bind(this);
     }
     async componentDidMount() {
         const { data } = await axios.get("/user");
@@ -44,6 +45,9 @@ export default class App extends Component {
             uploaderModal: !this.state.uploaderModal,
         });
     }
+    logout() {
+        axios.get("/logout").then(() => location.replace("/welcome"));
+    }
     deleteImg() {
         var self = this;
         axios
@@ -65,6 +69,7 @@ export default class App extends Component {
         return (
             <>
                 <h2>App</h2>
+                <button onClick={this.logout}>logout</button>
                 <ProfilePic
                     first={this.state.first}
                     last={this.state.last}
