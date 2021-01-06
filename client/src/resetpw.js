@@ -59,7 +59,7 @@ export default class Reset extends Component {
                     console.log("promise resolved, res: ", res);
                 })
                 .catch((err) => {
-                    console.log("error at POST /reset/email", err);
+                    console.log("error at POST /reset/verify", err);
                 });
         }
     }

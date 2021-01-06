@@ -40,3 +40,10 @@ module.exports.updatePw = (pw, email) => {
         [pw, email]
     );
 };
+
+module.exports.getUserInfo = (userId) => {
+    return db.query(
+        `SELECT email, id, first, last, profile_pic FROM users WHERE id = $1`,
+        [userId]
+    );
+};

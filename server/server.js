@@ -186,6 +186,20 @@ app.post("/reset/verify", (req, res) => {
         });
 });
 
+app.get("/user", function (req, res) {
+    db.getUserInfo(req.session.userId)
+        .then(({ rows }) => {
+            console.log("rows: ", rows);
+            res.json({
+                first: rows[0].first,
+                last: rows[0].last,
+                email: rows[0].email,
+                profile_pic: rows[0].profile_pic,
+            });
+        })
+        .catch((err) => console.log("error in db.getUserInfo():", err));
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
