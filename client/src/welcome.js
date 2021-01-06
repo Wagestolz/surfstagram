@@ -7,9 +7,9 @@ import Reset from "./resetpw";
 export default function Welcome() {
     return (
         <div>
-            <h1>Welcome to Wagestolz</h1>
-            <img src="logo.png" alt="logo" className="logo" />
-            <h2>The professional Network for Innovators</h2>
+            <h1>Surfbuddy</h1>
+            <img src="logo6.gif" alt="logo" className="logo" />
+            <h2>Connect with Surfers nearby</h2>
             <HashRouter>
                 <div>
                     <Route exact path="/" component={Registration} />
