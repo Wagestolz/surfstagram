@@ -8,6 +8,28 @@ const cookieSession = require("cookie-session");
 const { compare, hash } = require("./bc");
 const cryptoRandomString = require("crypto-random-string");
 const ses = require("./ses");
+const multer = require("multer"); // middleware for handling multipart/form-data (for uploading files)
+const uidSafe = require("uid-safe"); // generating unique names for uploaded images
+const s3 = require("./s3");
+const { s3Url } = require("./config.json");
+
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152, // = 2mb
+    },
+});
 
 app.use(
     cookieSession({
@@ -44,24 +66,16 @@ app.post("/register", (req, res) => {
     } else {
         hash(pw)
             .then((hashedPw) => {
-                db.addUser(first, last, email, hashedPw)
-                    .then(({ rows }) => {
-                        // console.log("NEW USER added to database table users");
-                        req.session.userId = rows[0].id;
-                        console.log("req.session.userId: ", req.session.userId);
-                        res.json({
-                            error: false,
-                        });
-                    })
-                    .catch((err) => {
-                        console.log("error in db.addUser(): ", err);
-                        res.json({
-                            error: true,
-                        });
-                    });
+                return db.addUser(first, last, email, hashedPw);
+            })
+            .then(({ rows }) => {
+                req.session.userId = rows[0].id;
+                res.json({
+                    error: false,
+                });
             })
             .catch((err) => {
-                console.log("error in hash(): ", err);
+                console.log("error in hash() or db.addUser():: ", err);
                 res.json({
                     error: true,
                 });
@@ -79,7 +93,7 @@ app.post("/login", (req, res) => {
     } else {
         db.checkLogin(email)
             .then(({ rows }) => {
-                compare(pw, rows[0].password).then((result) => {
+                return compare(pw, rows[0].password).then((result) => {
                     if (result) {
                         req.session.userId = rows[0].id;
                         res.json({
@@ -96,7 +110,7 @@ app.post("/login", (req, res) => {
                 });
             })
             .catch((err) => {
-                console.log("error in db.checkLogin() or compare(): ", err);
+                console.log("error in db.checkLogin(): ", err);
                 res.json({
                     error: true,
                 });
@@ -121,24 +135,23 @@ app.post("/reset/email", (req, res) => {
                 return db
                     .createResetCode(email, secretCode)
                     .then(({ rows }) => {
-                        return ses
-                            .sendEmail(
-                                "thorsten.staender@wagestolz.de",
-                                `your Reset code: ${rows[0].code}`,
-                                "Reset your password"
-                            )
-                            .then(() => {
-                                res.json({
-                                    error: false,
-                                    view: 2,
-                                });
-                            })
-                            .catch((err) =>
-                                console.log("error in ses.sendEmail: ", err)
-                            );
+                        return ses.sendEmail(
+                            "thorsten.staender@wagestolz.de",
+                            `your Reset code: ${rows[0].code}`,
+                            "Reset your password"
+                        );
+                    })
+                    .then(() => {
+                        res.json({
+                            error: false,
+                            view: 2,
+                        });
                     })
                     .catch((err) =>
-                        console.log("error in createResetCode: ", err)
+                        console.log(
+                            "error in ses.sendEmail() or createResetCode(): ",
+                            err
+                        )
                     );
             }
         })
@@ -155,23 +168,22 @@ app.post("/reset/verify", (req, res) => {
             if (match) {
                 return hash(pw)
                     .then((hashedPw) => {
-                        return db
-                            .updatePw(hashedPw, match.email)
-                            .then(() => {
-                                console.log(
-                                    "successfully updated pw in database table users"
-                                );
-                                res.json({
-                                    error: false,
-                                    view: 3,
-                                });
-                            })
-                            .catch((err) => {
-                                console.log("error in db.updatePw(): ", err);
-                            });
+                        return db.updatePw(hashedPw, match.email);
+                    })
+                    .then(() => {
+                        console.log(
+                            "successfully updated pw in database table users"
+                        );
+                        res.json({
+                            error: false,
+                            view: 3,
+                        });
                     })
                     .catch((err) => {
-                        console.log("error in hash(): ", err);
+                        console.log(
+                            "error in db.updatePw() or in hash(): ",
+                            err
+                        );
                     });
             } else {
                 res.json({
@@ -189,15 +201,24 @@ app.post("/reset/verify", (req, res) => {
 app.get("/user", function (req, res) {
     db.getUserInfo(req.session.userId)
         .then(({ rows }) => {
-            console.log("rows: ", rows);
-            res.json({
-                first: rows[0].first,
-                last: rows[0].last,
-                email: rows[0].email,
-                profile_pic: rows[0].profile_pic,
-            });
+            res.json(rows);
         })
         .catch((err) => console.log("error in db.getUserInfo():", err));
+});
+
+app.post("/imageupload", uploader.single("image"), s3.upload, (req, res) => {
+    const url = `${s3Url}${req.file.filename}`;
+    if (req.file) {
+        db.storeNewImage(url, req.session.userId)
+            .then(({ rows }) => {
+                res.json(rows[0]);
+            })
+            .catch((err) => {
+                console.log("error in db.storeNewImage: ", err);
+            });
+    } else {
+        res.json({ error: true });
+    }
 });
 
 app.get("*", function (req, res) {

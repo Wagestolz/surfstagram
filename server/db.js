@@ -47,3 +47,12 @@ module.exports.getUserInfo = (userId) => {
         [userId]
     );
 };
+
+module.exports.storeNewImage = (upUrl, userId) => {
+    return db.query(
+        `UPDATE users SET profile_pic = $1
+        WHERE id = $2
+        RETURNING profile_pic`,
+        [upUrl, userId]
+    );
+};

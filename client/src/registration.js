@@ -21,7 +21,6 @@ export default class Registration extends Component {
         });
     }
     handleClick() {
-        console.log("handle click fired", this.state);
         axios
             .post("/register", this.state)
             .then((res) => {

@@ -7,30 +7,26 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
+            id: null,
             email: null,
-            first: "Thorsten",
-            last: "Staender",
-            uploaderModal: false,
+            first: null,
+            last: null,
             profile_pic: null,
+            uploaderModal: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.toggleUploader = this.toggleUploader.bind(this);
         this.setImage = this.setImage.bind(this);
     }
-    componentDidMount() {
-        axios
-            .get("/user")
-            .then((res) => {
-                this.setState({
-                    email: res.data.email,
-                    first: res.data.first,
-                    last: res.data.last,
-                    profile_pic: res.data.profile_pic,
-                });
-            })
-            .catch((err) => {
-                console.log("error at GET /user", err);
-            });
+    async componentDidMount() {
+        const { data } = await axios.get("/user");
+        this.setState({
+            id: data[0].id,
+            email: data[0].email,
+            first: data[0].first,
+            last: data[0].last,
+            profile_pic: data[0].profile_pic,
+        });
     }
     setImage(imageUrl) {
         this.setState({
@@ -54,10 +50,9 @@ export default class App extends Component {
                 <ProfilePic
                     first={this.state.first}
                     last={this.state.last}
-                    email={this.state.email}
                     profile_pic={this.state.profile_pic}
+                    toggleUploader={this.toggleUploader}
                 />
-                <button onClick={this.toggleUploader}>Upload</button>
                 {this.state.uploaderModal && (
                     <Uploader setImage={this.setImage} />
                 )}
