@@ -68,15 +68,48 @@ export default class App extends Component {
     render() {
         return (
             <>
-                <h2>App</h2>
-                <button onClick={this.logout}>logout</button>
-                <ProfilePic
-                    first={this.state.first}
-                    last={this.state.last}
-                    profile_pic={this.state.profile_pic}
-                    toggleUploader={this.toggleUploader}
-                    deleteImg={this.deleteImg}
-                />
+                {/* navbar */}
+                <nav className="navbar">
+                    <div className="nav-center">
+                        {/* links */}
+                        <div>
+                            {/* <button className="toggle-nav" @click="toggleNav">
+                            <i className="fas fa-bars"></i>
+                        </button> */}
+                            {/* logo */}
+                            <img
+                                src="/logo6.gif"
+                                className="nav-logo"
+                                alt="logo"
+                            />
+                            <ul className="nav-links">
+                                <li>
+                                    <a className="nav-link"> find friends</a>
+                                </li>
+                                <li>
+                                    <a
+                                        onClick={this.logout}
+                                        className="nav-link"
+                                    >
+                                        logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* cart icon */}
+                        <div className="pic-container">
+                            <ProfilePic
+                                first={this.state.first}
+                                last={this.state.last}
+                                profile_pic={this.state.profile_pic}
+                                toggleUploader={this.toggleUploader}
+                                deleteImg={this.deleteImg}
+                            />
+                        </div>
+                    </div>
+                </nav>
+
                 {this.state.uploaderModal && (
                     <Uploader setImage={this.setImage} />
                 )}

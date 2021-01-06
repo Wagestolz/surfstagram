@@ -9,11 +9,11 @@ export default function ProfilePic({
 }) {
     return (
         <div>
-            <h2>Profile Pic</h2>
-            <h3>{first}</h3>
-            <h3>{last}</h3>
+            {/* <h3>{first}</h3>
+            <h3>{last}</h3> */}
             {profile_pic ? (
                 <img
+                    className="profile-pic"
                     onClick={toggleUploader}
                     src={profile_pic}
                     alt={first + " " + last}
@@ -21,12 +21,12 @@ export default function ProfilePic({
             ) : (
                 <img
                     onClick={toggleUploader}
-                    className="logo"
-                    src="logo.png"
+                    className="profile-pic"
+                    src="logo6.gif"
                     alt="default"
                 />
             )}
-            <button onClick={deleteImg}>delete</button>
+            {/* <button onClick={deleteImg}>delete</button> */}
         </div>
     );
 }
