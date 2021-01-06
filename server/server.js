@@ -221,6 +221,17 @@ app.post("/imageupload", uploader.single("image"), s3.upload, (req, res) => {
     }
 });
 
+app.post("/deleteimg", s3.delete, (req, res) => {
+    const id = req.session.userId;
+    db.deleteImage(id)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error in db.deleteImage: ", err);
+        });
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

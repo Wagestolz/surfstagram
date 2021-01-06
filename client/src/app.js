@@ -17,6 +17,7 @@ export default class App extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.toggleUploader = this.toggleUploader.bind(this);
         this.setImage = this.setImage.bind(this);
+        this.deleteImg = this.deleteImg.bind(this);
     }
     async componentDidMount() {
         const { data } = await axios.get("/user");
@@ -43,6 +44,23 @@ export default class App extends Component {
             uploaderModal: !this.state.uploaderModal,
         });
     }
+    deleteImg() {
+        var self = this;
+        axios
+            .post("/deleteimg", {
+                params: {
+                    url: this.state.profile_pic,
+                },
+            })
+            .then(() => {
+                self.setState({
+                    profile_pic: null,
+                });
+            })
+            .catch((err) => {
+                console.log("error at POST /deleteimg", err);
+            });
+    }
     render() {
         return (
             <>
@@ -52,6 +70,7 @@ export default class App extends Component {
                     last={this.state.last}
                     profile_pic={this.state.profile_pic}
                     toggleUploader={this.toggleUploader}
+                    deleteImg={this.deleteImg}
                 />
                 {this.state.uploaderModal && (
                     <Uploader setImage={this.setImage} />

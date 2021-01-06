@@ -56,3 +56,12 @@ module.exports.storeNewImage = (upUrl, userId) => {
         [upUrl, userId]
     );
 };
+
+module.exports.deleteImage = (id) => {
+    return db.query(
+        `UPDATE users SET profile_pic = null
+        WHERE id = $1
+        RETURNING profile_pic`,
+        [id]
+    );
+};
