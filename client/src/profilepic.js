@@ -19,8 +19,8 @@ export default function ProfilePic({
             ) : (
                 <img
                     onClick={toggleUploader}
-                    className="profile-pic"
-                    src="logo6.gif"
+                    className={`profile-pic + ${largerSize}`}
+                    src="logo3.gif"
                     alt="default"
                 />
             )}

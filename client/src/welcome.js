@@ -8,7 +8,7 @@ export default function Welcome() {
     return (
         <div>
             <h1>Surfbuddies</h1>
-            <img src="logo8.PNG" alt="logo" className="logo" />
+            <img src="logo6.gif" alt="logo" className="logo" />
             <h2>it's better together</h2>
             <HashRouter>
                 <div>

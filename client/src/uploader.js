@@ -14,6 +14,9 @@ export default class Uploader extends Component {
     }
     handleClick(e) {
         e.preventDefault();
+        if (this.props.profile_pic && this.state.image) {
+            this.props.deleteImg();
+        }
         var formData = new FormData();
         formData.append("image", this.state.image);
         if (this.state.image) {
@@ -21,6 +24,7 @@ export default class Uploader extends Component {
                 .post("/imageupload", formData)
                 .then((res) => {
                     this.props.setImage(res.data.profile_pic);
+                    this.props.toggleUploader();
                 })
                 .catch((err) => {
                     console.log("error from POST /imageupload", err);
@@ -33,7 +37,10 @@ export default class Uploader extends Component {
         });
     }
     handleDelete() {
-        this.props.deleteImg();
+        if (this.props.profile_pic) {
+            this.props.deleteImg();
+        }
+        this.props.toggleUploader();
     }
     render() {
         return (

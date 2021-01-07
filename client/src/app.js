@@ -13,8 +13,7 @@ export default class App extends Component {
             first: null,
             last: null,
             profile_pic: null,
-            bio: "blogger, soccer mom, artist",
-            // bio: null,
+            bio: null,
             uploaderModal: false,
         };
         this.handleChange = this.handleChange.bind(this);
@@ -92,14 +91,9 @@ export default class App extends Component {
                 <nav className="navbar">
                     <div className="nav-center">
                         {/* logo */}
-                        <div className="logo-container">
-                            <h2>SB</h2>
-                            <img
-                                src="/logo8.PNG"
-                                className="nav-logo"
-                                alt="logo"
-                            />
-                        </div>
+
+                        <img src="/logo6.gif" className="nav-logo" alt="logo" />
+
                         <div className="links-container">
                             {/* <button className="toggle-nav" @click="toggleNav">
                             <i className="fas fa-bars"></i>
@@ -136,6 +130,8 @@ export default class App extends Component {
                     <Uploader
                         setImage={this.setImage}
                         deleteImg={this.deleteImg}
+                        profile_pic={this.state.profile_pic}
+                        toggleUploader={this.toggleUploader}
                     />
                 )}
                 <Profile

@@ -134,11 +134,7 @@ p {
 .nav-logo {
     width: 80px;
 }
-.logo-container {
-    display: grid;
-    align-items: end;
-    grid-template-columns: auto 1fr;
-}
+
 .logo-container h2 {
     margin-bottom: 0px;
 }
