@@ -44,18 +44,46 @@ export default class Uploader extends Component {
     }
     render() {
         return (
-            <>
-                {this.state.error && <p>something went wrong!</p>}
-                <input
-                    type="file"
-                    name="image"
-                    id="image"
-                    accept="image/*"
-                    onChange={this.handleFileChange}
-                />
-                <button onClick={this.handleClick}>upload</button>
-                <button onClick={this.handleDelete}>delete</button>
-            </>
+            <div className="modal">
+                <div className="modal-container">
+                    <h2
+                        onClick={this.props.toggleUploader}
+                        className="close-btn"
+                    >
+                        <i className="fas fa-times"></i>
+                    </h2>
+                    <div>
+                        <input
+                            type="file"
+                            name="image"
+                            id="image"
+                            accept="image/*"
+                            className="inputfile"
+                            onChange={this.handleFileChange}
+                        />
+                        <label htmlFor="image" id="upload">
+                            <i className="fas fa-upload"> </i>
+                            {this.state.image
+                                ? this.state.image.name
+                                : " Choose Img (max 2mb)"}
+                        </label>
+                    </div>
+                    <div>
+                        <button
+                            className="btn modalBtn"
+                            onClick={this.handleClick}
+                        >
+                            upload
+                        </button>
+                        <button
+                            className="btn modalBtn"
+                            onClick={this.handleDelete}
+                        >
+                            delete
+                        </button>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

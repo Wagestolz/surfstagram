@@ -6,17 +6,11 @@ export default class BioEditer extends Component {
         this.state = {
             editMode: false,
             bioDraft: "",
-            bio: this.props.bio,
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
     }
-    // UNSAFE_componentWillReceiveProps() {
-    //     this.setState({
-    //         bio: this.props.bio,
-    //     });
-    // }
     handleClick() {
         this.setState({
             bioDraft: this.props.bio,

@@ -26,12 +26,7 @@ export default class App extends Component {
     async componentDidMount() {
         const { data } = await axios.get("/user");
         this.setState({
-            id: data[0].id,
-            email: data[0].email,
-            first: data[0].first,
-            last: data[0].last,
-            bio: data[0].bio,
-            profile_pic: data[0].profile_pic,
+            ...data[0],
         });
     }
     setImage(imageUrl) {
@@ -121,7 +116,12 @@ export default class App extends Component {
                                 profile_pic={this.state.profile_pic}
                                 toggleUploader={this.toggleUploader}
                             />
-                            <button onClick={this.logout}>logout</button>
+                            <button
+                                className="btn logoutBtn"
+                                onClick={this.logout}
+                            >
+                                logout
+                            </button>
                         </div>
                     </div>
                 </nav>
