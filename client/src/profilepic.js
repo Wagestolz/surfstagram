@@ -5,12 +5,13 @@ export default function ProfilePic({
     last,
     profile_pic,
     toggleUploader,
+    largerSize,
 }) {
     return (
         <div>
             {profile_pic ? (
                 <img
-                    className="profile-pic"
+                    className={`profile-pic + ${largerSize}`}
                     onClick={toggleUploader}
                     src={profile_pic}
                     alt={first + " " + last}

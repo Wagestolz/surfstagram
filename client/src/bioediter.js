@@ -12,22 +12,19 @@ export default class BioEditer extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
     }
-    UNSAFE_componentWillReceiveProps() {
-        this.setState({
-            bio: this.props.bio,
-        });
-    }
+    // UNSAFE_componentWillReceiveProps() {
+    //     this.setState({
+    //         bio: this.props.bio,
+    //     });
+    // }
     handleClick() {
         this.setState({
-            bioDraft: "",
+            bioDraft: this.props.bio,
             editMode: !this.state.editMode,
         });
     }
     handleUpdate() {
-        if (this.state.bioDraft) {
-            console.log("this.state.bioDraft: ", this.state.bioDraft);
-            // bio not empty, trigger axios request
-        }
+        this.props.updateBio(this.state.bioDraft);
         this.handleClick();
     }
     handleChange(e) {

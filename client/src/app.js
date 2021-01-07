@@ -22,6 +22,7 @@ export default class App extends Component {
         this.setImage = this.setImage.bind(this);
         this.deleteImg = this.deleteImg.bind(this);
         this.logout = this.logout.bind(this);
+        this.updateBio = this.updateBio.bind(this);
     }
     async componentDidMount() {
         const { data } = await axios.get("/user");
@@ -53,7 +54,7 @@ export default class App extends Component {
         axios.get("/logout").then(() => location.replace("/welcome"));
     }
     deleteImg() {
-        var self = this;
+        let self = this;
         axios
             .post("/deleteimg", {
                 params: {
@@ -67,6 +68,21 @@ export default class App extends Component {
             })
             .catch((err) => {
                 console.log("error at POST /deleteimg", err);
+            });
+    }
+    updateBio(bioDraft) {
+        let self = this;
+        axios
+            .post("/updateBio", {
+                bioDraft: bioDraft,
+            })
+            .then(({ data }) => {
+                self.setState({
+                    bio: data[0].bio,
+                });
+            })
+            .catch((err) => {
+                console.log("error at POST /updateBio", err);
             });
     }
     render() {
@@ -128,6 +144,7 @@ export default class App extends Component {
                     profile_pic={this.state.profile_pic}
                     bio={this.state.bio}
                     toggleUploader={this.toggleUploader}
+                    updateBio={this.updateBio}
                 />
             </>
         );

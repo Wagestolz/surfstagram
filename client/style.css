@@ -278,10 +278,20 @@ Navbar
 .profile-center {
     display: grid;
     grid-template-columns: auto 1fr;
+    align-items: center;
     column-gap: 2rem;
     width: 90vw;
     max-width: var(--max-width);
 }
+.profile-info {
+    max-width: 250px;
+}
+
+.bigger {
+    width: 250px;
+    height: 250px;
+}
+
 /*
 =============== 
 Welcome

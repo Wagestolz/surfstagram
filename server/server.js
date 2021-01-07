@@ -232,6 +232,18 @@ app.post("/deleteimg", s3.delete, (req, res) => {
         });
 });
 
+app.post("/updateBio", (req, res) => {
+    const id = req.session.userId;
+    const { bioDraft } = req.body;
+    db.updateBio(id, bioDraft)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error in db.updateBio: ", err);
+        });
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.sendStatus(200);

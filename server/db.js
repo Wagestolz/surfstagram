@@ -41,6 +41,15 @@ module.exports.updatePw = (pw, email) => {
     );
 };
 
+module.exports.updateBio = (id, bio) => {
+    return db.query(
+        `UPDATE users SET bio = $2
+        WHERE id = $1
+        RETURNING bio`,
+        [id, bio]
+    );
+};
+
 module.exports.getUserInfo = (userId) => {
     return db.query(
         `SELECT email, id, first, last, profile_pic, bio FROM users WHERE id = $1`,

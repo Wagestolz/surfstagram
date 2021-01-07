@@ -9,6 +9,7 @@ export default function Profile({
     profile_pic,
     bio,
     toggleUploader,
+    updateBio,
 }) {
     return (
         <div className="profile-container">
@@ -18,12 +19,13 @@ export default function Profile({
                     last={last}
                     profile_pic={profile_pic}
                     toggleUploader={toggleUploader}
+                    largerSize="bigger"
                 />
                 <div className="profile-info">
                     <h3>
                         {first} {last}
                     </h3>
-                    <BioEditer bio={bio} />
+                    <BioEditer bio={bio} updateBio={updateBio} />
                 </div>
             </div>
         </div>
