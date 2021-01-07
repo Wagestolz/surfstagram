@@ -130,8 +130,17 @@ p {
         line-height: 1;
     }
 }
+
 .nav-logo {
-    width: 100px; /* added*/
+    width: 80px;
+}
+.logo-container {
+    display: grid;
+    align-items: end;
+    grid-template-columns: auto 1fr;
+}
+.logo-container h2 {
+    margin-bottom: 0px;
 }
 .img {
     width: 100%;
@@ -174,27 +183,27 @@ Navbar
 .navbar {
     height: 6rem;
     background: transparent;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     font-family: var(--ff-heading); /* added */
+    margin-bottom: 4rem;
 }
 
 .nav-center {
     width: 90vw;
     max-width: var(--max-width);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
     align-items: center;
 }
+
 .nav-links {
     display: none;
 }
 .toggle-nav {
-    /* background: var(--pink); */
     background: transparent;
-    /* border-color: transparent; */
-    border: solid 2px var(--bright); /* added*/
+    border: solid 2px var(--bright);
     color: var(--bright);
     width: 3.5rem;
     height: 2.5rem;
@@ -210,25 +219,19 @@ Navbar
     background: var(--pink);
 }
 .pic-container {
-    position: relative;
     margin-top: 0.75rem;
+    justify-self: end;
 }
 
 @media screen and (min-width: 800px) {
-    .nav-center {
-        position: relative;
-    }
-    .nav-logo {
-        position: absolute;
-        top: 50%;
-        left: 65%;
-        transform: translate(-50%, -50%);
-    }
     .toggle-nav {
         display: none;
     }
     .nav-links {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: end;
+        align-content: center;
         font-size: 1.5rem;
         text-transform: capitalize;
     }
@@ -237,32 +240,53 @@ Navbar
         margin-right: 3rem;
         letter-spacing: var(--spacing);
         transition: var(--transition);
-        /* font-size: 1.25rem; */
-        font-size: 1.5rem; /* added */
-        color: var(--bright); /* added */
+        font-size: 1.5rem;
+        color: var(--bright);
         cursor: pointer;
+        justify-self: end;
     }
     .nav-link:hover {
         color: var(--pink);
     }
 }
-@media screen and (min-width: 992px) {
-    .nav-logo {
-        left: 50%;
-    }
-}
 
 .logo {
-    width: 100px;
+    max-width: 500px;
 }
 .profile-pic {
     width: 70px;
     height: 70px;
     object-fit: cover;
     border-radius: 50%;
+    border: 3px solid var(--bright);
     cursor: pointer;
 }
 
+/*
+=============== 
+Navbar
+===============
+*/
+
+.profile-container {
+    /* height: 100vh; */
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-center {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 2rem;
+    width: 90vw;
+    max-width: var(--max-width);
+}
+/*
+=============== 
+Welcome
+===============
+*/
 .register-form {
     display: grid;
     max-width: 300px;

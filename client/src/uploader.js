@@ -10,6 +10,7 @@ export default class Uploader extends Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
     handleClick(e) {
         e.preventDefault();
@@ -31,6 +32,9 @@ export default class Uploader extends Component {
             image: e.target.files[0],
         });
     }
+    handleDelete() {
+        this.props.deleteImg();
+    }
     render() {
         return (
             <>
@@ -43,6 +47,7 @@ export default class Uploader extends Component {
                     onChange={this.handleFileChange}
                 />
                 <button onClick={this.handleClick}>upload</button>
+                <button onClick={this.handleDelete}>delete</button>
             </>
         );
     }

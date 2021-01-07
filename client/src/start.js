@@ -7,7 +7,6 @@ if (location.pathname === "/welcome") {
     element = <Welcome />;
 } else {
     element = <App />;
-    // element = <img src="logo.png" alt="logo" className="logo" />;
 }
 
 ReactDOM.render(element, document.querySelector("main"));
@@ -17,4 +16,12 @@ Welcome(parent)
     - Registration (child)
     - Login (child)
     - Reset (child)
+App (parent)
+    - ProfilePic (child)
+    - Uploader (grandchild)   
+    - Profile (child)
+        - ProfilePic (grandchild)
+            - Uploader (great grandchild) 
+        - BioEditor (grandchild) 
+
 */

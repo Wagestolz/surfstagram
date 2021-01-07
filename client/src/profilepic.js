@@ -5,12 +5,9 @@ export default function ProfilePic({
     last,
     profile_pic,
     toggleUploader,
-    deleteImg,
 }) {
     return (
         <div>
-            {/* <h3>{first}</h3>
-            <h3>{last}</h3> */}
             {profile_pic ? (
                 <img
                     className="profile-pic"
@@ -26,7 +23,6 @@ export default function ProfilePic({
                     alt="default"
                 />
             )}
-            {/* <button onClick={deleteImg}>delete</button> */}
         </div>
     );
 }
