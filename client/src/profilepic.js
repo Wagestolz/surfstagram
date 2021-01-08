@@ -11,7 +11,7 @@ export default function ProfilePic({
         <div>
             {profile_pic ? (
                 <img
-                    className={`profile-pic + ${largerSize}`}
+                    className={`profile-pic ${largerSize}`}
                     onClick={toggleUploader}
                     src={profile_pic}
                     alt={first + " " + last}
@@ -19,7 +19,7 @@ export default function ProfilePic({
             ) : (
                 <img
                     onClick={toggleUploader}
-                    className={`profile-pic + ${largerSize}`}
+                    className={`profile-pic ${largerSize}`}
                     src="logo3.gif"
                     alt="default"
                 />

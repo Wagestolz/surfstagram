@@ -244,6 +244,14 @@ app.post("/updateBio", (req, res) => {
         });
 });
 
+app.get(`/getuser/:id`, (req, res) => {
+    db.getUserInfo(req.query.id)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("error in db.getUserInfo():", err));
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.sendStatus(200);

@@ -9,7 +9,7 @@ export default function Welcome() {
         <div>
             <h1>Surfbuddies</h1>
             <img src="logo6.gif" alt="logo" className="logo" />
-            <h2>it's better together</h2>
+            <h2>it's always better together</h2>
             <HashRouter>
                 <div>
                     <Route exact path="/" component={Registration} />

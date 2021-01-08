@@ -45,9 +45,11 @@ export default class BioEditer extends Component {
                 {!this.state.editMode && (
                     <>
                         <p>{this.props.bio}</p>
-                        <button className="btn" onClick={this.handleClick}>
-                            {this.props.bio ? "update Bio" : "add Bio"}
-                        </button>
+                        {this.props.updateBio && (
+                            <button className="btn" onClick={this.handleClick}>
+                                {this.props.bio ? "update Bio" : "add Bio"}
+                            </button>
+                        )}
                     </>
                 )}
             </>
