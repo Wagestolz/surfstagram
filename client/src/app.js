@@ -89,13 +89,11 @@ export default class App extends Component {
                     <nav className="navbar">
                         <div className="nav-center">
                             {/* logo */}
-
                             <img
                                 src="/logo6.gif"
                                 className="nav-logo"
                                 alt="logo"
                             />
-
                             <div className="links-container">
                                 {/* <button className="toggle-nav" @click="toggleNav">
                             <i className="fas fa-bars"></i>

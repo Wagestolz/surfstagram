@@ -37,7 +37,11 @@ export default class BioEditer extends Component {
                             rows="10"
                             defaultValue={this.props.bio}
                         ></textarea>
-                        <button className="btn" onClick={this.handleUpdate}>
+                        <button
+                            id="save-btn"
+                            className="btn"
+                            onClick={this.handleUpdate}
+                        >
                             save
                         </button>
                     </>
