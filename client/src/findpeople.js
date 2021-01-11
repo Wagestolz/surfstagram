@@ -13,28 +13,43 @@ export default function FindPeople({
 }) {
     const [query, setQuery] = useState("");
     const [users, setUsers] = useState([]);
-    // let abort;
     useEffect(() => {
-        if (!query) {
-            axios.get("/usersLatest").then(({ data }) => {
-                setUsers(data);
-            });
-        } else {
-            axios
-                .get("/userSearch", { params: { searchValue: query } })
-                .then(({ data }) => {
+        let abort;
+        (async () => {
+            if (!query) {
+                const { data } = await axios.get("/usersLatest");
+                if (!abort) {
                     setUsers(data);
+                }
+            } else {
+                const { data } = await axios.get("/userSearch", {
+                    params: { searchValue: query },
                 });
-        }
-        // return () => {
-        //     console.log(`about to to replace ${query}`);
-        //     abort = true;
-        // };
+                if (!abort) {
+                    setUsers(data);
+                }
+            }
+        })();
+        return () => {
+            abort = true;
+        };
+        // if (!query) {
+        //     axios.get("/usersLatest").then(({ data }) => {
+        //         setUsers(data);
+        //     });
+        // } else {
+        //     axios
+        //         .get("/userSearch", {
+        //             params: { searchValue: query },
+        //         })
+        //         .then(({ data }) => {
+        //             setUsers(data);
+        //         });
+        // }
     }, [query]);
-    // openProfile(id){
+    //     openProfile(id) => {
     //     console.log("id: ", id);
     // }
-
     return (
         <div>
             <h2>Find Surfbuddies</h2>
@@ -43,24 +58,21 @@ export default function FindPeople({
                 <div className="users-container">
                     {users.map((user, idx) => (
                         <div key={idx} className="profile-container">
-                            <div className="profile-center">
-                                {/* <Link
-                                    className="nav-link"
-                                    to={"/user/" + user.id}
-                                > */}
-                                <img
-                                    className="profile-pic"
-                                    // onClick={openProfile(user.id)}
-                                    src={user.profile_pic}
-                                    alt={user.first + " " + user.last}
-                                />
-                                {/* </Link> */}
-                                <div className="profile-info">
-                                    <h3>
-                                        {user.first} {user.last}
-                                    </h3>
+                            <Link className="nav-link" to={"/user/" + user.id}>
+                                <div className="profile-center">
+                                    <img
+                                        className="profile-pic"
+                                        // onClick={openProfile(user.id)}
+                                        src={user.profile_pic}
+                                        alt={user.first + " " + user.last}
+                                    />
+                                    <div className="profile-info">
+                                        <h3>
+                                            {user.first} {user.last}
+                                        </h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>
@@ -71,18 +83,20 @@ export default function FindPeople({
                 <div className="users-container">
                     {users.map((user, idx) => (
                         <div key={idx} className="profile-container">
-                            <div className="profile-center">
-                                <img
-                                    className="profile-pic"
-                                    src={user.profile_pic}
-                                    alt={user.first + " " + user.last}
-                                />
-                                <div className="profile-info">
-                                    <h3>
-                                        {user.first} {user.last}
-                                    </h3>
+                            <Link className="nav-link" to={"/user/" + user.id}>
+                                <div className="profile-center">
+                                    <img
+                                        className="profile-pic"
+                                        src={user.profile_pic}
+                                        alt={user.first + " " + user.last}
+                                    />
+                                    <div className="profile-info">
+                                        <h3>
+                                            {user.first} {user.last}
+                                        </h3>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>

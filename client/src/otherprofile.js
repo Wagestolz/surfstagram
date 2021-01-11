@@ -8,22 +8,21 @@ export default class OtherProfile extends Component {
         super(props);
         this.state = {};
     }
-    componentDidUpdate(prevProps) {
-        if (this.props.id !== prevProps.id) {
-            if (this.props.match.params.id == this.props.id) {
-                this.props.history.push("/");
-            }
-            axios
-                .get(`/getuser/:${this.props.match.params.id}`, {
-                    params: { id: this.props.match.params.id },
-                })
-                .then(({ data }) => {
+    componentDidMount() {
+        axios
+            .get(`/getuser/:${this.props.match.params.id}`, {
+                params: { id: this.props.match.params.id },
+            })
+            .then(({ data }) => {
+                if (!data.ownProfile) {
                     this.setState({
                         ...data[0],
                     });
-                })
-                .catch();
-        }
+                } else {
+                    this.props.history.push("/");
+                }
+            })
+            .catch();
     }
     render() {
         return (
