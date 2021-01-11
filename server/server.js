@@ -252,6 +252,22 @@ app.get(`/getuser/:id`, (req, res) => {
         .catch((err) => console.log("error in db.getUserInfo():", err));
 });
 
+app.get(`/usersLatest`, (req, res) => {
+    db.getLastJoiners()
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("error in db.getLastJoiners():", err));
+});
+
+app.get(`/userSearch`, (req, res) => {
+    db.userSearch(req.query.searchValue)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("error in db.userSearch():", err));
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.sendStatus(200);

@@ -57,6 +57,25 @@ module.exports.getUserInfo = (userId) => {
     );
 };
 
+module.exports.getLastJoiners = () => {
+    return db.query(
+        `SELECT id, first, last, profile_pic 
+        FROM users 
+        ORDER BY id 
+        DESC LIMIT 3`
+    );
+};
+module.exports.userSearch = (searchValue) => {
+    return db.query(
+        `SELECT id, first, last, profile_pic 
+        FROM users 
+        WHERE first ILIKE $1
+        OR last ILIKE $1
+        ORDER BY id DESC`,
+        ["%" + searchValue + "%"]
+    );
+};
+
 module.exports.storeNewImage = (upUrl, userId) => {
     return db.query(
         `UPDATE users SET profile_pic = $1
