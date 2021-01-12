@@ -5,17 +5,30 @@ import axios from "./axios";
 export default function FriendButton(friend) {
     const { otherUserId } = friend;
     const [buttonText, setButtonText] = useState("");
+    const [friendStatus, setFriendStatus] = useState("");
     useEffect(() => {
         axios
             .get("/friendstatus", { params: { friendId: Number(otherUserId) } })
             .then(({ data }) => {
                 const text = friendStatusToButtonText(data);
                 setButtonText(text);
+                setFriendStatus(data);
             });
     }, [otherUserId]);
 
     const handleClick = () => {
-        console.log("handleClick fired");
+        axios
+            .post("/friendaction", {
+                action: buttonText,
+                friendStatus: friendStatus,
+                friendId: Number(otherUserId),
+            })
+            .then(({ data }) => {
+                console.log("resolved: ", data);
+                const text = friendStatusToButtonText(data);
+                setButtonText(text);
+                setFriendStatus(data);
+            });
     };
     if (buttonText) {
         return (

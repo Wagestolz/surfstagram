@@ -108,7 +108,42 @@ module.exports.friendStatus = (friendId, userId) => {
     );
 };
 
-// module.exports.friendRequest;
-// module.exports.cancelRequest;
-// module.exports.acceptRequest;
-// module.exports.unfriend;
+module.exports.friendRequest = (senId, recId) => {
+    return db.query(
+        `INSERT INTO friends (sender_id, recipient_id) VALUES ($1, $2) RETURNING *`,
+        [senId, recId]
+    );
+};
+
+module.exports.acceptRequest = (userId, friendId) => {
+    return db.query(
+        `UPDATE friends SET accepted = true
+        WHERE (sender_id = $1 
+        AND recipient_id = $2)
+        OR (recipient_id = $1
+        AND sender_id = $2) RETURNING *`,
+        [userId, friendId]
+    );
+};
+
+module.exports.cancelRequest = (friendId, userId) => {
+    return db.query(
+        `DELETE FROM friends WHERE
+        (sender_id = $1 
+        AND recipient_id = $2)
+        OR (recipient_id = $1
+        AND sender_id = $2)`,
+        [friendId, userId]
+    );
+};
+
+module.exports.unfriend = (friendId, userId) => {
+    return db.query(
+        `DELETE FROM friends WHERE
+        (sender_id = $1 
+        AND recipient_id = $2)
+        OR (recipient_id = $1
+        AND sender_id = $2)`,
+        [friendId, userId]
+    );
+};
