@@ -2,7 +2,7 @@ import { Component } from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 
-export default class Registration extends Component {
+export default class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -19,15 +19,15 @@ export default class Registration extends Component {
         });
     }
     handleClick() {
-        console.log("handle click fired", this.state);
         axios
             .post("/login", this.state)
             .then((res) => {
                 this.setState({
                     error: res.data.error,
                 });
-                console.log("promise resolved, res: ", res.data.error);
-                location.replace("/");
+                if (!res.data.error) {
+                    location.replace("/");
+                }
             })
             .catch((err) => {
                 console.log("error at POST /register", err);

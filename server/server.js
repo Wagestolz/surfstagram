@@ -272,6 +272,22 @@ app.get(`/userSearch`, (req, res) => {
         .catch((err) => console.log("error in db.userSearch():", err));
 });
 
+app.get("/user", function (req, res) {
+    db.getUserInfo(req.session.userId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("error in db.getUserInfo():", err));
+});
+
+app.get("/friendstatus", function (req, res) {
+    db.friendStatus(req.query.friendId, req.session.userId)
+        .then(({ rows }) => {
+            res.json({ rows: rows, userId: req.session.userId });
+        })
+        .catch((err) => console.log("error in db.friendStatus():", err));
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.sendStatus(200);

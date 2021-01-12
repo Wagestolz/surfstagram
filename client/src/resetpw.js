@@ -56,7 +56,6 @@ export default class Reset extends Component {
                         msg: res.data.msg,
                         view: res.data.view,
                     });
-                    console.log("promise resolved, res: ", res);
                 })
                 .catch((err) => {
                     console.log("error at POST /reset/verify", err);

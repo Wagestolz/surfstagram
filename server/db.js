@@ -93,3 +93,22 @@ module.exports.deleteImage = (id) => {
         [id]
     );
 };
+
+/////////////////////
+// FRIENDSHIP QUERIES
+/////////////////////
+
+module.exports.friendStatus = (friendId, userId) => {
+    return db.query(
+        `SELECT id, sender_id, recipient_id, accepted FROM friends WHERE (sender_id = $1 
+        AND recipient_id = $2)
+        OR (recipient_id = $1
+        AND sender_id = $2)`,
+        [friendId, userId]
+    );
+};
+
+// module.exports.friendRequest;
+// module.exports.cancelRequest;
+// module.exports.acceptRequest;
+// module.exports.unfriend;

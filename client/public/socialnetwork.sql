@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS friends; 
 DROP TABLE IF EXISTS users; 
 DROP TABLE IF EXISTS reset_codes; 
 
@@ -18,6 +19,19 @@ CREATE TABLE reset_codes(
     code VARCHAR NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE friends(
+    id SERIAL PRIMARY KEY,
+    sender_id INT REFERENCES users(id) NOT NULL,
+    recipient_id INT REFERENCES users(id) NOT NULL,
+    accepted BOOLEAN DEFAULT false,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (10, 20, false); 
+INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (10, 21, true); 
+INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (22, 10, false); 
+
 
 /*
 

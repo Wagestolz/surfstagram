@@ -2,15 +2,8 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
-import OtherProfile from "./otherprofile";
 
-export default function FindPeople({
-    first,
-    last,
-    profile_pic,
-    toggleUploader,
-    largerSize,
-}) {
+export default function FindPeople() {
     const [query, setQuery] = useState("");
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -33,25 +26,9 @@ export default function FindPeople({
         return () => {
             abort = true;
         };
-        // if (!query) {
-        //     axios.get("/usersLatest").then(({ data }) => {
-        //         setUsers(data);
-        //     });
-        // } else {
-        //     axios
-        //         .get("/userSearch", {
-        //             params: { searchValue: query },
-        //         })
-        //         .then(({ data }) => {
-        //             setUsers(data);
-        //         });
-        // }
     }, [query]);
-    //     openProfile(id) => {
-    //     console.log("id: ", id);
-    // }
     return (
-        <div>
+        <div className="profile-container">
             <h2>Find Surfbuddies</h2>
             {!query && <h3>check out who just joined</h3>}
             {!query && (

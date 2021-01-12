@@ -27,8 +27,9 @@ export default class Registration extends Component {
                 this.setState({
                     error: res.data.error,
                 });
-                console.log("promise resolved, res: ", res.data.error);
-                location.replace("/");
+                if (!res.data.error) {
+                    location.replace("/");
+                }
             })
             .catch((err) => {
                 console.log("error at POST /register", err);

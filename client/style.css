@@ -67,6 +67,7 @@ body {
         rgba(69, 123, 204, 0.9),
         rgba(69, 166, 204, 1)
     );
+    /* url("../public/surfbuddies1.PNG"); */
     color: var(--bright);
     line-height: 1.5;
     font-size: 0.875rem;
