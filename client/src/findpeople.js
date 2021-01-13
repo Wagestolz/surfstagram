@@ -28,7 +28,7 @@ export default function FindPeople() {
         };
     }, [query]);
     return (
-        <div className="profile-container">
+        <div>
             <h2>Find Surfbuddies</h2>
             {!query && <h3>check out who just joined</h3>}
             {!query && (
