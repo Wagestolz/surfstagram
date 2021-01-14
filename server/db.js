@@ -147,3 +147,19 @@ module.exports.unfriend = (friendId, userId) => {
         [friendId, userId]
     );
 };
+
+/////////////////////
+// REDUX STATE QUERIES
+/////////////////////
+
+module.exports.getFriends = (userId) => {
+    return db.query(
+        `SELECT users.id, first, last, profile_pic, accepted
+        FROM friends
+        JOIN users
+        ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)`,
+        [userId]
+    );
+};

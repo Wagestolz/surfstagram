@@ -5,6 +5,7 @@ import Uploader from "./uploader";
 import Profile from "./profile";
 import OtherProfile from "./otherprofile";
 import FindPeople from "./findpeople";
+import Friends from "./friends";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -104,6 +105,14 @@ export default class App extends Component {
                                 <ul className="nav-links">
                                     <li>
                                         <Link className="nav-link" to="/users">
+                                            Find Surfers
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            className="nav-link"
+                                            to="/friends"
+                                        >
                                             Buddies
                                         </Link>
                                     </li>
@@ -167,6 +176,7 @@ export default class App extends Component {
                         )}
                     />
                     <Route exact path="/users" render={() => <FindPeople />} />
+                    <Route exact path="/friends" render={() => <Friends />} />
                 </>
             </BrowserRouter>
         );

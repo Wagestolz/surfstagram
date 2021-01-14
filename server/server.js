@@ -291,22 +291,31 @@ app.get("/friendstatus", function (req, res) {
 app.post("/friendaction", function (req, res) {
     let { action, friendStatus, friendId } = req.body;
     if (action == "accept") {
-        db.acceptRequest(friendStatus.userId, friendId).then(({ rows }) => {
+        db.acceptRequest(req.session.userId, friendId).then(({ rows }) => {
             res.json({ rows: rows, userId: req.session.userId });
         });
     } else if (action == "make request") {
-        db.friendRequest(friendStatus.userId, friendId).then(({ rows }) => {
+        db.friendRequest(req.session.userId, friendId).then(({ rows }) => {
             res.json({ rows: rows, userId: req.session.userId });
         });
     } else if (action == "unfriend") {
-        db.unfriend(friendId, friendStatus.userId).then(() => {
+        db.unfriend(friendId, req.session.userId).then(() => {
             res.json({ rows: [], userId: req.session.userId });
         });
     } else if (action == "cancel request") {
-        db.cancelRequest(friendId, friendStatus.userId).then(() => {
+        db.cancelRequest(friendId, req.session.userId).then(() => {
             res.json({ rows: [], userId: req.session.userId });
         });
     }
+});
+
+app.get("/getfriends", (req, res) => {
+    db.getFriends(req.session.userId)
+        .then(({ rows }) => {
+            console.log("rows: ", rows);
+            res.json({ users: rows });
+        })
+        .catch((err) => console.log("error in db.getFriends():", err));
 });
 
 app.get("/logout", (req, res) => {

@@ -20,7 +20,7 @@ export default function FriendButton(friend) {
         axios
             .post("/friendaction", {
                 action: buttonText,
-                friendStatus: friendStatus,
+                friendStatus: friendStatus, // actually irrelevant
                 friendId: Number(otherUserId),
             })
             .then(({ data }) => {
