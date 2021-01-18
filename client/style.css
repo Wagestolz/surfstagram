@@ -61,7 +61,7 @@ Global Styles
 }
 body {
     font-family: var(--ff-text);
-    height: 100vh;
+    /* height: 100vh; */
     background: linear-gradient(
         0deg,
         rgba(69, 123, 204, 0.9),
@@ -224,7 +224,7 @@ Navbar
     column-gap: 1rem;
 }
 .logoutBtn {
-    position: absolute;
+    position: fixed;
     bottom: 2rem;
     height: 1.7rem;
     font-size: 0.7rem;
@@ -305,6 +305,7 @@ Navbar
 Modal 
 ===============
 */
+
 .modal {
     position: fixed;
     top: 0;
@@ -381,4 +382,79 @@ Welcome
     display: grid;
     max-width: 300px;
     gap: 0.5rem;
+}
+
+/*
+=============== 
+CHAT
+===============
+*/
+
+.chat-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 100vh;
+    margin-bottom: 6rem;
+}
+
+.chat-center {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
+    width: 90vw;
+    max-width: 500px;
+}
+
+.message-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.chat-pic {
+    justify-self: start;
+    align-self: start;
+}
+
+.message-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: start;
+    column-gap: 0.5rem;
+}
+
+.timestamp {
+    color: var(--clr-grey-1);
+}
+
+.message-content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.chat-input {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-family: var(--ff-text);
+    margin-bottom: 0.7rem;
+    outline: none;
+    border: solid 2px rgba(0, 0, 0, 0);
+    transition: var(--transition);
+    border-radius: var(--radius);
+}
+
+.chat-input:focus {
+    background-color: rgba(255, 255, 255, 1);
+    border: 2px solid rgba(240, 224, 71, 1);
 }

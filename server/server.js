@@ -356,7 +356,7 @@ io.on("connection", (socket) => {
                         first: first,
                         last: last,
                         profile_pic: profile_pic,
-                        timestamp: created_at,
+                        created_at: created_at,
                     });
                 });
             })

@@ -15,25 +15,27 @@ export default function Chat() {
         return null;
     }
     return (
-        <div>
-            <div className="chat-container">
+        <div className="chat-container">
+            <div className="chat-center">
                 {chatMessages.map((message, idx) => (
-                    <div key={idx} className="profile-container">
-                        <div className="profile-center">
-                            <img
-                                className="profile-pic"
-                                src={message.profile_pic}
-                                alt={message.first + " " + message.last}
-                            />
-                            <div className="profile-info">
-                                <Link
-                                    className="nav-link"
-                                    to={"/user/" + message.id}
-                                >
-                                    <h3>
-                                        {message.first} {message.last}
-                                    </h3>
-                                </Link>
+                    <div key={idx} className="message-container">
+                        <img
+                            className="profile-pic chat-pic"
+                            src={message.profile_pic}
+                            alt={message.first + " " + message.last}
+                        />
+                        <div className="message-content">
+                            <div className="message-header">
+                                <div className="msg-sender">
+                                    <Link to={"/user/" + message.id}>
+                                        <h4>
+                                            {message.first} {message.last}
+                                        </h4>
+                                    </Link>
+                                </div>
+                                <h4 className="timestamp">
+                                    {message.created_at.substring(0, 10)}
+                                </h4>
                             </div>
                             <p ref={elemRef} id="chat-message">
                                 {message.message}
@@ -44,8 +46,8 @@ export default function Chat() {
             </div>
             <textarea
                 onKeyDown={handleKeyDown}
-                name="message"
-                id="message"
+                className="chat-input"
+                placeholder="enter your message..."
                 cols="30"
                 rows="10"
             ></textarea>
