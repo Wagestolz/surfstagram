@@ -12,6 +12,11 @@ const multer = require("multer"); // middleware for handling multipart/form-data
 const uidSafe = require("uid-safe"); // generating unique names for uploaded images
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -31,21 +36,23 @@ const uploader = multer({
     },
 });
 
-app.use(
-    cookieSession({
-        secret: `crocs are awesome`,
-        maxAge: 1000 * 60 * 60 * 24 * 14, // 1000ms * 60s * 60mins * 24hours * 14days valid
-    })
-);
-app.use(csurf());
+const cookieSessionMiddleware = cookieSession({
+    secret: `crocs are awesome`,
+    maxAge: 1000 * 60 * 60 * 24 * 14, // 1000ms * 60s * 60mins * 24hours * 14days valid
+});
 
+app.use(compression());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "..", "client", "public")));
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+app.use(csurf());
 app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
 });
-app.use(compression());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
 // redirecting
 app.get("/welcome", (req, res) => {
@@ -312,7 +319,6 @@ app.post("/friendaction", function (req, res) {
 app.get("/getfriends", (req, res) => {
     db.getFriends(req.session.userId)
         .then(({ rows }) => {
-            console.log("rows: ", rows);
             res.json({ users: rows });
         })
         .catch((err) => console.log("error in db.getFriends():", err));
@@ -331,6 +337,28 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+io.on("connection", (socket) => {
+    console.log(`socket with if ${socket.id} just connected`);
+    console.log(`socket.request.session: `, socket.request.session);
+    socket.on("post Message", (message) => {
+        console.log("post new message: ", message);
+        // 1. INSERT new msg into new "chat_messages table"
+        // 2. Return to client: msg, profile_pic, name, id, (timestamp)"
+        io.sockets.emit("render new Message", {
+            message: "test",
+            id: "test",
+            profilePic: "test",
+            name: "test",
+            timestamp: "test",
+        });
+    });
+    db.getTenLastMessages()
+        .then((res) => {
+            socket.emit("10 last messages", payload);
+        })
+        .catch();
+});
+
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });

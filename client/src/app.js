@@ -6,6 +6,7 @@ import Profile from "./profile";
 import OtherProfile from "./otherprofile";
 import FindPeople from "./findpeople";
 import Friends from "./friends";
+import Chat from "./chat";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -105,7 +106,7 @@ export default class App extends Component {
                                 <ul className="nav-links">
                                     <li>
                                         <Link className="nav-link" to="/users">
-                                            Find Surfers
+                                            Connect
                                         </Link>
                                     </li>
                                     <li>
@@ -113,12 +114,17 @@ export default class App extends Component {
                                             className="nav-link"
                                             to="/friends"
                                         >
-                                            Buddies
+                                            My Buddies
                                         </Link>
                                     </li>
                                     <li>
                                         <Link className="nav-link" to="/">
                                             Profile
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="nav-link" to="/chat">
+                                            Chat
                                         </Link>
                                     </li>
                                 </ul>
@@ -177,6 +183,7 @@ export default class App extends Component {
                     />
                     <Route exact path="/users" render={() => <FindPeople />} />
                     <Route exact path="/friends" render={() => <Friends />} />
+                    <Route exact path="/chat" render={() => <Chat />} />
                 </>
             </BrowserRouter>
         );
