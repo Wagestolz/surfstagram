@@ -22,75 +22,65 @@ export default function Friends() {
     }
 
     return (
-        <div>
-            <h3>Friends</h3>
-            <div className="users-container">
+        <div className="buddy-container">
+            <div className="buddy-center">
+                <h2>Friends</h2>
                 {friends.map((friend, idx) => (
-                    <div key={idx} className="profile-container">
-                        <div className="profile-center">
-                            <img
-                                className="profile-pic"
-                                src={friend.profile_pic}
-                                alt={friend.first + " " + friend.last}
-                            />
-                            <div className="profile-info">
-                                <Link
-                                    className="nav-link"
-                                    to={"/user/" + friend.id}
-                                >
-                                    <h3>
-                                        {friend.first} {friend.last}
-                                    </h3>
-                                </Link>
-                                <button
-                                    className="btn"
-                                    onClick={() =>
-                                        dispatch(
-                                            unfriend(
-                                                "unfriend",
-                                                true,
-                                                friend.id
-                                            )
-                                        )
-                                    }
-                                >
-                                    unfriend
-                                </button>
-                            </div>
+                    <div key={idx} className="users-container">
+                        <img
+                            className="profile-pic"
+                            src={friend.profile_pic}
+                            alt={friend.first + " " + friend.last}
+                        />
+                        <div className="profile-info">
+                            <Link
+                                className="nav-link"
+                                to={"/user/" + friend.id}
+                            >
+                                <h3>
+                                    {friend.first} {friend.last}
+                                </h3>
+                            </Link>
+                            <button
+                                className="btn"
+                                onClick={() =>
+                                    dispatch(
+                                        unfriend("unfriend", true, friend.id)
+                                    )
+                                }
+                            >
+                                unfriend
+                            </button>
                         </div>
                     </div>
                 ))}
-            </div>
-            <h3>Wannabees</h3>
-            <div className="users-container">
+                <h2 className="wannabes">Wannabes</h2>
                 {wannabes.map((wannabe, idx) => (
-                    <div key={idx} className="profile-container">
-                        <div className="profile-center">
-                            <img
-                                className="profile-pic"
-                                src={wannabe.profile_pic}
-                                alt={wannabe.first + " " + wannabe.last}
-                            />
-                            <div className="profile-info">
-                                <Link
-                                    className="nav-link"
-                                    to={"/user/" + wannabe.id}
-                                >
-                                    <h3>
-                                        {wannabe.first} {wannabe.last}
-                                    </h3>
-                                </Link>
-                                <button
-                                    className="btn"
-                                    onClick={() =>
-                                        dispatch(
-                                            accept("accept", false, wannabe.id)
-                                        )
-                                    }
-                                >
-                                    accept
-                                </button>
-                            </div>
+                    <div key={idx} className="users-container">
+                        <img
+                            className="profile-pic"
+                            src={wannabe.profile_pic}
+                            alt={wannabe.first + " " + wannabe.last}
+                        />
+                        <div className="profile-info">
+                            <Link
+                                className="nav-link"
+                                to={"/user/" + wannabe.id}
+                            >
+                                <h3>
+                                    {wannabe.first} {wannabe.last}
+                                </h3>
+                            </Link>
+                            <button
+                                className="btn"
+                                onClick={() =>
+                                    dispatch(
+                                        accept("accept", false, wannabe.id)
+                                    )
+                                }
+                            >
+                                accept
+                            </button>
                         </div>
                     </div>
                 ))}

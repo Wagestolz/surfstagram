@@ -32,6 +32,7 @@ export default class BioEditer extends Component {
                 {this.state.editMode && (
                     <>
                         <textarea
+                            className="chat-input"
                             onChange={this.handleChange}
                             cols="30"
                             rows="10"

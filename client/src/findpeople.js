@@ -28,56 +28,60 @@ export default function FindPeople() {
         };
     }, [query]);
     return (
-        <div>
-            <h2>Find Surfbuddies</h2>
-            {!query && <h3>check out who just joined</h3>}
-            {!query && (
-                <div className="users-container">
-                    {users.map((user, idx) => (
-                        <div key={idx} className="profile-container">
-                            <Link className="nav-link" to={"/user/" + user.id}>
-                                <div className="profile-center">
-                                    <img
-                                        className="profile-pic"
-                                        // onClick={openProfile(user.id)}
-                                        src={user.profile_pic}
-                                        alt={user.first + " " + user.last}
-                                    />
+        <div className="buddy-container">
+            <div className="buddy-center">
+                {!query && <h2>check out who just joined</h2>}
+                {!query && (
+                    <>
+                        {users.map((user, idx) => (
+                            <div className="search-container" key={idx}>
+                                <img
+                                    className="profile-pic"
+                                    src={user.profile_pic}
+                                    alt={user.first + " " + user.last}
+                                />
+                                <Link to={"/user/" + user.id}>
                                     <div className="profile-info">
                                         <h3>
                                             {user.first} {user.last}
                                         </h3>
                                     </div>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            )}
-            {!query && <h3>Looking for someone in particular?</h3>}
-            <input type="text" onChange={(e) => setQuery(e.target.value)} />
-            {query && (
-                <div className="users-container">
-                    {users.map((user, idx) => (
-                        <div key={idx} className="profile-container">
-                            <Link className="nav-link" to={"/user/" + user.id}>
-                                <div className="profile-center">
-                                    <img
-                                        className="profile-pic"
-                                        src={user.profile_pic}
-                                        alt={user.first + " " + user.last}
-                                    />
+                                </Link>
+                            </div>
+                        ))}
+                    </>
+                )}
+                {!query && (
+                    <h2 className="wannabes">
+                        Looking for someone in particular?
+                    </h2>
+                )}
+                <input
+                    className="field particular"
+                    type="text"
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                {query && (
+                    <>
+                        {users.map((user, idx) => (
+                            <div className="search-container" key={idx}>
+                                <img
+                                    className="profile-pic"
+                                    src={user.profile_pic}
+                                    alt={user.first + " " + user.last}
+                                />
+                                <Link to={"/user/" + user.id}>
                                     <div className="profile-info">
                                         <h3>
                                             {user.first} {user.last}
                                         </h3>
                                     </div>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            )}
+                                </Link>
+                            </div>
+                        ))}
+                    </>
+                )}
+            </div>
         </div>
     );
 }

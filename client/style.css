@@ -258,9 +258,6 @@ Navbar
     }
 }
 
-.logo {
-    max-width: 500px;
-}
 .profile-pic {
     width: 70px;
     height: 70px;
@@ -272,7 +269,70 @@ Navbar
 
 /*
 =============== 
-Navbar
+Welcome
+===============
+*/
+
+.register-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.register-center {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2rem;
+    width: 90vw;
+    max-width: var(--max-width);
+}
+.welcome-container {
+    display: grid;
+    justify-items: center;
+    grid-template-rows: repeat(3, auto);
+}
+.logo {
+    max-width: 300px;
+}
+
+.form-container {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+}
+
+.field {
+    min-width: 250px;
+    padding: 0.4rem 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-family: var(--ff-text);
+    margin-bottom: 0.7rem;
+    outline: none;
+    border: solid 2px rgba(0, 0, 0, 0);
+    transition: var(--transition);
+    border-radius: var(--radius);
+}
+
+.field:focus {
+    background-color: rgba(255, 255, 255, 1);
+    border: 2px solid rgba(240, 224, 71, 1);
+}
+
+.register-form {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.login-note {
+    margin-top: 0.5rem;
+}
+
+/*
+=============== 
+PROFILE
 ===============
 */
 
@@ -284,9 +344,10 @@ Navbar
 }
 
 .profile-center {
+    min-height: calc(100vh - 10rem);
     display: grid;
     grid-template-columns: auto 1fr;
-    align-items: center;
+    align-items: start;
     column-gap: 2rem;
     width: 90vw;
     max-width: var(--max-width);
@@ -298,6 +359,61 @@ Navbar
 .bigger {
     width: 250px;
     height: 250px;
+}
+/*
+=============== 
+FRIENDS
+===============
+*/
+
+.buddy-container {
+    /* height: 100vh; */
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.buddy-center {
+    min-height: calc(100vh - 10rem);
+    display: grid;
+    align-items: start;
+    width: 90vw;
+    max-width: var(--max-width);
+}
+.wannabes {
+    margin-top: 2rem;
+}
+
+.users-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 2rem;
+    margin: 1rem 0;
+}
+.profile-info {
+    max-width: 250px;
+}
+
+.bigger {
+    width: 250px;
+    height: 250px;
+}
+
+/*
+=============== 
+CONNECT
+===============
+*/
+.search-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 1rem;
+}
+.particular {
+    max-width: 300px;
+    margin-bottom: 3rem;
 }
 
 /*
@@ -369,23 +485,6 @@ Modal
 
 /*
 =============== 
-Welcome
-===============
-*/
-.register-form {
-    display: grid;
-    max-width: 300px;
-    gap: 0.5rem;
-}
-
-.login-form {
-    display: grid;
-    max-width: 300px;
-    gap: 0.5rem;
-}
-
-/*
-=============== 
 CHAT
 ===============
 */
@@ -403,10 +502,11 @@ CHAT
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     column-gap: 2rem;
     width: 90vw;
-    max-width: 500px;
+
+    max-width: var(--max-width);
 }
 
 .message-container {
@@ -417,6 +517,7 @@ CHAT
     justify-content: center;
     column-gap: 2rem;
     margin-bottom: 1rem;
+    /* max-width: 500px; */
 }
 
 .chat-pic {
@@ -452,6 +553,7 @@ CHAT
     border: solid 2px rgba(0, 0, 0, 0);
     transition: var(--transition);
     border-radius: var(--radius);
+    /* max-width: 500px; */
 }
 
 .chat-input:focus {

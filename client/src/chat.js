@@ -48,8 +48,6 @@ export default function Chat() {
                 onKeyDown={handleKeyDown}
                 className="chat-input"
                 placeholder="enter your message..."
-                cols="30"
-                rows="10"
             ></textarea>
         </div>
     );

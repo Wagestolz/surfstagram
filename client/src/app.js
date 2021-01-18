@@ -114,7 +114,7 @@ export default class App extends Component {
                                             className="nav-link"
                                             to="/friends"
                                         >
-                                            My Buddies
+                                            MyBuddies
                                         </Link>
                                     </li>
                                     <li>

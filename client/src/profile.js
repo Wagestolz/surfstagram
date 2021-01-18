@@ -1,8 +1,6 @@
 import ProfilePic from "./profilepic";
 import BioEditer from "./bioediter";
 
-// import React from "react";
-
 export default function Profile({
     first,
     last,
@@ -11,6 +9,9 @@ export default function Profile({
     toggleUploader,
     updateBio,
 }) {
+    if (!first) {
+        return null;
+    }
     return (
         <div className="profile-container">
             <div className="profile-center">

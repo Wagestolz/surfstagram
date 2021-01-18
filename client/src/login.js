@@ -37,26 +37,30 @@ export default class Login extends Component {
         return (
             <>
                 {this.state.error && <p>something went wrong!</p>}
-                <div className="login-form">
+                <div className="register-form">
                     <input
+                        className="field"
                         type="email"
                         placeholder="email"
                         name="email"
                         onChange={this.handleChange}
                     />
                     <input
+                        className="field"
                         type="password"
                         placeholder="password"
                         name="pw"
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.handleClick}>Login</button>
+                    <button className="btn" onClick={this.handleClick}>
+                        Login
+                    </button>
                 </div>
-                <p>
+                <p className="login-note">
                     Not a member? <Link to="/">Sign up</Link>
                 </p>
                 <p>
-                    forgot your password? <Link to="/reset">click here</Link>
+                    forgot your password? <Link to="/reset">Click here</Link>
                 </p>
             </>
         );

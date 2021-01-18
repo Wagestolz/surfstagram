@@ -7,16 +7,22 @@ import Reset from "./resetpw";
 export default function Welcome() {
     return (
         <div>
-            <h1>Surfbuddies</h1>
-            <img src="logo6.gif" alt="logo" className="logo" />
-            <h2>it's always better together</h2>
-            <HashRouter>
-                <div>
-                    <Route exact path="/" component={Registration} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/reset" component={Reset} />
+            <div className="register-container">
+                <div className="register-center">
+                    <div className="welcome-container">
+                        <h1>Surfbuddies</h1>
+                        <img src="logo6.gif" alt="logo" className="logo" />
+                        <h2>it&apos;s always better together</h2>
+                    </div>
+                    <HashRouter>
+                        <div className="form-container">
+                            <Route exact path="/" component={Registration} />
+                            <Route path="/login" component={Login} />
+                            <Route path="/reset" component={Reset} />
+                        </div>
+                    </HashRouter>
                 </div>
-            </HashRouter>
+            </div>
         </div>
     );
 }

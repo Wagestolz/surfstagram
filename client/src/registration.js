@@ -41,32 +41,38 @@ export default class Registration extends Component {
                 {this.state.error && <p>something went wrong!</p>}
                 <div className="register-form">
                     <input
+                        className="field"
                         type="text"
                         placeholder="first name"
                         name="first"
                         onChange={this.handleChange}
                     />
                     <input
+                        className="field"
                         type="text"
                         placeholder="last name"
                         name="last"
                         onChange={this.handleChange}
                     />
                     <input
+                        className="field"
                         type="email"
                         placeholder="email"
                         name="email"
                         onChange={this.handleChange}
                     />
                     <input
+                        className="field"
                         type="password"
                         placeholder="password"
                         name="pw"
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.handleClick}>Register</button>
+                    <button className="btn" onClick={this.handleClick}>
+                        Register
+                    </button>
                 </div>
-                <p>
+                <p className="login-note">
                     Already a member? <Link to="/login">Log in</Link>
                 </p>
             </>

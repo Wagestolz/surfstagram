@@ -65,26 +65,28 @@ export default class Reset extends Component {
     render() {
         return (
             <>
-                <h2>Reset Password</h2>
                 {this.state.msg && <p>Ooops... {this.state.msg}</p>}
                 {this.state.view == 1 && (
                     <>
                         <div className="register-form">
-                            <h3>
+                            <p>
                                 Please enter the email adress with which you
                                 registered
-                            </h3>
+                            </p>
                             <input
+                                className="field"
                                 type="email"
                                 placeholder="email"
                                 name="email"
                                 onChange={this.handleChange}
                             />
-                            <button onClick={this.handleReset}>Submit</button>
-                            <p>
-                                Back to <Link to="/login">log in</Link>
-                            </p>
+                            <button className="btn" onClick={this.handleReset}>
+                                Submit
+                            </button>
                         </div>
+                        <p className="login-note">
+                            Back to <Link to="/login">log in</Link>
+                        </p>
                     </>
                 )}
                 {this.state.view == 2 && (
