@@ -338,25 +338,30 @@ app.get("*", function (req, res) {
 });
 
 io.on("connection", (socket) => {
-    console.log(`socket with if ${socket.id} just connected`);
-    console.log(`socket.request.session: `, socket.request.session);
-    socket.on("post Message", (message) => {
-        console.log("post new message: ", message);
-        // 1. INSERT new msg into new "chat_messages table"
-        // 2. Return to client: msg, profile_pic, name, id, (timestamp)"
-        io.sockets.emit("render new Message", {
-            message: "test",
-            id: "test",
-            profilePic: "test",
-            name: "test",
-            timestamp: "test",
-        });
-    });
+    console.log(`socket with id ${socket.id} just connected`);
     db.getTenLastMessages()
-        .then((res) => {
-            socket.emit("10 last messages", payload);
+        .then(({ rows }) => {
+            socket.emit("10 last messages", rows);
         })
         .catch();
+    socket.on("post Message", (message) => {
+        db.postMessage(socket.request.session.userId, message)
+            .then(({ rows }) => {
+                const { message, sender_id, created_at } = rows[0];
+                return db.getUserInfo(sender_id).then(({ rows }) => {
+                    const { first, last, profile_pic } = rows[0];
+                    io.sockets.emit("render new Message", {
+                        message: message,
+                        id: sender_id,
+                        first: first,
+                        last: last,
+                        profile_pic: profile_pic,
+                        timestamp: created_at,
+                    });
+                });
+            })
+            .catch((err) => console.log("error in db.postMessage():", err));
+    });
 });
 
 server.listen(process.env.PORT || 3001, function () {

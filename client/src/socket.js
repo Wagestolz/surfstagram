@@ -13,8 +13,6 @@ export const init = (store) => {
         store.dispatch(postNewMessage(newMessage));
     });
     socket.on("10 last messages", (TenLastMessages) => {
-        console.log("The 10 most recent messages were: ", TenLastMessages);
-        // hand over to redux (dispatch a message)
-        store.dispatch(renderRecentMessages(TenLastMessages));
+        store.dispatch(renderRecentMessages(TenLastMessages.reverse()));
     });
 };

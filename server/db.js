@@ -163,3 +163,25 @@ module.exports.getFriends = (userId) => {
         [userId]
     );
 };
+
+/////////////////////
+// CHAT QUERIES
+/////////////////////
+
+module.exports.postMessage = (senId, msg) => {
+    return db.query(
+        `INSERT INTO chat_messages (sender_id, message) VALUES ($1, $2) RETURNING *`,
+        [senId, msg]
+    );
+};
+
+module.exports.getTenLastMessages = () => {
+    return db.query(
+        `SELECT users.id, first, last, profile_pic, message, chat_messages.created_at
+        FROM chat_messages
+        JOIN users
+        on users.id = chat_messages.sender_id 
+        ORDER BY chat_messages.id 
+        DESC LIMIT 10`
+    );
+};

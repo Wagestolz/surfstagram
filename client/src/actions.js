@@ -43,3 +43,18 @@ export async function accept(buttonText, friendStatus, otherUserId) {
         friendId: Number(otherUserId),
     };
 }
+
+export async function renderRecentMessages(TenLastMessages) {
+    console.log("TenLastMessages: ", TenLastMessages);
+    return {
+        type: "LAST_TEN",
+        messages: TenLastMessages,
+    };
+}
+export async function postNewMessage(newMessage) {
+    console.log("newMessage: ", newMessage);
+    return {
+        type: "POST_MESSAGE",
+        message: newMessage,
+    };
+}
