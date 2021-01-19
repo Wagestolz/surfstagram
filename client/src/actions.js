@@ -9,12 +9,6 @@ export async function receiveUsers() {
 }
 
 export async function unfriend(buttonText, friendStatus, otherUserId) {
-    console.log(
-        "buttonText, friendStatus, otherUserId: ",
-        buttonText,
-        friendStatus,
-        otherUserId
-    );
     const { data } = await axios.post(`/friendaction`, {
         action: buttonText,
         friendStatus: friendStatus,
@@ -27,12 +21,6 @@ export async function unfriend(buttonText, friendStatus, otherUserId) {
 }
 
 export async function accept(buttonText, friendStatus, otherUserId) {
-    console.log(
-        "buttonText, friendStatus, otherUserId: ",
-        buttonText,
-        friendStatus,
-        otherUserId
-    );
     const { data } = await axios.post(`/friendaction`, {
         action: buttonText,
         friendStatus: friendStatus,
@@ -45,14 +33,12 @@ export async function accept(buttonText, friendStatus, otherUserId) {
 }
 
 export async function renderRecentMessages(TenLastMessages) {
-    console.log("TenLastMessages: ", TenLastMessages);
     return {
         type: "LAST_TEN",
         messages: TenLastMessages,
     };
 }
 export async function postNewMessage(newMessage) {
-    console.log("newMessage: ", newMessage);
     return {
         type: "POST_MESSAGE",
         message: newMessage,

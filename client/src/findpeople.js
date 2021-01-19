@@ -38,7 +38,11 @@ export default function FindPeople() {
                                 <div className="search-container" key={idx}>
                                     <img
                                         className="profile-pic"
-                                        src={user.profile_pic}
+                                        src={
+                                            user.profile_pic
+                                                ? user.profile_pic
+                                                : "../logo3.gif"
+                                        }
                                         alt={user.first + " " + user.last}
                                     />
                                     <Link to={"/user/" + user.id}>
@@ -70,7 +74,11 @@ export default function FindPeople() {
                                 <div className="search-container" key={idx}>
                                     <img
                                         className="profile-pic"
-                                        src={user.profile_pic}
+                                        src={
+                                            user.profile_pic
+                                                ? user.profile_pic
+                                                : "../logo3.gif"
+                                        }
                                         alt={user.first + " " + user.last}
                                     />
                                     <Link to={"/user/" + user.id}>

@@ -95,6 +95,27 @@ module.exports.deleteImage = (id) => {
 };
 
 /////////////////////
+// DELETE PROFILE
+/////////////////////
+
+module.exports.deleteChat = (id) => {
+    return db.query(`DELETE FROM chat_messages WHERE sender_id = $1`, [id]);
+};
+
+module.exports.deleteFriends = (id) => {
+    return db.query(
+        `DELETE FROM friends 
+    WHERE sender_id = $1
+    OR recipient_id = $1`,
+        [id]
+    );
+};
+
+module.exports.deleteUser = (id) => {
+    return db.query(`DELETE FROM users WHERE id = $1`, [id]);
+};
+
+/////////////////////
 // FRIENDSHIP QUERIES
 /////////////////////
 

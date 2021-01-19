@@ -9,6 +9,7 @@ export default function Chat() {
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             socket.emit("post Message", e.target.value);
+            e.target.value = "";
         }
     };
     if (!chatMessages) {
@@ -21,7 +22,11 @@ export default function Chat() {
                     <div key={idx} className="message-container">
                         <img
                             className="profile-pic chat-pic"
-                            src={message.profile_pic}
+                            src={
+                                message.profile_pic
+                                    ? message.profile_pic
+                                    : "../logo3.gif"
+                            }
                             alt={message.first + " " + message.last}
                         />
                         <div className="message-content">

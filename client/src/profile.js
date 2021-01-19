@@ -10,6 +10,7 @@ export default function Profile({
     bio,
     toggleUploader,
     updateBio,
+    deleteProfile,
 }) {
     const time = new Date().toLocaleTimeString([], {
         hour: "2-digit",
@@ -43,19 +44,21 @@ export default function Profile({
                 "https://geolocation-db.com/json/c0593a60-4159-11eb-80cd-db15f946225f"
             )
             .then(({ data }) => {
-                console.log("data: ", data);
+                // console.log("data: ", data);
                 setLocation(data);
                 axios
                     .get(
                         `https://api.openweathermap.org/data/2.5/onecall?lat=${data.latitude}&lon=${data.longitude}&exclude=hourly,minutely&appid=ec3e7aaed207a3f2e54d02f3b057b45f&units=metric`
                     )
                     .then(({ data }) => {
-                        console.log("weather data: ", data);
+                        // console.log("weather data: ", data);
                         setWeather(data);
                     });
             });
     }, []);
-
+    function handleClick() {
+        deleteProfile();
+    }
     if (!weather) {
         return null;
     }
@@ -78,6 +81,9 @@ export default function Profile({
                             {location.city}, {location.country_name}
                         </h6>
                         <BioEditer bio={bio} updateBio={updateBio} />
+                        <button className="btn" onClick={handleClick}>
+                            Delete
+                        </button>
                     </div>
                 </div>
             </div>
@@ -97,6 +103,10 @@ export default function Profile({
                             className="curr-weather-img"
                             src={`/${weather.current.weather[0].icon}.png`}
                         />
+                        <h5>
+                            <i className="fas fa-wind"> </i>
+                            &nbsp;{Math.round(weather.current.wind_speed)}kmh
+                        </h5>
                     </div>
 
                     <div className="five-days">
@@ -127,6 +137,14 @@ export default function Profile({
                                                     className="curr-weather-img-small"
                                                     src={`/${day.weather[0].icon}.png`}
                                                 />
+                                                <h5>
+                                                    <i className="fas fa-wind">
+                                                        {" "}
+                                                    </i>
+                                                    &nbsp;
+                                                    {Math.round(day.wind_speed)}
+                                                    kmh
+                                                </h5>
                                             </div>
                                         );
                                     }

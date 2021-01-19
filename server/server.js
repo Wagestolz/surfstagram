@@ -239,6 +239,25 @@ app.post("/deleteimg", s3.delete, (req, res) => {
         });
 });
 
+app.post("/deleteprofile", (req, res) => {
+    db.deleteChat(req.session.userId)
+        .then((res) => {
+            console.log("delete chat resolved", res);
+            return db.deleteFriends(req.session.userId);
+        })
+        .then((res) => {
+            console.log("delete friends resolved", res);
+            return db.deleteUser(req.session.userId);
+        })
+        .then((response) => {
+            console.log("delete User resolved", response);
+            res.json({ success: true });
+        })
+        .catch((err) => {
+            console.log("error in Deletion-Process: ", err);
+        });
+});
+
 app.post("/updateBio", (req, res) => {
     const id = req.session.userId;
     const { bioDraft } = req.body;

@@ -25,14 +25,12 @@ export function reducer(state = {}, action) {
         };
     }
     if (action.type == "LAST_TEN") {
-        console.log("action: ", action.messages);
         state = {
             ...state,
             chatMessages: action.messages,
         };
     }
     if (action.type == "POST_MESSAGE") {
-        console.log("action: ", action);
         state = {
             ...state,
             chatMessages: [...state.chatMessages, action.message],

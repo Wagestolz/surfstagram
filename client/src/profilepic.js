@@ -1,5 +1,3 @@
-// import React from "react";
-
 export default function ProfilePic({
     first,
     last,
@@ -7,7 +5,6 @@ export default function ProfilePic({
     toggleUploader,
     largerSize,
 }) {
-    // if (profile_pic) {
     return (
         <div>
             {profile_pic ? (
@@ -27,7 +24,4 @@ export default function ProfilePic({
             )}
         </div>
     );
-    // } else {
-    //     return null;
-    // }
 }

@@ -29,7 +29,11 @@ export default function Friends() {
                     <div key={idx} className="users-container">
                         <img
                             className="profile-pic"
-                            src={friend.profile_pic}
+                            src={
+                                friend.profile_pic
+                                    ? friend.profile_pic
+                                    : "../logo3.gif"
+                            }
                             alt={friend.first + " " + friend.last}
                         />
                         <div className="profile-info">

@@ -28,6 +28,7 @@ export default class App extends Component {
         this.deleteImg = this.deleteImg.bind(this);
         this.logout = this.logout.bind(this);
         this.updateBio = this.updateBio.bind(this);
+        this.deleteProfile = this.deleteProfile.bind(this);
     }
     async componentDidMount() {
         const { data } = await axios.get("/user");
@@ -68,6 +69,20 @@ export default class App extends Component {
             })
             .catch((err) => {
                 console.log("error at POST /deleteimg", err);
+            });
+    }
+    deleteProfile() {
+        let self = this;
+        console.log("delete profile fired!");
+        this.deleteImg();
+        axios
+            .post("/deleteprofile")
+            .then((res) => {
+                console.log("deletion resolved: ", res);
+                self.logout();
+            })
+            .catch((err) => {
+                console.log("error at POST /deleteprofile", err);
             });
     }
     updateBio(bioDraft) {
@@ -167,6 +182,7 @@ export default class App extends Component {
                                 bio={this.state.bio}
                                 toggleUploader={this.toggleUploader}
                                 updateBio={this.updateBio}
+                                deleteProfile={this.deleteProfile}
                             />
                         )}
                     />

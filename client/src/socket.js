@@ -8,7 +8,6 @@ export const init = (store) => {
         socket = io.connect();
     }
     socket.on("render new Message", (newMessage) => {
-        console.log("newMessage: ", newMessage);
         // hand over to redux (dispatch a message)
         store.dispatch(postNewMessage(newMessage));
     });

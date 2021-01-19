@@ -40,7 +40,7 @@ export default class BioEditer extends Component {
                         ></textarea>
                         <button
                             id="save-btn"
-                            className="btn"
+                            className="btn bio-btn"
                             onClick={this.handleUpdate}
                         >
                             save
@@ -51,7 +51,10 @@ export default class BioEditer extends Component {
                     <>
                         <p>{this.props.bio}</p>
                         {this.props.updateBio && (
-                            <button className="btn" onClick={this.handleClick}>
+                            <button
+                                className="btn bio-btn"
+                                onClick={this.handleClick}
+                            >
                                 {this.props.bio ? "update Bio" : "add Bio"}
                             </button>
                         )}

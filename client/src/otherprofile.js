@@ -15,7 +15,8 @@ export default class OtherProfile extends Component {
                 params: { id: this.props.match.params.id },
             })
             .then(({ data }) => {
-                if (!data.ownProfile) {
+                console.log("data: ", data);
+                if (!data.ownProfile && data.length > 0) {
                     this.setState({
                         ...data[0],
                     });
@@ -28,7 +29,7 @@ export default class OtherProfile extends Component {
     render() {
         return (
             <div className="profile-container">
-                <div className="profile-center">
+                <div className="other-profile-center">
                     <ProfilePic
                         first={this.state.first}
                         last={this.state.last}
