@@ -66,6 +66,7 @@ export default function FindPeople() {
                     <input
                         className="field particular"
                         type="text"
+                        placeholder="Search..."
                         onChange={(e) => setQuery(e.target.value)}
                     />
                     {query && (

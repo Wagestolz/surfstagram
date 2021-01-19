@@ -368,13 +368,14 @@ io.on("connection", (socket) => {
         })
         .catch((err) => console.log("error in db.getOnliners():", err));
     socket.on("disconnect", () => {
-        const index = uniqOnliners.indexOf(socket.request.session.userId);
+        const index = onliners.indexOf(socket.request.session.userId);
         if (index > -1) {
-            uniqOnliners.splice(index, 1);
+            onliners.splice(index, 1);
+            let uniqOnliners = [...new Set(onliners)];
             return db
                 .getOnliners(uniqOnliners)
                 .then(({ rows }) => {
-                    onliners = uniqOnliners;
+                    // onliners = uniqOnliners;
                     io.sockets.emit("who is online", rows);
                 })
                 .catch((err) => console.log("error in db.getOnliners():", err));
