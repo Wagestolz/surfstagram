@@ -22,9 +22,11 @@ export default class App extends Component {
             profile_pic: null,
             bio: null,
             uploaderModal: false,
+            sidebar: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.toggleUploader = this.toggleUploader.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
         this.setImage = this.setImage.bind(this);
         this.deleteImg = this.deleteImg.bind(this);
         this.logout = this.logout.bind(this);
@@ -50,6 +52,11 @@ export default class App extends Component {
     toggleUploader() {
         this.setState({
             uploaderModal: !this.state.uploaderModal,
+        });
+    }
+    toggleSidebar() {
+        this.setState({
+            sidebar: !this.state.sidebar,
         });
     }
     logout() {
@@ -109,6 +116,12 @@ export default class App extends Component {
                     {/* navbar */}
                     <nav className="navbar">
                         <div className="nav-center">
+                            <button
+                                className="toggle-nav"
+                                onClick={this.toggleSidebar}
+                            >
+                                <i className="fas fa-bars"></i>
+                            </button>
                             {/* logo */}
                             <img
                                 src="/logo6.gif"
@@ -116,9 +129,6 @@ export default class App extends Component {
                                 alt="logo"
                             />
                             <div className="links-container">
-                                {/* <button className="toggle-nav" @click="toggleNav">
-                            <i className="fas fa-bars"></i>
-                        </button> */}
                                 {/* links */}
                                 <ul className="nav-links">
                                     <li>
@@ -145,6 +155,65 @@ export default class App extends Component {
                                         </Link>
                                     </li>
                                 </ul>
+                            </div>
+                            {/* <!-- sidebar --> */}
+                            <div
+                                className={
+                                    this.state.sidebar
+                                        ? "sidebar-overlay show"
+                                        : "sidebar-overlay"
+                                }
+                            >
+                                <aside className="sidebar">
+                                    <button
+                                        className="sidebar-close"
+                                        onClick={this.toggleSidebar}
+                                    >
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                    <ul className="sidebar-links">
+                                        <li>
+                                            <Link
+                                                className="sidebar-link"
+                                                to="/users"
+                                                onClick={this.toggleSidebar}
+                                            >
+                                                <i className="fas fa-water"></i>
+                                                Connect
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                className="sidebar-link"
+                                                to="/friends"
+                                                onClick={this.toggleSidebar}
+                                            >
+                                                <i className="fas fa-user-friends"></i>
+                                                MyBuddies
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                className="sidebar-link"
+                                                to="/"
+                                                onClick={this.toggleSidebar}
+                                            >
+                                                <i className="fas fa-umbrella-beach"></i>
+                                                Profile
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                className="sidebar-link"
+                                                to="/chat"
+                                                onClick={this.toggleSidebar}
+                                            >
+                                                <i className="fas fa-comments"></i>
+                                                Chat
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </aside>
                             </div>
                             {/* Profile Pic */}
                             <div className="pic-container">

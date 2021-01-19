@@ -15,7 +15,6 @@ export default class OtherProfile extends Component {
                 params: { id: this.props.match.params.id },
             })
             .then(({ data }) => {
-                console.log("data: ", data);
                 if (!data.ownProfile && data.length > 0) {
                     this.setState({
                         ...data[0],

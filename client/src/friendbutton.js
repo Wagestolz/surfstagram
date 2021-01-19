@@ -24,7 +24,6 @@ export default function FriendButton(friend) {
                 friendId: Number(otherUserId),
             })
             .then(({ data }) => {
-                console.log("resolved: ", data);
                 const text = friendStatusToButtonText(data);
                 setButtonText(text);
                 setFriendStatus(data);
