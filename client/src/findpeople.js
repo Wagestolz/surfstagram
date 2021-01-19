@@ -30,57 +30,61 @@ export default function FindPeople() {
     return (
         <div className="buddy-container">
             <div className="buddy-center">
-                {!query && <h2>check out who just joined</h2>}
-                {!query && (
-                    <>
-                        {users.map((user, idx) => (
-                            <div className="search-container" key={idx}>
-                                <img
-                                    className="profile-pic"
-                                    src={user.profile_pic}
-                                    alt={user.first + " " + user.last}
-                                />
-                                <Link to={"/user/" + user.id}>
-                                    <div className="profile-info">
-                                        <h3>
-                                            {user.first} {user.last}
-                                        </h3>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </>
-                )}
-                {!query && (
-                    <h2 className="wannabes">
-                        Looking for someone in particular?
-                    </h2>
-                )}
-                <input
-                    className="field particular"
-                    type="text"
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-                {query && (
-                    <>
-                        {users.map((user, idx) => (
-                            <div className="search-container" key={idx}>
-                                <img
-                                    className="profile-pic"
-                                    src={user.profile_pic}
-                                    alt={user.first + " " + user.last}
-                                />
-                                <Link to={"/user/" + user.id}>
-                                    <div className="profile-info">
-                                        <h3>
-                                            {user.first} {user.last}
-                                        </h3>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </>
-                )}
+                <div className="buddies">
+                    {!query && <h2>check out who just joined</h2>}
+                    {!query && (
+                        <>
+                            {users.map((user, idx) => (
+                                <div className="search-container" key={idx}>
+                                    <img
+                                        className="profile-pic"
+                                        src={user.profile_pic}
+                                        alt={user.first + " " + user.last}
+                                    />
+                                    <Link to={"/user/" + user.id}>
+                                        <div className="profile-info">
+                                            <h3>
+                                                {user.first} {user.last}
+                                            </h3>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))}
+                        </>
+                    )}
+                </div>
+                <div className="buddies">
+                    {!query && (
+                        <h2 className="wannabes">
+                            Looking for someone in particular?
+                        </h2>
+                    )}
+                    <input
+                        className="field particular"
+                        type="text"
+                        onChange={(e) => setQuery(e.target.value)}
+                    />
+                    {query && (
+                        <>
+                            {users.map((user, idx) => (
+                                <div className="search-container" key={idx}>
+                                    <img
+                                        className="profile-pic"
+                                        src={user.profile_pic}
+                                        alt={user.first + " " + user.last}
+                                    />
+                                    <Link to={"/user/" + user.id}>
+                                        <div className="profile-info">
+                                            <h3>
+                                                {user.first} {user.last}
+                                            </h3>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );

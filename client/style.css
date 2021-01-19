@@ -337,14 +337,14 @@ PROFILE
 */
 
 .profile-container {
-    /* height: 100vh; */
     display: grid;
     align-items: center;
     justify-content: center;
 }
 
 .profile-center {
-    min-height: calc(100vh - 10rem);
+    /* min-height: calc(100vh - 10rem); */
+    min-height: calc(50vh - 10rem);
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: start;
@@ -360,12 +360,65 @@ PROFILE
     width: 250px;
     height: 250px;
 }
+
+/*
+=============== 
+WEATHER
+===============
+*/
+.weather-heading {
+    margin-bottom: 2rem;
+    color: var(--pink);
+}
+
+.weather-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3rem;
+}
+
+.weather-center {
+    min-height: calc(50vh - 2rem);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 1rem;
+    width: 90vw;
+    max-width: var(--max-width);
+}
+
+.curr-weather {
+    display: grid;
+    align-items: start;
+    justify-content: start;
+    justify-items: center;
+    row-gap: 0.5rem;
+}
+.curr-weather h3 {
+    color: var(--bright);
+}
+
+.five-days {
+    max-width: 400px;
+    min-height: calc(50vh - 2rem);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: start;
+}
+
+.curr-weather-img-small {
+    width: 50px;
+}
+.light {
+    font-weight: 300;
+}
 /*
 =============== 
 FRIENDS
 ===============
 */
-
 .buddy-container {
     /* height: 100vh; */
     display: grid;
@@ -376,12 +429,16 @@ FRIENDS
 .buddy-center {
     min-height: calc(100vh - 10rem);
     display: grid;
+    grid-template-rows: auto 1fr;
     align-items: start;
     width: 90vw;
     max-width: var(--max-width);
 }
+.buddy-center h2 {
+    margin-bottom: 1.5rem;
+}
 .wannabes {
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .users-container {
@@ -390,6 +447,10 @@ FRIENDS
     align-items: start;
     column-gap: 2rem;
     margin: 1rem 0;
+}
+.buddies {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
 }
 .profile-info {
     max-width: 250px;
