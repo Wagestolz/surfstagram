@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { socket } from "./socket";
+import WhosOnline from "./onlineusers";
 
 export default function Chat() {
     const chatMessages = useSelector((state) => state && state.chatMessages);
@@ -18,6 +19,8 @@ export default function Chat() {
     return (
         <div className="chat-container">
             <div className="chat-center">
+                <WhosOnline></WhosOnline>
+                <h2 className="chat-heading">Group Chat</h2>
                 {chatMessages.map((message, idx) => (
                     <div key={idx} className="message-container">
                         <img

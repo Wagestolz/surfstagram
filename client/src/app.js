@@ -9,6 +9,7 @@ import Friends from "./friends";
 import Chat from "./chat";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { socket } from "./socket";
 
 export default class App extends Component {
     constructor() {
@@ -53,6 +54,7 @@ export default class App extends Component {
     }
     logout() {
         axios.get("/logout").then(() => location.replace("/welcome"));
+        socket.emit("disconnect");
     }
     deleteImg() {
         let self = this;

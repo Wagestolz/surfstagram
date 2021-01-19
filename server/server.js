@@ -356,13 +356,35 @@ app.get("*", function (req, res) {
     }
 });
 
+let onliners = [];
+
 io.on("connection", (socket) => {
     console.log(`socket with id ${socket.id} just connected`);
+    onliners.push(socket.request.session.userId);
+    let uniqOnliners = [...new Set(onliners)];
+    db.getOnliners(uniqOnliners)
+        .then(({ rows }) => {
+            io.sockets.emit("who is online", rows);
+        })
+        .catch((err) => console.log("error in db.getOnliners():", err));
+    socket.on("disconnect", () => {
+        const index = uniqOnliners.indexOf(socket.request.session.userId);
+        if (index > -1) {
+            uniqOnliners.splice(index, 1);
+            return db
+                .getOnliners(uniqOnliners)
+                .then(({ rows }) => {
+                    onliners = uniqOnliners;
+                    io.sockets.emit("who is online", rows);
+                })
+                .catch((err) => console.log("error in db.getOnliners():", err));
+        }
+    });
     db.getTenLastMessages()
         .then(({ rows }) => {
             socket.emit("10 last messages", rows);
         })
-        .catch();
+        .catch((err) => console.log("error in db.getTenLastMessages():", err));
     socket.on("post Message", (message) => {
         db.postMessage(socket.request.session.userId, message)
             .then(({ rows }) => {

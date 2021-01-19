@@ -77,9 +77,12 @@ export default function Profile({
                         <h3>
                             {first} {last}
                         </h3>
-                        <h6>
-                            {location.city}, {location.country_name}
-                        </h6>
+                        <div className="online-location">
+                            <div className="online"></div>
+                            <h6>
+                                {location.city}, {location.country_name}
+                            </h6>
+                        </div>
                         <BioEditer bio={bio} updateBio={updateBio} />
                         <button className="btn" onClick={handleClick}>
                             Delete
@@ -88,7 +91,7 @@ export default function Profile({
                 </div>
             </div>
             <div className="weather-container">
-                <h2 className="weather-heading">Weather Forecast</h2>
+                <h2 className="weather-heading">Surf Forecast</h2>
                 <div className="weather-center">
                     <div className="curr-weather">
                         <h5>

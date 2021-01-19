@@ -206,3 +206,14 @@ module.exports.getTenLastMessages = () => {
         DESC LIMIT 10`
     );
 };
+
+/////////////////////
+// GET ONLINERS (SOCKET)
+/////////////////////
+
+module.exports.getOnliners = (arrayOfIds) => {
+    return db.query(
+        `SELECT id, first, last, profile_pic FROM users WHERE id = ANY($1)`,
+        [arrayOfIds]
+    );
+};

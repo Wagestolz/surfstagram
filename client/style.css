@@ -382,7 +382,7 @@ WEATHER
 */
 .weather-heading {
     margin-bottom: 2rem;
-    color: var(--pink);
+    /* color: var(--pink); */
 }
 
 .weather-container {
@@ -634,4 +634,51 @@ CHAT
 .chat-input:focus {
     background-color: rgba(255, 255, 255, 1);
     border: 2px solid rgba(240, 224, 71, 1);
+}
+
+/*
+=============== 
+ONLINE USERS
+===============
+*/
+
+.online-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+.online-user {
+    display: grid;
+    justify-items: center;
+    max-width: 600px;
+}
+.online-user img {
+    display: block;
+}
+.online {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: greenyellow;
+}
+.online-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 0.3rem;
+    color: var(--bright);
+}
+
+.online-location {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.chat-heading {
+    margin-bottom: 2rem;
 }

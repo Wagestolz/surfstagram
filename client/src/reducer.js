@@ -36,6 +36,12 @@ export function reducer(state = {}, action) {
             chatMessages: [...state.chatMessages, action.message],
         };
     }
+    if (action.type == "WHOS_ONLINE") {
+        state = {
+            ...state,
+            onliners: action.onliners,
+        };
+    }
 
     return state;
 }

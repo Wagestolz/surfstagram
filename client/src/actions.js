@@ -44,3 +44,10 @@ export async function postNewMessage(newMessage) {
         message: newMessage,
     };
 }
+
+export async function getOnliners(usersArray) {
+    return {
+        type: "WHOS_ONLINE",
+        onliners: usersArray,
+    };
+}

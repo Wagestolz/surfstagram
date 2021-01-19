@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import { postNewMessage, renderRecentMessages } from "./actions";
+import { postNewMessage, renderRecentMessages, getOnliners } from "./actions";
 
 export let socket;
 
@@ -7,6 +7,10 @@ export const init = (store) => {
     if (!socket) {
         socket = io.connect();
     }
+    socket.on("who is online", (usersArray) => {
+        // hand over to redux (dispatch a message)
+        store.dispatch(getOnliners(usersArray));
+    });
     socket.on("render new Message", (newMessage) => {
         // hand over to redux (dispatch a message)
         store.dispatch(postNewMessage(newMessage));
