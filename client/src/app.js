@@ -23,6 +23,7 @@ export default class App extends Component {
             bio: null,
             uploaderModal: false,
             sidebar: false,
+            // requests: 3,
         };
         this.handleChange = this.handleChange.bind(this);
         this.toggleUploader = this.toggleUploader.bind(this);
@@ -32,6 +33,7 @@ export default class App extends Component {
         this.logout = this.logout.bind(this);
         this.updateBio = this.updateBio.bind(this);
         this.deleteProfile = this.deleteProfile.bind(this);
+        // this.updateFriendRequests = this.updateFriendRequests.bind(this);
     }
     async componentDidMount() {
         const { data } = await axios.get("/user");
@@ -109,6 +111,9 @@ export default class App extends Component {
                 console.log("error at POST /updateBio", err);
             });
     }
+    // updateFriendRequests(requestsCount) {
+    //     this.requests = requestsCount;
+    // }
     render() {
         return (
             <BrowserRouter>
@@ -136,13 +141,16 @@ export default class App extends Component {
                                             Connect
                                         </Link>
                                     </li>
-                                    <li>
+                                    <li className="releative">
                                         <Link
                                             className="nav-link"
                                             to="/friends"
                                         >
                                             MyBuddies
                                         </Link>
+                                        {/* <span className="friend-count">
+                                            {this.state.requests}
+                                        </span> */}
                                     </li>
                                     <li>
                                         <Link className="nav-link" to="/">

@@ -277,6 +277,23 @@ Navbar
     cursor: pointer;
 }
 
+.releative {
+    position: relative;
+}
+.friend-count {
+    position: absolute;
+    top: -0.5rem;
+    right: 2rem;
+    color: var(--pink);
+    background: var(--bright);
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
 /*
 =============== 
 Sidebar
@@ -522,7 +539,7 @@ FRIENDS
 .buddy-center {
     min-height: calc(100vh - 10rem);
     display: grid;
-    grid-template-rows: auto 1fr;
+    /* grid-template-rows: auto 1fr; */
     align-items: start;
     width: 90vw;
     max-width: var(--max-width);
@@ -535,6 +552,7 @@ FRIENDS
 }
 
 .users-container {
+    height: 100px;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: start;

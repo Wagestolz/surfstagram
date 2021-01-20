@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-// import React from "react";
+import { socket } from "./socket";
 import axios from "./axios";
+// import { useSelector } from "react-redux";
 
 export default function FriendButton(friend) {
+    // const friendRequests = useSelector((state) => state && state.requests);
     const { otherUserId } = friend;
     const [buttonText, setButtonText] = useState("");
     const [friendStatus, setFriendStatus] = useState("");
@@ -17,6 +19,9 @@ export default function FriendButton(friend) {
     }, [otherUserId]);
 
     const handleClick = () => {
+        if (buttonText == "make request") {
+            socket.emit("friend request", Number(otherUserId));
+        }
         axios
             .post("/friendaction", {
                 action: buttonText,

@@ -357,9 +357,11 @@ app.get("*", function (req, res) {
 });
 
 let onliners = [];
+let socketToIds = {};
 
 io.on("connection", (socket) => {
     console.log(`socket with id ${socket.id} just connected`);
+    socketToIds[socket.id] = socket.request.session.userId;
     onliners.push(socket.request.session.userId);
     let uniqOnliners = [...new Set(onliners)];
     db.getOnliners(uniqOnliners)
@@ -368,6 +370,7 @@ io.on("connection", (socket) => {
         })
         .catch((err) => console.log("error in db.getOnliners():", err));
     socket.on("disconnect", () => {
+        delete socketToIds[socket.id];
         const index = onliners.indexOf(socket.request.session.userId);
         if (index > -1) {
             onliners.splice(index, 1);
@@ -379,6 +382,17 @@ io.on("connection", (socket) => {
                     io.sockets.emit("who is online", rows);
                 })
                 .catch((err) => console.log("error in db.getOnliners():", err));
+        }
+    });
+    socket.on("friend request", (targetId) => {
+        // console.log("Who I friended: ", targetId);
+        // console.log("Who I am: ", socket.request.session.userId);
+        for (const key in socketToIds) {
+            if (socketToIds[key] == targetId) {
+                io.sockets.sockets.get(key).emit("friend request", {
+                    fromUser: socket.request.session.userId,
+                });
+            }
         }
     });
     db.getTenLastMessages()

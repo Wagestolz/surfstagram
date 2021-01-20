@@ -51,3 +51,10 @@ export async function getOnliners(usersArray) {
         onliners: usersArray,
     };
 }
+// export async function renderRequests(requester) {
+//     console.log("friend request from", requester.fromUser);
+//     return {
+//         type: "FRIEND_REQUEST",
+//         fromUser: requester.fromUser,
+//     };
+// }

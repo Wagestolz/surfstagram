@@ -42,6 +42,12 @@ export function reducer(state = {}, action) {
             onliners: action.onliners,
         };
     }
+    // if (action.type == "FRIEND_REQUESTS") {
+    //     state = {
+    //         ...state,
+    //         requests: action.requests,
+    //     };
+    // }
 
     return state;
 }
