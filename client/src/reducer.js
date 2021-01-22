@@ -1,4 +1,10 @@
 export function reducer(state = {}, action) {
+    if (action.type == "GET_USER") {
+        state = {
+            ...state,
+            user: action.user,
+        };
+    }
     if (action.type == "RECEIVE_USERS") {
         state = {
             ...state,

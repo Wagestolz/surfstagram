@@ -1,5 +1,13 @@
 import axios from "./axios";
 
+export async function getUserData() {
+    const { data } = await axios.get("/user");
+    return {
+        type: "GET_USER",
+        user: data[0],
+    };
+}
+
 export async function receiveUsers() {
     const { data } = await axios.get("/getfriends");
     return {

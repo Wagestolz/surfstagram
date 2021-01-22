@@ -62,11 +62,12 @@ Global Styles
 body {
     font-family: var(--ff-text);
     /* height: 100vh; */
-    background: linear-gradient(
+    /* background: linear-gradient(
         0deg,
         rgba(69, 123, 204, 0.9),
         rgba(69, 166, 204, 1)
-    );
+    ); */
+    background: var(--babyDark);
     /* url("../public/surfbuddies1.PNG"); */
     color: var(--bright);
     line-height: 1.5;
@@ -188,7 +189,7 @@ Navbar
     align-items: center;
     justify-content: center;
     font-family: var(--ff-heading); /* added */
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .nav-center {
@@ -428,6 +429,66 @@ Welcome
 
 .login-note {
     margin-top: 0.5rem;
+}
+
+/*
+=============== 
+MAINPAGE
+===============
+*/
+.main-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-center {
+    height: calc(80vh - 10rem);
+    min-height: 400px;
+    display: grid;
+    width: 90vw;
+    max-width: var(--max-width);
+    position: relative;
+    /* grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 2rem; */
+}
+
+.map-logo {
+    position: absolute;
+    width: 50px;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.search {
+    position: absolute;
+    top: 1rem;
+    left: 50vw;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+}
+.search-results {
+    color: var(--lila);
+}
+
+.locate {
+    position: absolute;
+    width: 50px;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    z-index: 10;
+    cursor: pointer;
+}
+.locate img {
+    width: 50px;
 }
 
 /*
