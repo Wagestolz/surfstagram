@@ -544,7 +544,9 @@ SURFSPOT
 
 .surfspot-header {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
+    max-width: 700px;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     padding: 2rem;
     column-gap: 2rem;
@@ -574,6 +576,7 @@ SURFSPOT
     }
     .surfspot-pic {
         min-height: 0px;
+        max-height: 400px;
     }
     .surfspot-info-container {
         min-height: 0;
@@ -583,6 +586,7 @@ SURFSPOT
 .surfspot-pic {
     width: 100%;
     min-height: 300px;
+    max-height: 400px;
     object-fit: cover;
     border-radius: var(--radius);
     border: 2px solid var(--bright);
@@ -674,6 +678,7 @@ CREATE SURFSPOT
     width: 90vw;
     max-width: var(--max-width);
     height: 90vh;
+    min-height: 730px;
     background: var(--offBlue);
     transition: var(--transition);
     border-radius: var(--radius);
@@ -688,6 +693,7 @@ CREATE SURFSPOT
     margin-top: 2rem;
     display: grid;
     align-items: start;
+    justify-items: center;
     grid-template-columns: 1fr;
 }
 .create-field {
@@ -723,7 +729,7 @@ CREATE SURFSPOT
 }
 
 .create-textarea:focus {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: #ffffff;
     border: 2px solid var(--bright);
 }
 .create-image-upload {
@@ -732,6 +738,18 @@ CREATE SURFSPOT
     justify-items: center;
     align-items: start;
     margin: 1rem 0;
+}
+
+.preview {
+    width: 350px;
+    height: 200px;
+    margin-bottom: 0.7rem;
+    border-radius: var(--radius);
+    border: 2px solid var(--bright);
+}
+.create-btn {
+    display: block;
+    width: 100%;
 }
 
 /*

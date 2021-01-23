@@ -5,7 +5,7 @@ import {
     GoogleMap,
     useLoadScript,
     Marker,
-    InfoWindow,
+    // InfoWindow,
 } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
     getGeocode,
