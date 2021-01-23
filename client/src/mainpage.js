@@ -100,21 +100,25 @@ export default function MainPage() {
     };
     const cancel = () => {
         setCreated(null);
+        setMarkers([]);
     };
     const handleMapClick = (e) => {
-        setCreated({
-            lat: e.latLng.lat(),
-            lng: e.latLng.lng(),
-            creator: user.id,
-        });
-        // setMarkers((currentMarkers) => [
-        //     ...currentMarkers,
-        //     {
-        //         lat: e.latLng.lat(),
-        //         lng: e.latLng.lng(),
-        //         time: new Date(),
-        //     },
-        // ]);
+        setTimeout(() => {
+            setCreated({
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
+                creator: user.id,
+            });
+        }, 500);
+
+        setMarkers((currentMarkers) => [
+            ...currentMarkers,
+            {
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
+                time: new Date(),
+            },
+        ]);
     };
 
     const mapRef = useRef();
@@ -175,28 +179,35 @@ export default function MainPage() {
                                 onClick={() => select(marker)}
                             />
                         ))}
-                        {/* {markers.map((marker) => (
-                            <Marker
-                                key={marker.time.toISOString()}
-                                position={{ lat: marker.lat, lng: marker.lng }}
-                                icon={{
-                                    url: "/surfspot2.png",
-                                    scaledSize: new window.google.maps.Size(
-                                        30,
-                                        30
-                                    ),
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(
-                                        15,
-                                        15
-                                    ),
-                                }}
-                                onClick={() => {
-                                    setSelected(marker);
-                                }}
-                            />
-                        ))}
-                        {selected && (
+                        {markers &&
+                            markers.map((marker) => (
+                                <Marker
+                                    key={marker.time.toISOString()}
+                                    position={{
+                                        lat: marker.lat,
+                                        lng: marker.lng,
+                                    }}
+                                    icon={{
+                                        url: "/surfspot2.png",
+                                        scaledSize: new window.google.maps.Size(
+                                            30,
+                                            30
+                                        ),
+                                        origin: new window.google.maps.Point(
+                                            0,
+                                            0
+                                        ),
+                                        anchor: new window.google.maps.Point(
+                                            15,
+                                            15
+                                        ),
+                                    }}
+                                    onClick={() => {
+                                        setSelected(marker);
+                                    }}
+                                />
+                            ))}
+                        {/* {selected && (
                             <InfoWindow
                                 position={{
                                     lat: parseFloat(selected.lat),

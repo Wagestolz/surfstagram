@@ -448,7 +448,7 @@ MAINPAGE
 }
 
 .main-center {
-    height: calc(80vh - 10rem);
+    height: calc(95vh - 10rem);
     min-height: 400px;
     display: grid;
     width: 90vw;
@@ -530,26 +530,121 @@ SURFSPOT
 .surfspot-container {
     position: relative;
     padding: 2rem;
+    margin: 2rem 0;
     width: 90vw;
     max-width: var(--max-width);
-    height: 90vh;
     background: var(--offBlue);
     transition: var(--transition);
     border-radius: var(--radius);
     display: grid;
-    /* grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr; */
     justify-items: center;
     justify-content: center;
     align-items: start;
 }
 
+.surfspot-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 2rem;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+.surfspot-info-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border-bottom: dashed 2px var(--bright);
+    max-height: 300px;
+}
+.surfspot-info-container p {
+    overflow-y: auto;
+}
+@media screen and (max-width: 900px) {
+    .surfspot-container {
+        margin: 2rem 0;
+    }
+}
+@media screen and (max-width: 900px) {
+    .surfspot-container {
+        margin: 2rem 0;
+    }
+    .surfspot-header {
+        grid-template-columns: 1fr;
+        padding: 2rem 0;
+    }
+    .surfspot-pic {
+        min-height: 0px;
+    }
+    .surfspot-info-container {
+        min-height: 0;
+    }
+}
+
 .surfspot-pic {
-    width: 400px;
-    height: 200px;
+    width: 100%;
+    min-height: 300px;
     object-fit: cover;
     border-radius: var(--radius);
     border: 2px solid var(--bright);
+}
+
+/*
+=============== 
+WEATHER
+===============
+*/
+.weather-heading {
+    margin-bottom: 2rem;
+}
+
+.weather-container {
+    display: grid;
+    align-items: start;
+    justify-items: start;
+    width: 100%;
+    padding: 2rem;
+}
+
+.weather-center {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 1rem;
+    width: 100%;
+    max-width: var(--max-width);
+}
+
+.curr-weather {
+    display: grid;
+    align-items: start;
+    justify-content: start;
+    justify-items: center;
+    row-gap: 0.5rem;
+}
+.curr-weather h3 {
+    color: var(--bright);
+}
+
+.five-days {
+    max-width: 400px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: start;
+}
+
+.curr-weather-img-small {
+    width: 50px;
+}
+.light {
+    font-weight: 300;
+}
+
+@media screen and (max-width: 900px) {
+    .weather-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 /*
@@ -680,59 +775,6 @@ PROFILE
     height: 250px;
 }
 
-/*
-=============== 
-WEATHER
-===============
-*/
-.weather-heading {
-    margin-bottom: 2rem;
-    /* color: var(--pink); */
-}
-
-.weather-container {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    padding-top: 3rem;
-}
-
-.weather-center {
-    min-height: calc(50vh - 2rem);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    column-gap: 1rem;
-    width: 90vw;
-    max-width: var(--max-width);
-}
-
-.curr-weather {
-    display: grid;
-    align-items: start;
-    justify-content: start;
-    justify-items: center;
-    row-gap: 0.5rem;
-}
-.curr-weather h3 {
-    color: var(--bright);
-}
-
-.five-days {
-    max-width: 400px;
-    min-height: calc(50vh - 2rem);
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    align-items: start;
-}
-
-.curr-weather-img-small {
-    width: 50px;
-}
-.light {
-    font-weight: 300;
-}
 /*
 =============== 
 FRIENDS

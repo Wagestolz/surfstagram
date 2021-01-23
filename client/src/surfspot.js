@@ -1,8 +1,4 @@
-import { useSelector } from "react-redux";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { socket } from "./socket";
-import WhosOnline from "./onlineusers";
+import Weather from "./weather";
 
 export default function SurfSpot({ selected, unselect }) {
     return (
@@ -11,9 +7,18 @@ export default function SurfSpot({ selected, unselect }) {
                 <h2 className="close-btn" onClick={unselect}>
                     <i className="fas fa-times"></i>
                 </h2>
-                <h2>{selected.name}</h2>
-                <img src={selected.img} className="surfspot-pic" alt="logo" />
-                <p>{selected.description}</p>
+                <div className="surfspot-header">
+                    <img
+                        src={selected.img}
+                        className="surfspot-pic"
+                        alt="logo"
+                    />
+                    <div className="surfspot-info-container">
+                        <h2>{selected.name}</h2>
+                        <p>{selected.description}</p>
+                    </div>
+                </div>
+                <Weather selected={selected}></Weather>
             </div>
         </div>
     );
