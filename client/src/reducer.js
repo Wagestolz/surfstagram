@@ -11,6 +11,12 @@ export function reducer(state = {}, action) {
             surfSpots: action.surfSpots,
         };
     }
+    if (action.type == "STORE_SURFSPOT") {
+        state = {
+            ...state,
+            surfSpots: [...state.surfSpots, action.surfSpot],
+        };
+    }
     if (action.type == "RECEIVE_USERS") {
         state = {
             ...state,

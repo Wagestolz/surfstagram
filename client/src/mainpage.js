@@ -53,6 +53,7 @@ export default function MainPage() {
         dispatch(getSurfSpots());
     }, []);
     const surfSpots = useSelector((state) => state && state.surfSpots);
+    const user = useSelector((state) => state && state.user);
 
     const { isLoaded, loadError } = useLoadScript({
         id: "google-map-script",
@@ -104,15 +105,16 @@ export default function MainPage() {
         setCreated({
             lat: e.latLng.lat(),
             lng: e.latLng.lng(),
+            creator: user.id,
         });
-        setMarkers((currentMarkers) => [
-            ...currentMarkers,
-            {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-                time: new Date(),
-            },
-        ]);
+        // setMarkers((currentMarkers) => [
+        //     ...currentMarkers,
+        //     {
+        //         lat: e.latLng.lat(),
+        //         lng: e.latLng.lng(),
+        //         time: new Date(),
+        //     },
+        // ]);
     };
 
     const mapRef = useRef();
@@ -173,7 +175,7 @@ export default function MainPage() {
                                 onClick={() => select(marker)}
                             />
                         ))}
-                        {markers.map((marker) => (
+                        {/* {markers.map((marker) => (
                             <Marker
                                 key={marker.time.toISOString()}
                                 position={{ lat: marker.lat, lng: marker.lng }}
@@ -210,7 +212,7 @@ export default function MainPage() {
                                     <p>some description</p>
                                 </div>
                             </InfoWindow>
-                        )}
+                        )} */}
                     </GoogleMap>
                 </div>
             </div>

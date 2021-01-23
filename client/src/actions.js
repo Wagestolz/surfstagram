@@ -14,6 +14,13 @@ export async function getSurfSpots() {
         surfSpots: data.surfSpots,
     };
 }
+export async function storeSurfSpot(formData) {
+    const { data } = await axios.post("/createsurfspot", formData);
+    return {
+        type: "STORE_SURFSPOT",
+        surfSpot: data,
+    };
+}
 
 export async function receiveUsers() {
     const { data } = await axios.get("/getfriends");

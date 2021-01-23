@@ -5,23 +5,15 @@ import { socket } from "./socket";
 import WhosOnline from "./onlineusers";
 
 import { useState } from "react";
-import axios from "./axios";
+import { useDispatch } from "react-redux";
+import { storeSurfSpot } from "./actions";
 
 export default function CreateSurfSpot({ created, cancel }) {
-    // const chatMessages = useSelector((state) => state && state.chatMessages);
-    // const elemRef = useRef();
-    // const handleKeyDown = (e) => {
-    //     if (e.key === "Enter") {
-    //         socket.emit("post Message", e.target.value);
-    //         e.target.value = "";
-    //     }
-    // };
-    // if (!chatMessages) {
-    //     return null;
-    // }
+    const dispatch = useDispatch();
     const [surfSpotData, setsurfSpotData] = useState({
         lat: created.lat,
         lng: created.lng,
+        creator: created.creator,
     });
     const handleChange = (e) => {
         setsurfSpotData({
@@ -43,16 +35,10 @@ export default function CreateSurfSpot({ created, cancel }) {
         formData.append("img", surfSpotData.img);
         formData.append("lat", surfSpotData.lat);
         formData.append("lng", surfSpotData.lng);
-        if (this.state.image) {
-            axios
-                .post("/createsurfspot", formData)
-                .then((res) => {
-                    // this.props.setImage(res.data.profile_pic);
-                    // this.props.toggleUploader();
-                })
-                .catch((err) => {
-                    console.log("error from POST /createsurfspot", err);
-                });
+        formData.append("creator", surfSpotData.creator);
+        if (surfSpotData.img && surfSpotData.name && surfSpotData.description) {
+            dispatch(storeSurfSpot(formData));
+            cancel();
         }
     };
 

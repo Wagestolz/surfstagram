@@ -224,7 +224,14 @@ app.get("/surfspots", function (req, res) {
 app.post("/createsurfspot", uploader.single("img"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;
     if (req.file) {
-        db.storeNewImage(url, req.session.userId)
+        db.storeNewSurfSpot(
+            req.body.lat,
+            req.body.lng,
+            req.body.name,
+            req.body.description,
+            url,
+            req.body.creator
+        )
             .then(({ rows }) => {
                 res.json(rows[0]);
             })

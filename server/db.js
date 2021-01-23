@@ -64,6 +64,20 @@ module.exports.getSurfSpots = () => {
     );
 };
 
+module.exports.storeNewSurfSpot = (
+    lat,
+    lng,
+    name,
+    description,
+    url,
+    creator
+) => {
+    return db.query(
+        `INSERT INTO surfspots (lat, lng, name, description, img, creator) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+        [lat, lng, name, description, url, creator]
+    );
+};
+
 module.exports.getLastJoiners = () => {
     return db.query(
         `SELECT id, first, last, profile_pic 
