@@ -12,7 +12,7 @@ import { socket } from "./socket";
 // new
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "./actions";
+import { getUserData, getSurfSpots } from "./actions";
 import MainPage from "./mainpage";
 
 export default function App() {

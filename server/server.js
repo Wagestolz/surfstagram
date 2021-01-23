@@ -213,6 +213,29 @@ app.get("/user", function (req, res) {
         .catch((err) => console.log("error in db.getUserInfo():", err));
 });
 
+app.get("/surfspots", function (req, res) {
+    db.getSurfSpots()
+        .then(({ rows }) => {
+            res.json({ surfSpots: rows });
+        })
+        .catch((err) => console.log("error in db.getSurfSpots():", err));
+});
+
+app.post("/createsurfspot", uploader.single("img"), s3.upload, (req, res) => {
+    const url = `${s3Url}${req.file.filename}`;
+    if (req.file) {
+        db.storeNewImage(url, req.session.userId)
+            .then(({ rows }) => {
+                res.json(rows[0]);
+            })
+            .catch((err) => {
+                console.log("error in db.storeNewImage: ", err);
+            });
+    } else {
+        res.json({ error: true });
+    }
+});
+
 app.post("/imageupload", uploader.single("image"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;
     if (req.file) {

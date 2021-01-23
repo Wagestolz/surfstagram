@@ -1,44 +1,59 @@
-DROP TABLE IF EXISTS friends; 
-DROP TABLE IF EXISTS users; 
-DROP TABLE IF EXISTS reset_codes; 
-DROP TABLE IF EXISTS chat_messages; 
+-- DROP TABLE IF EXISTS friends; 
+-- DROP TABLE IF EXISTS users; 
+-- DROP TABLE IF EXISTS reset_codes; 
+-- DROP TABLE IF EXISTS chat_messages; 
+DROP TABLE IF EXISTS surfspots; 
 
-CREATE TABLE users(
+-- CREATE TABLE users(
+--     id SERIAL PRIMARY KEY,
+--     first VARCHAR(255) NOT NULL,
+--     last VARCHAR(255) NOT NULL,
+--     email VARCHAR(255) NOT NULL UNIQUE,
+--     password VARCHAR(255) NOT NULL,
+--     profile_pic VARCHAR,
+--     bio TEXT,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- CREATE TABLE reset_codes(
+--     id SERIAL PRIMARY KEY,
+--     email VARCHAR NOT NULL,
+--     code VARCHAR NOT NULL,
+--     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- CREATE TABLE friends(
+--     id SERIAL PRIMARY KEY,
+--     sender_id INT REFERENCES users(id) NOT NULL,
+--     recipient_id INT REFERENCES users(id) NOT NULL,
+--     accepted BOOLEAN DEFAULT false,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- CREATE TABLE chat_messages(
+--     id SERIAL PRIMARY KEY,
+--     sender_id INT REFERENCES users(id) NOT NULL,
+--     message TEXT,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+
+CREATE TABLE surfspots(
     id SERIAL PRIMARY KEY,
-    first VARCHAR(255) NOT NULL,
-    last VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    profile_pic VARCHAR,
-    bio TEXT,
+    lat DECIMAL NOT NULL,
+    lng DECIMAL NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    img VARCHAR,
+    creator INT REFERENCES users(id) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE reset_codes(
-    id SERIAL PRIMARY KEY,
-    email VARCHAR NOT NULL,
-    code VARCHAR NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+INSERT INTO surfspots (lat, lng, name, description, img, creator) VALUES (21.707114638981295, -157.99116931717083, 'Kawela Bay', 'Located next to Haleiwa Beach Park, Kawela Bay is a great spot to catch your first wave or perfect your technique. It is ideal for surfers and stand up paddleboarders alike. There is also some shade to be had along the shoreline if you need a break from the rays. As an added bonus, it’s not far from Haleiwa, a great town with cool surf shops, restaurants, boutiques, and art galleries.', 'https://cdn1.theinertia.com/wp-content/gallery/two-brothers/mg_8083.jpg', 13); 
 
-CREATE TABLE friends(
-    id SERIAL PRIMARY KEY,
-    sender_id INT REFERENCES users(id) NOT NULL,
-    recipient_id INT REFERENCES users(id) NOT NULL,
-    accepted BOOLEAN DEFAULT false,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
 
-CREATE TABLE chat_messages(
-    id SERIAL PRIMARY KEY,
-    sender_id INT REFERENCES users(id) NOT NULL,
-    message TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-);
-
-INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (10, 20, false); 
-INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (10, 21, true); 
-INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (22, 10, false); 
+-- INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (10, 20, false); 
+-- INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (10, 21, true); 
+-- INSERT INTO friends (sender_id, recipient_id, accepted) VALUES (22, 10, false); 
 
 
 /*

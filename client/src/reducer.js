@@ -5,6 +5,12 @@ export function reducer(state = {}, action) {
             user: action.user,
         };
     }
+    if (action.type == "GET_SURFSPOTS") {
+        state = {
+            ...state,
+            surfSpots: action.surfSpots,
+        };
+    }
     if (action.type == "RECEIVE_USERS") {
         state = {
             ...state,

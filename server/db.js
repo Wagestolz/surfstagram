@@ -57,6 +57,13 @@ module.exports.getUserInfo = (userId) => {
     );
 };
 
+module.exports.getSurfSpots = () => {
+    return db.query(
+        `SELECT lat, lng, name, description, img, creator 
+        FROM surfspots`
+    );
+};
+
 module.exports.getLastJoiners = () => {
     return db.query(
         `SELECT id, first, last, profile_pic 

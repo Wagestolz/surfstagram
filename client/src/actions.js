@@ -7,6 +7,13 @@ export async function getUserData() {
         user: data[0],
     };
 }
+export async function getSurfSpots() {
+    const { data } = await axios.get("/surfspots");
+    return {
+        type: "GET_SURFSPOTS",
+        surfSpots: data.surfSpots,
+    };
+}
 
 export async function receiveUsers() {
     const { data } = await axios.get("/getfriends");

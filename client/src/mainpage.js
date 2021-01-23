@@ -1,4 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSurfSpots } from "./actions";
 import {
     GoogleMap,
     useLoadScript,
@@ -17,10 +19,10 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 
-// import { formatRelative } from "date-fns";
-
 import "@reach/combobox/styles.css";
 import mapSytyles from "./mapstyles";
+import SurfSpot from "./surfspot";
+import CreateSurfSpot from "./createsurfspot";
 
 let secrets;
 if (process.env.NODE_ENV == "production") {
@@ -46,14 +48,22 @@ const options = {
 };
 
 export default function MainPage() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getSurfSpots());
+    }, []);
+    const surfSpots = useSelector((state) => state && state.surfSpots);
+
     const { isLoaded, loadError } = useLoadScript({
         id: "google-map-script",
         googleMapsApiKey: key,
         libraries,
     });
+    const [location, setLocation] = useState(null);
     const [markers, setMarkers] = useState([]);
     const [selected, setSelected] = useState(null);
-    const [location, setLocation] = useState(null);
+    const [created, setCreated] = useState(null);
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
             (location) => {
@@ -81,8 +91,20 @@ export default function MainPage() {
             </button>
         );
     }
-
+    const select = (marker) => {
+        setSelected(marker);
+    };
+    const unselect = () => {
+        setSelected(null);
+    };
+    const cancel = () => {
+        setCreated(null);
+    };
     const handleMapClick = (e) => {
+        setCreated({
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+        });
         setMarkers((currentMarkers) => [
             ...currentMarkers,
             {
@@ -104,7 +126,7 @@ export default function MainPage() {
     }, []);
 
     if (loadError) return "Error loading Map";
-    if (!isLoaded) {
+    if (!isLoaded || !surfSpots) {
         return null;
     }
     return (
@@ -114,6 +136,12 @@ export default function MainPage() {
                 <div className="main-center">
                     {/* <img src="/surfspot2.png" className="map-logo" alt="logo" /> */}
                     <Locate panTo={panTo} />
+                    {selected && (
+                        <SurfSpot selected={selected} unselect={unselect} />
+                    )}
+                    {created && (
+                        <CreateSurfSpot created={created} cancel={cancel} />
+                    )}
                     <GoogleMap
                         mapContainerStyle={mapContainerStyle}
                         zoom={8}
@@ -123,6 +151,28 @@ export default function MainPage() {
                         onClick={handleMapClick}
                         onLoad={onMapLoad}
                     >
+                        {surfSpots.map((marker) => (
+                            <Marker
+                                key={marker.id}
+                                position={{
+                                    lat: parseFloat(marker.lat),
+                                    lng: parseFloat(marker.lng),
+                                }}
+                                icon={{
+                                    url: "/surfspot2.png",
+                                    scaledSize: new window.google.maps.Size(
+                                        30,
+                                        30
+                                    ),
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(
+                                        15,
+                                        15
+                                    ),
+                                }}
+                                onClick={() => select(marker)}
+                            />
+                        ))}
                         {markers.map((marker) => (
                             <Marker
                                 key={marker.time.toISOString()}
@@ -147,8 +197,8 @@ export default function MainPage() {
                         {selected && (
                             <InfoWindow
                                 position={{
-                                    lat: selected.lat,
-                                    lng: selected.lng,
+                                    lat: parseFloat(selected.lat),
+                                    lng: parseFloat(selected.lng),
                                 }}
                                 onCloseClick={() => {
                                     setSelected(null);
@@ -208,7 +258,7 @@ function Search({ panTo }) {
                     disabled={!ready}
                     placeholder="Enter adress..."
                 />
-                <ComboboxPopover>
+                <ComboboxPopover className="search-listbox">
                     <ComboboxList className="search-results">
                         {status === "OK" &&
                             data.map(({ id, description }) => (
