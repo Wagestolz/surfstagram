@@ -1,81 +1,171 @@
 export default [
     {
-        featureType: "all",
-        elementType: "all",
+        featureType: "administrative",
+        elementType: "geometry.stroke",
         stylers: [
             {
-                color: "#ff7000",
+                visibility: "on",
             },
             {
-                lightness: "69",
+                color: "#0096aa",
             },
             {
-                saturation: "100",
+                weight: "0.30",
             },
             {
-                weight: "1.17",
+                saturation: "-75",
             },
             {
-                gamma: "2.04",
+                lightness: "5",
+            },
+            {
+                gamma: "1",
             },
         ],
     },
     {
-        featureType: "all",
-        elementType: "geometry",
-        stylers: [
-            {
-                color: "#cb8536",
-            },
-        ],
-    },
-    {
-        featureType: "all",
-        elementType: "labels",
-        stylers: [
-            {
-                color: "#ffb471",
-            },
-            {
-                lightness: "66",
-            },
-            {
-                saturation: "100",
-            },
-        ],
-    },
-    {
-        featureType: "all",
+        featureType: "administrative",
         elementType: "labels.text.fill",
         stylers: [
             {
-                gamma: 0.01,
+                color: "#0096aa",
             },
             {
-                lightness: 20,
+                saturation: "-75",
+            },
+            {
+                lightness: "5",
             },
         ],
     },
     {
-        featureType: "all",
+        featureType: "administrative",
         elementType: "labels.text.stroke",
         stylers: [
             {
-                saturation: -31,
+                color: "#ffe146",
             },
             {
-                lightness: -33,
+                visibility: "on",
             },
             {
-                weight: 2,
+                weight: "6",
             },
             {
-                gamma: 0.8,
+                saturation: "-28",
+            },
+            {
+                lightness: "0",
             },
         ],
     },
     {
-        featureType: "all",
+        featureType: "administrative",
+        elementType: "labels.icon",
+        stylers: [
+            {
+                visibility: "on",
+            },
+            {
+                color: "#e6007e",
+            },
+            {
+                weight: "1",
+            },
+        ],
+    },
+    {
+        featureType: "landscape",
+        elementType: "all",
+        stylers: [
+            {
+                color: "#ffe146",
+            },
+            {
+                saturation: "-28",
+            },
+            {
+                lightness: "0",
+            },
+        ],
+    },
+    {
+        featureType: "poi",
+        elementType: "all",
+        stylers: [
+            {
+                visibility: "off",
+            },
+        ],
+    },
+    {
+        featureType: "road",
+        elementType: "all",
+        stylers: [
+            {
+                color: "#0096aa",
+            },
+            {
+                visibility: "simplified",
+            },
+            {
+                saturation: "-75",
+            },
+            {
+                lightness: "5",
+            },
+            {
+                gamma: "1",
+            },
+        ],
+    },
+    {
+        featureType: "road",
+        elementType: "labels.text",
+        stylers: [
+            {
+                visibility: "on",
+            },
+            {
+                color: "#ffe146",
+            },
+            {
+                weight: 8,
+            },
+            {
+                saturation: "-28",
+            },
+            {
+                lightness: "0",
+            },
+        ],
+    },
+    {
+        featureType: "road",
+        elementType: "labels.text.fill",
+        stylers: [
+            {
+                visibility: "on",
+            },
+            {
+                color: "#0096aa",
+            },
+            {
+                weight: 8,
+            },
+            {
+                lightness: "5",
+            },
+            {
+                gamma: "1",
+            },
+            {
+                saturation: "-75",
+            },
+        ],
+    },
+    {
+        featureType: "road",
         elementType: "labels.icon",
         stylers: [
             {
@@ -84,89 +174,71 @@ export default [
         ],
     },
     {
-        featureType: "landscape",
+        featureType: "transit",
         elementType: "all",
         stylers: [
             {
-                lightness: "-8",
+                visibility: "simplified",
             },
             {
-                gamma: "0.98",
+                color: "#0096aa",
             },
             {
-                weight: "2.45",
+                saturation: "-75",
             },
             {
-                saturation: "26",
-            },
-        ],
-    },
-    {
-        featureType: "landscape",
-        elementType: "geometry",
-        stylers: [
-            {
-                lightness: 30,
+                lightness: "5",
             },
             {
-                saturation: 30,
-            },
-        ],
-    },
-    {
-        featureType: "poi",
-        elementType: "geometry",
-        stylers: [
-            {
-                saturation: 20,
-            },
-        ],
-    },
-    {
-        featureType: "poi.park",
-        elementType: "geometry",
-        stylers: [
-            {
-                lightness: 20,
-            },
-            {
-                saturation: -20,
-            },
-        ],
-    },
-    {
-        featureType: "road",
-        elementType: "geometry",
-        stylers: [
-            {
-                lightness: 10,
-            },
-            {
-                saturation: -30,
-            },
-        ],
-    },
-    {
-        featureType: "road",
-        elementType: "geometry.stroke",
-        stylers: [
-            {
-                saturation: 25,
-            },
-            {
-                lightness: 25,
+                gamma: "1",
             },
         ],
     },
     {
         featureType: "water",
-        elementType: "all",
+        elementType: "geometry.fill",
         stylers: [
             {
-                lightness: -20,
+                visibility: "on",
             },
             {
-                color: "#ecc080",
+                color: "#0096aa",
+            },
+            {
+                saturation: "-75",
+            },
+            {
+                lightness: "5",
+            },
+            {
+                gamma: "1",
+            },
+        ],
+    },
+    {
+        featureType: "water",
+        elementType: "labels.text",
+        stylers: [
+            {
+                visibility: "simplified",
+            },
+            {
+                color: "#ffe146",
+            },
+            {
+                saturation: "-28",
+            },
+            {
+                lightness: "0",
+            },
+        ],
+    },
+    {
+        featureType: "water",
+        elementType: "labels.icon",
+        stylers: [
+            {
+                visibility: "off",
             },
         ],
     },

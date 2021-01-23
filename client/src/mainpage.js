@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useRef, useCallback, useEffect } from "react";
 import {
     GoogleMap,
@@ -111,9 +110,9 @@ export default function MainPage() {
     return (
         <>
             <div className="main-container">
+                <Search panTo={panTo} />
                 <div className="main-center">
-                    <img src="/logo6.gif" className="map-logo" alt="logo" />
-                    <Search panTo={panTo} />
+                    {/* <img src="/surfspot2.png" className="map-logo" alt="logo" /> */}
                     <Locate panTo={panTo} />
                     <GoogleMap
                         mapContainerStyle={mapContainerStyle}
@@ -154,11 +153,12 @@ export default function MainPage() {
                                 onCloseClick={() => {
                                     setSelected(null);
                                 }}
+                                className="info-window"
                             >
-                                <>
+                                <div className="info-window">
                                     <h2>Amazing Surfspot</h2>
                                     <p>some description</p>
-                                </>
+                                </div>
                             </InfoWindow>
                         )}
                     </GoogleMap>

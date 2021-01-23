@@ -34,7 +34,11 @@ export default function App() {
                         <i className="fas fa-bars"></i>
                     </button> */}
                         {/* logo */}
-                        <img src="/logo6.gif" className="nav-logo" alt="logo" />
+                        <img
+                            src="/surfspot2.png"
+                            className="nav-logo"
+                            alt="logo"
+                        />
                         <div className="links-container">
                             {/* links */}
                             <ul className="nav-links">
