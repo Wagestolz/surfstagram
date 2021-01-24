@@ -11,10 +11,22 @@ export function reducer(state = {}, action) {
             surfSpots: action.surfSpots,
         };
     }
+    if (action.type == "GET_SURFSPOTPOSTS") {
+        state = {
+            ...state,
+            surfSpotPosts: action.surfSpotPosts,
+        };
+    }
     if (action.type == "STORE_SURFSPOT") {
         state = {
             ...state,
             surfSpots: [...state.surfSpots, action.surfSpot],
+        };
+    }
+    if (action.type == "STORE_SURFSPOTPOST") {
+        state = {
+            ...state,
+            surfSpotPosts: [...state.surfSpotPosts, action.surfSpotPost],
         };
     }
     if (action.type == "RECEIVE_USERS") {

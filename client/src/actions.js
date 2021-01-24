@@ -9,16 +9,34 @@ export async function getUserData() {
 }
 export async function getSurfSpots() {
     const { data } = await axios.get("/surfspots");
+    console.log("surfspots: ", data);
     return {
         type: "GET_SURFSPOTS",
         surfSpots: data.surfSpots,
     };
 }
+export async function getSurfSpotPosts() {
+    const { data } = await axios.get("/surfspotposts");
+    console.log("surfspotposts: ", data);
+    return {
+        type: "GET_SURFSPOTPOSTS",
+        surfSpotPosts: data.surfSpotPosts,
+    };
+}
 export async function storeSurfSpot(formData) {
     const { data } = await axios.post("/createsurfspot", formData);
+    console.log("data: ", data);
     return {
         type: "STORE_SURFSPOT",
         surfSpot: data,
+    };
+}
+export async function storeSurfSpotPost(formData) {
+    const { data } = await axios.post("/createsurfspotpost", formData);
+    console.log("data: ", data);
+    return {
+        type: "STORE_SURFSPOTPOST",
+        surfSpotPost: data,
     };
 }
 

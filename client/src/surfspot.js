@@ -1,6 +1,8 @@
 import Weather from "./weather";
+import FeedPost from "./feedpost";
+import SurfSpotFeed from "./surfspotfeed";
 
-export default function SurfSpot({ selected, unselect }) {
+export default function SurfSpot({ selected, unselect, userId }) {
     return (
         <div className="surfspot-modal">
             <div className="surfspot-container">
@@ -19,6 +21,8 @@ export default function SurfSpot({ selected, unselect }) {
                     </div>
                 </div>
                 <Weather selected={selected}></Weather>
+                <FeedPost selected={selected} userId={userId}></FeedPost>
+                <SurfSpotFeed selected={selected}></SurfSpotFeed>
             </div>
         </div>
     );

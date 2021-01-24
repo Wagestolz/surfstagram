@@ -59,8 +59,14 @@ module.exports.getUserInfo = (userId) => {
 
 module.exports.getSurfSpots = () => {
     return db.query(
-        `SELECT lat, lng, name, description, img, creator 
+        `SELECT id, lat, lng, name, description, img, creator, created_at 
         FROM surfspots`
+    );
+};
+module.exports.getSurfSpotPosts = () => {
+    return db.query(
+        `SELECT id, surfspot_id, user_id, text, img, created_at 
+        FROM surfspotposts`
     );
 };
 
@@ -75,6 +81,13 @@ module.exports.storeNewSurfSpot = (
     return db.query(
         `INSERT INTO surfspots (lat, lng, name, description, img, creator) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
         [lat, lng, name, description, url, creator]
+    );
+};
+
+module.exports.storeNewSurfSpotPost = (surfSpotId, userId, text, url) => {
+    return db.query(
+        `INSERT INTO surfspotposts (surfspot_id, user_id, text, img) VALUES ($1, $2, $3, $4) RETURNING *`,
+        [surfSpotId, userId, text, url]
     );
 };
 

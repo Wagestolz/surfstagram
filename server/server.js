@@ -221,6 +221,14 @@ app.get("/surfspots", function (req, res) {
         .catch((err) => console.log("error in db.getSurfSpots():", err));
 });
 
+app.get("/surfspotposts", function (req, res) {
+    db.getSurfSpotPosts()
+        .then(({ rows }) => {
+            res.json({ surfSpotPosts: rows });
+        })
+        .catch((err) => console.log("error in db.getSurfSpotPosts():", err));
+});
+
 app.post("/createsurfspot", uploader.single("img"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;
     if (req.file) {
@@ -236,12 +244,36 @@ app.post("/createsurfspot", uploader.single("img"), s3.upload, (req, res) => {
                 res.json(rows[0]);
             })
             .catch((err) => {
-                console.log("error in db.storeNewImage: ", err);
+                console.log("error in db.storeNewSurfSpot: ", err);
             });
     } else {
         res.json({ error: true });
     }
 });
+app.post(
+    "/createsurfspotpost",
+    uploader.single("img"),
+    s3.upload,
+    (req, res) => {
+        const url = `${s3Url}${req.file.filename}`;
+        if (req.file) {
+            db.storeNewSurfSpotPost(
+                req.body.surfSpotId,
+                req.body.userId,
+                req.body.text,
+                url
+            )
+                .then(({ rows }) => {
+                    res.json(rows[0]);
+                })
+                .catch((err) => {
+                    console.log("error in db.storeNewSurfSpotPost: ", err);
+                });
+        } else {
+            res.json({ error: true });
+        }
+    }
+);
 
 app.post("/imageupload", uploader.single("image"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;

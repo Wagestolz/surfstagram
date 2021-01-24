@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSurfSpots } from "./actions";
+import { getSurfSpots, getSurfSpotPosts } from "./actions";
 import {
     GoogleMap,
     useLoadScript,
@@ -51,6 +51,7 @@ export default function MainPage() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getSurfSpots());
+        dispatch(getSurfSpotPosts());
     }, []);
     const surfSpots = useSelector((state) => state && state.surfSpots);
     const user = useSelector((state) => state && state.user);
@@ -143,7 +144,11 @@ export default function MainPage() {
                     {/* <img src="/surfspot2.png" className="map-logo" alt="logo" /> */}
                     <Locate panTo={panTo} />
                     {selected && (
-                        <SurfSpot selected={selected} unselect={unselect} />
+                        <SurfSpot
+                            selected={selected}
+                            unselect={unselect}
+                            userId={user.id}
+                        />
                     )}
                     {created && (
                         <CreateSurfSpot created={created} cancel={cancel} />
