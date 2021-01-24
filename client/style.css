@@ -732,14 +732,6 @@ POSTFEED WINDOW
     column-gap: 1rem;
     margin: 1rem 0;
 }
-/* .post-img-preview {
-    display: block;
-    max-width: 600px;
-    object-fit: cover;
-    margin-bottom: 0.7rem;
-    border-radius: var(--radius);
-    border: 2px solid var(--bright);
-} */
 
 .feed-pic-container {
     padding: 2rem 0;
@@ -802,7 +794,7 @@ POSTFEED WINDOW
     grid-template-columns: auto 1fr;
     column-gap: 1rem;
     width: 100%;
-    border-top: solid 1px var(--bright);
+    /* border-top: solid 1px var(--bright); */
 }
 .feedcomment-container p {
     margin: 0;
