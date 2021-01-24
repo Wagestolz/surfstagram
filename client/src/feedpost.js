@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import { storeSurfSpotPost } from "./actions";
 const allowed = ["image/png", "image/jpeg", "image/jpg"];
 
-export default function FeedPost({ selected, userId }) {
+export default function FeedPost({ selected, userId, userFirst, userLast }) {
     const dispatch = useDispatch();
     const [surfSpotPost, setsurfSpotPost] = useState({
         surfSpotId: selected.id,
         userId: userId,
+        userFirst: userFirst,
+        userLast: userLast,
     });
     const [imgPreview, setImgPreview] = useState(null);
 
@@ -15,9 +17,12 @@ export default function FeedPost({ selected, userId }) {
         e.preventDefault();
         var formData = new FormData();
         formData.append("surfSpotId", selected.id);
+        formData.append("surfSpotName", selected.name);
         formData.append("text", surfSpotPost.text);
         formData.append("img", surfSpotPost.img);
         formData.append("userId", surfSpotPost.userId);
+        formData.append("userFirst", surfSpotPost.userFirst);
+        formData.append("userLast", surfSpotPost.userLast);
         if (surfSpotPost.img || surfSpotPost.name) {
             dispatch(storeSurfSpotPost(formData));
             setImgPreview(null);
@@ -71,18 +76,20 @@ export default function FeedPost({ selected, userId }) {
                                 ? " add Pic (2mb)"
                                 : ` ${surfSpotPost.img.name}`}
                         </label>
-                        {imgPreview && (
-                            <img
-                                src={imgPreview}
-                                className="post-img-preview"
-                                alt="image preview"
-                            />
-                        )}
                     </div>
                     <button className="post-btn" onClick={handleClick}>
                         Post
                     </button>
                 </div>
+                {imgPreview && (
+                    <div className="feed-pic-container">
+                        <img
+                            src={imgPreview}
+                            className="feed-pic"
+                            alt="image preview"
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -11,24 +11,31 @@ export default function SurfSpotFeed({ selected }) {
     console.log("posts: ", posts);
 
     return (
-        <div className="post-container">
-            <div className="post-center">
+        <div className="feedpost-container">
+            <div className="feedpost-center">
                 {posts &&
                     posts.map((post) => (
                         <div key={post.id}>
-                            <div className="comment-container">
+                            <div className="feedcomment-container">
                                 <img
                                     src="/logo3.gif"
                                     className="post-thumb"
                                     alt="logo"
                                 />
-                                <p className="">{post.text}</p>
+                                <div className="post-user-info">
+                                    <h2>
+                                        {post.user_first} {post.user_last}
+                                    </h2>
+                                    <p>{post.text}</p>
+                                </div>
                             </div>
-                            <img
-                                src={post.img}
-                                className="post-thumb"
-                                alt="logo"
-                            />
+                            <div className="feed-pic-container">
+                                <img
+                                    src={post.img}
+                                    className="feed-pic"
+                                    alt="logo"
+                                />
+                            </div>
                         </div>
                     ))}
             </div>

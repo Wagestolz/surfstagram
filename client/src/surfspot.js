@@ -2,7 +2,13 @@ import Weather from "./weather";
 import FeedPost from "./feedpost";
 import SurfSpotFeed from "./surfspotfeed";
 
-export default function SurfSpot({ selected, unselect, userId }) {
+export default function SurfSpot({
+    selected,
+    unselect,
+    userId,
+    userFirst,
+    userLast,
+}) {
     return (
         <div className="surfspot-modal">
             <div className="surfspot-container">
@@ -21,7 +27,12 @@ export default function SurfSpot({ selected, unselect, userId }) {
                     </div>
                 </div>
                 <Weather selected={selected}></Weather>
-                <FeedPost selected={selected} userId={userId}></FeedPost>
+                <FeedPost
+                    selected={selected}
+                    userId={userId}
+                    userFirst={userFirst}
+                    userLast={userLast}
+                ></FeedPost>
                 <SurfSpotFeed selected={selected}></SurfSpotFeed>
             </div>
         </div>

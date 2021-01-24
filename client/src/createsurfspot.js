@@ -72,7 +72,7 @@ export default function CreateSurfSpot({ created, cancel }) {
                             onChange={handleFileChange}
                         />
                         <label htmlFor="image" id="upload">
-                            <i className="fas fa-upload"> </i>
+                            <i className="fas fa-camera-retro"> </i>
                             {!surfSpotData.img
                                 ? " Choose Img (max 2mb)"
                                 : ` ${surfSpotData.img.name}`}

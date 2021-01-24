@@ -148,6 +148,8 @@ export default function MainPage() {
                             selected={selected}
                             unselect={unselect}
                             userId={user.id}
+                            userFirst={user.first}
+                            userLast={user.last}
                         />
                     )}
                     {created && (

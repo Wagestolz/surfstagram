@@ -259,7 +259,10 @@ app.post(
         if (req.file) {
             db.storeNewSurfSpotPost(
                 req.body.surfSpotId,
+                req.body.surfSpotName,
                 req.body.userId,
+                req.body.userFirst,
+                req.body.userLast,
                 req.body.text,
                 url
             )

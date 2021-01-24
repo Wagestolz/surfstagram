@@ -52,7 +52,10 @@ DROP TABLE IF EXISTS surfspotposts;
 CREATE TABLE surfspotposts(
     id SERIAL PRIMARY KEY,
     surfspot_id INT REFERENCES surfspots(id) NOT NULL,
+    surfspot_name VARCHAR(255) NOT NULL,
     user_id INT REFERENCES users(id) NOT NULL,
+    user_first VARCHAR(255) NOT NULL,
+    user_last VARCHAR(255) NOT NULL,
     text TEXT,
     img VARCHAR,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
