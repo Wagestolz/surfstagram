@@ -158,7 +158,7 @@ export default function MainPage() {
                                     rating.surfspot_id == selected.id
                                 );
                             })}
-                            surfSpotRating={ratings.filter((rating) => {
+                            surfSpotRatings={ratings.filter((rating) => {
                                 return rating.surfspot_id == selected.id;
                             })}
                         />

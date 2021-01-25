@@ -22,12 +22,14 @@ Fonts (Pacifico, Open Sans)
     --lila: #5b2fb2;
     /* --pink: #e541a5; */
     --pink: #e6007e;
+    --pinkOpac: #e6007ff4;
     --pinkLight: #f349b2;
     --sun: #ecc03a;
     /* --bright: #f0e047; */
-    --bright: hsl(50, 72%, 64%);
+    --bright: #e5cf61;
     --offBlue: hsl(187, 25%, 33%);
     --offBlueDark: #1f3234;
+    --offBlueDarkOpac: #152123;
     --offRed: #e65039;
     /* darkest grey - used for headings */
     --clr-grey-1: #102a42;
@@ -567,6 +569,9 @@ SURFSPOT
     .surfspot-container {
         margin: 2rem 0;
     }
+    .surfspot-info-container {
+        max-height: 500px;
+    }
 }
 @media screen and (max-width: 900px) {
     .surfspot-container {
@@ -823,6 +828,44 @@ POSTFEED WINDOW
 }
 .shaka {
     cursor: pointer;
+}
+.rating-header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: end;
+    justify-items: start;
+}
+.rating-number {
+    font-family: var(--ff-heading);
+    font-size: 1rem;
+    color: var(--bright);
+    margin: 0;
+    padding: 0;
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    margin-bottom: 1.1rem;
+}
+.avg-rating-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 140px;
+    margin-bottom: 0.75rem;
+}
+.img-relative {
+    position: relative;
+}
+.surfvan {
+    position: absolute;
+    font-size: 1.5rem;
+    right: 20px;
+    bottom: 4px;
+    z-index: 20;
+    cursor: pointer;
+    stroke: var(--bright);
+    stroke-width: 10;
+}
+.surfvan:hover {
+    fill: var(--pinkOpac);
 }
 
 /*
