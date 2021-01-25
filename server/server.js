@@ -228,6 +228,13 @@ app.get("/surfspotposts", function (req, res) {
         })
         .catch((err) => console.log("error in db.getSurfSpotPosts():", err));
 });
+app.get("/ratings", function (req, res) {
+    db.getRatings()
+        .then(({ rows }) => {
+            res.json({ ratings: rows });
+        })
+        .catch((err) => console.log("error in db.getRatings():", err));
+});
 
 app.post("/createsurfspot", uploader.single("img"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;
@@ -277,6 +284,17 @@ app.post(
         }
     }
 );
+
+app.post("/createrating", (req, res) => {
+    let { surfSpotId, userId, rating } = req.body;
+    db.storeRating(surfSpotId, userId, rating)
+        .then(({ rows }) => {
+            res.json(rows[0]);
+        })
+        .catch((err) => {
+            console.log("error in db.storeRating: ", err);
+        });
+});
 
 app.post("/imageupload", uploader.single("image"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;

@@ -17,6 +17,12 @@ export function reducer(state = {}, action) {
             surfSpotPosts: action.surfSpotPosts,
         };
     }
+    if (action.type == "GET_RATINGS") {
+        state = {
+            ...state,
+            ratings: action.ratings,
+        };
+    }
     if (action.type == "STORE_SURFSPOT") {
         state = {
             ...state,
@@ -29,6 +35,33 @@ export function reducer(state = {}, action) {
             surfSpotPosts: [...state.surfSpotPosts, action.surfSpotPost],
         };
     }
+    if (action.type == "STORE_RATING") {
+        const index = state.ratings.findIndex(
+            (rating) =>
+                rating.user_id === action.rating.user_id &&
+                rating.surfspot_id == action.rating.surfspot_id
+        );
+        if (index > -1) {
+            state = {
+                ...state,
+                ratings: state.ratings.map((each, idx) => {
+                    if (idx == index) {
+                        return action.rating;
+                    } else return each;
+                }),
+            };
+        }
+
+        // (state.ratings[index].rating = action.rating.rating),
+        // (state.ratings[index].rating = action.rating.rating),
+        else {
+            state = {
+                ...state,
+                ratings: [...state.ratings, action.rating],
+            };
+        }
+    }
+
     if (action.type == "RECEIVE_USERS") {
         state = {
             ...state,

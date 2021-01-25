@@ -1,6 +1,7 @@
 import Weather from "./weather";
 import FeedPost from "./feedpost";
 import SurfSpotFeed from "./surfspotfeed";
+import GiveRating from "./giverating";
 
 export default function SurfSpot({
     selected,
@@ -8,7 +9,12 @@ export default function SurfSpot({
     userId,
     userFirst,
     userLast,
+    userRating,
+    surfSpotRating,
 }) {
+    // calculate the average rating from all ratings in array
+    console.log("UserRating", userRating);
+    console.log("SurfSpotRating", surfSpotRating);
     return (
         <div className="surfspot-modal">
             <div className="surfspot-container">
@@ -24,6 +30,11 @@ export default function SurfSpot({
                     <div className="surfspot-info-container">
                         <h2>{selected.name}</h2>
                         <p>{selected.description}</p>
+                        <GiveRating
+                            selected={selected}
+                            userId={userId}
+                            userRating={userRating}
+                        />
                     </div>
                 </div>
                 <Weather selected={selected}></Weather>

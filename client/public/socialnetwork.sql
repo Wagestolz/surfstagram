@@ -3,7 +3,8 @@
 -- DROP TABLE IF EXISTS reset_codes; 
 -- DROP TABLE IF EXISTS chat_messages; 
 -- DROP TABLE IF EXISTS surfspots; 
-DROP TABLE IF EXISTS surfspotposts; 
+-- DROP TABLE IF EXISTS surfspotposts; 
+DROP TABLE IF EXISTS surfspotratings; 
 
 -- CREATE TABLE users(
 --     id SERIAL PRIMARY KEY,
@@ -49,17 +50,31 @@ DROP TABLE IF EXISTS surfspotposts;
 --     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 -- );
 
-CREATE TABLE surfspotposts(
+-- CREATE TABLE surfspotposts(
+--     id SERIAL PRIMARY KEY,
+--     surfspot_id INT REFERENCES surfspots(id) NOT NULL,
+--     surfspot_name VARCHAR(255) NOT NULL,
+--     user_id INT REFERENCES users(id) NOT NULL,
+--     user_first VARCHAR(255) NOT NULL,
+--     user_last VARCHAR(255) NOT NULL,
+--     text TEXT,
+--     img VARCHAR,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+
+CREATE TABLE surfspotratings(
     id SERIAL PRIMARY KEY,
     surfspot_id INT REFERENCES surfspots(id) NOT NULL,
-    surfspot_name VARCHAR(255) NOT NULL,
     user_id INT REFERENCES users(id) NOT NULL,
-    user_first VARCHAR(255) NOT NULL,
-    user_last VARCHAR(255) NOT NULL,
-    text TEXT,
-    img VARCHAR,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    rating INT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (surfspot_id, user_id)
 );
+
+INSERT INTO surfspotratings (surfspot_id, user_id, rating) VALUES (1, 13, 3); 
+INSERT INTO surfspotratings (surfspot_id, user_id, rating) VALUES (1, 100, 4); 
+INSERT INTO surfspotratings (surfspot_id, user_id, rating) VALUES (1, 150, 5); 
+
 
 -- INSERT INTO surfspots (lat, lng, name, description, img, creator) VALUES (21.707114638981295, -157.99116931717083, 'Kawela Bay', 'Located next to Haleiwa Beach Park, Kawela Bay is a great spot to catch your first wave or perfect your technique. It is ideal for surfers and stand up paddleboarders alike. There is also some shade to be had along the shoreline if you need a break from the rays. As an added bonus, it’s not far from Haleiwa, a great town with cool surf shops, restaurants, boutiques, and art galleries.', 'https://cdn1.theinertia.com/wp-content/gallery/two-brothers/mg_8083.jpg', 13); 
 

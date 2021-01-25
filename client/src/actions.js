@@ -9,7 +9,7 @@ export async function getUserData() {
 }
 export async function getSurfSpots() {
     const { data } = await axios.get("/surfspots");
-    console.log("surfspots: ", data);
+    console.log("get surfspots: ", data);
     return {
         type: "GET_SURFSPOTS",
         surfSpots: data.surfSpots,
@@ -17,15 +17,23 @@ export async function getSurfSpots() {
 }
 export async function getSurfSpotPosts() {
     const { data } = await axios.get("/surfspotposts");
-    console.log("surfspotposts: ", data);
+    console.log("get surfspotposts: ", data);
     return {
         type: "GET_SURFSPOTPOSTS",
         surfSpotPosts: data.surfSpotPosts,
     };
 }
+export async function getRatings() {
+    const { data } = await axios.get("/ratings");
+    console.log("get ratings: ", data);
+    return {
+        type: "GET_RATINGS",
+        ratings: data.ratings,
+    };
+}
 export async function storeSurfSpot(formData) {
     const { data } = await axios.post("/createsurfspot", formData);
-    console.log("data: ", data);
+    console.log("stored surfspot: ", data);
     return {
         type: "STORE_SURFSPOT",
         surfSpot: data,
@@ -33,10 +41,24 @@ export async function storeSurfSpot(formData) {
 }
 export async function storeSurfSpotPost(formData) {
     const { data } = await axios.post("/createsurfspotpost", formData);
-    console.log("data: ", data);
+    console.log("stored post: ", data);
     return {
         type: "STORE_SURFSPOTPOST",
         surfSpotPost: data,
+    };
+}
+
+export async function storeRating({ surfSpotId, userId, rating }) {
+    console.log(surfSpotId, userId, rating);
+    const { data } = await axios.post("/createrating", {
+        surfSpotId: surfSpotId,
+        userId: userId,
+        rating: rating,
+    });
+    console.log("stored Rating: ", data);
+    return {
+        type: "STORE_RATING",
+        rating: data,
     };
 }
 

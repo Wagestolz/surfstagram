@@ -28,6 +28,7 @@ Fonts (Pacifico, Open Sans)
     --bright: hsl(50, 72%, 64%);
     --offBlue: hsl(187, 25%, 33%);
     --offBlueDark: #1f3234;
+    --offRed: #e65039;
     /* darkest grey - used for headings */
     --clr-grey-1: #102a42;
     --clr-grey-2: hsl(211, 39%, 23%);
@@ -813,6 +814,15 @@ POSTFEED WINDOW
     object-fit: cover;
     border-radius: var(--radius);
     border: 2px solid var(--bright);
+}
+
+.rating-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 170px;
+}
+.shaka {
+    cursor: pointer;
 }
 
 /*
