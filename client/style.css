@@ -28,6 +28,7 @@ Fonts (Pacifico, Open Sans)
     /* --bright: #f0e047; */
     --bright: #e5cf61;
     --offBlue: hsl(187, 25%, 33%);
+    --offBlueOpac: #3f6469bd;
     --offBlueDark: #1f3234;
     --offBlueDarkOpac: #152123;
     --offRed: #e65039;
@@ -779,7 +780,16 @@ POSTFEED WINDOW
     padding: 2rem;
     grid-template-columns: 1fr;
 }
-
+@media screen and (max-width: 900px) {
+    .post-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .feedpost-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
 .feedpost-center {
     display: grid;
     grid-template-rows: auto auto;
@@ -822,9 +832,17 @@ POSTFEED WINDOW
 }
 
 .rating-container {
+    position: absolute;
+    border-radius: var(--radius);
+    background-color: var(--offBlueOpac);
+    padding: 0 0.5rem;
+    padding-top: 0.3rem;
+    left: 16px;
+    bottom: 20px;
+    z-index: 20;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    width: 170px;
+    width: 150px;
 }
 .shaka {
     cursor: pointer;
@@ -857,8 +875,8 @@ POSTFEED WINDOW
 .surfvan-follow {
     position: absolute;
     font-size: 1.5rem;
-    right: 20px;
-    bottom: 10px;
+    right: 22px;
+    bottom: 12px;
     z-index: 20;
     cursor: pointer;
     stroke: var(--bright);
@@ -868,8 +886,8 @@ POSTFEED WINDOW
 .surfvan-unfollow {
     position: absolute;
     font-size: 1.5rem;
-    right: 20px;
-    bottom: 10px;
+    right: 22px;
+    bottom: 12px;
     z-index: 20;
     cursor: pointer;
     stroke: var(--bright);

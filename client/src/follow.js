@@ -12,8 +12,8 @@ function SurfVanIcon({ styling }) {
             viewBox="0 0 512 512"
             enableBackground="new 0 0 512 512;"
             xmlSpace="preserve"
-            width="60"
-            height="60"
+            width="54"
+            height="54"
             className={styling}
         >
             <g>

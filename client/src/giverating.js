@@ -8,9 +8,9 @@ function ShakaIcon(props) {
         <svg
             id="Capa_1"
             enableBackground="new 0 0 30 30"
-            height="30"
+            height="25"
             viewBox="0 0 512 512"
-            width="30"
+            width="25"
             xmlns="http://www.w3.org/2000/svg"
             fill={fill}
             stroke="#1f3234"

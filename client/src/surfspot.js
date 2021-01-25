@@ -41,6 +41,11 @@ export default function SurfSpot({
                             className="surfspot-pic"
                             alt="logo"
                         />
+                        <GiveRating
+                            selected={selected}
+                            userId={userId}
+                            userRating={userRating}
+                        />
                         <Follow
                             following={following}
                             // onClick={handleFollow}
@@ -57,21 +62,6 @@ export default function SurfSpot({
                             </h3>
                         </div>
                         <p>{selected.description}</p>
-                        <div>
-                            <div>
-                                <button
-                                    className="btn create-btn"
-                                    // onClick={handleRating}
-                                >
-                                    Rate
-                                </button>
-                                <GiveRating
-                                    selected={selected}
-                                    userId={userId}
-                                    userRating={userRating}
-                                />
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <Weather selected={selected}></Weather>
