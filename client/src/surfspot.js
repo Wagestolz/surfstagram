@@ -27,6 +27,7 @@ export default function SurfSpot({
         surfSpotRatings.reduce((a, b) => a + b.rating, 0) /
             surfSpotRatings.length
     );
+    let following = false;
     return (
         <div className="surfspot-modal">
             <div className="surfspot-container">
@@ -40,7 +41,10 @@ export default function SurfSpot({
                             className="surfspot-pic"
                             alt="logo"
                         />
-                        <Follow following={true} />
+                        <Follow
+                            following={following}
+                            // onClick={handleFollow}
+                        />
                     </div>
                     <div className="surfspot-info-container">
                         <div className="rating-header">

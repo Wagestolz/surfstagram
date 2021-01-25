@@ -22,7 +22,7 @@ Fonts (Pacifico, Open Sans)
     --lila: #5b2fb2;
     /* --pink: #e541a5; */
     --pink: #e6007e;
-    --pinkOpac: #e6007ff4;
+    --pinkOpac: #e6007fe9;
     --pinkLight: #f349b2;
     --sun: #ecc03a;
     /* --bright: #f0e047; */
@@ -854,18 +854,35 @@ POSTFEED WINDOW
 .img-relative {
     position: relative;
 }
-.surfvan {
+.surfvan-follow {
     position: absolute;
     font-size: 1.5rem;
     right: 20px;
-    bottom: 4px;
+    bottom: 10px;
+    z-index: 20;
+    cursor: pointer;
+    stroke: var(--bright);
+    stroke-width: 15;
+    fill: #e6007ff4;
+}
+.surfvan-unfollow {
+    position: absolute;
+    font-size: 1.5rem;
+    right: 20px;
+    bottom: 10px;
     z-index: 20;
     cursor: pointer;
     stroke: var(--bright);
     stroke-width: 10;
+    fill: #152123;
 }
-.surfvan:hover {
+.surfvan-unfollow:hover {
     fill: var(--pinkOpac);
+    stroke-width: 15;
+}
+.surfvan-follow:hover {
+    stroke-width: 10;
+    fill: #152123;
 }
 
 /*

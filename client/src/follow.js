@@ -1,9 +1,6 @@
 import { useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { followSurfSpot } from "./actions";
 
-function SurfVanIcon(props) {
-    const { fill = "none" } = props;
+function SurfVanIcon({ styling }) {
     return (
         <svg
             version="1.1"
@@ -17,7 +14,7 @@ function SurfVanIcon(props) {
             xmlSpace="preserve"
             width="60"
             height="60"
-            fill={fill}
+            className={styling}
         >
             <g>
                 <g>
@@ -59,16 +56,16 @@ function SurfVanIcon(props) {
 }
 
 export default function Follow({ following }) {
-    const fill = useMemo(() => {
+    const style = useMemo(() => {
         if (following) {
-            return "#e6007ff4";
+            return "surfvan-follow";
         } else {
-            return "#152123";
+            return "surfvan-unfollow";
         }
     }, [following]);
     return (
         <div className="surfvan">
-            <SurfVanIcon fill={fill} />
+            <SurfVanIcon styling={style} />
         </div>
     );
 }
