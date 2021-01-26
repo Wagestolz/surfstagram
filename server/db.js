@@ -1,7 +1,7 @@
 const spicedPg = require("spiced-pg");
 const db = spicedPg(
     process.env.DATABASE_URL ||
-        "postgres:postgres:postgres@localhost:5432/socialnetwork"
+        "postgres:postgres:postgres@localhost:5432/surfspots"
 );
 
 module.exports.addUser = (firstName, LastName, emailAdress, hashedPw) => {
