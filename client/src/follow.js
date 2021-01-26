@@ -59,7 +59,6 @@ function SurfVanIcon({ styling }) {
 
 export default function Follow({ following, surfSpotId }) {
     const dispatch = useDispatch();
-    console.log("following", following);
     const style = useMemo(() => {
         if (following) {
             return "surfvan-follow";

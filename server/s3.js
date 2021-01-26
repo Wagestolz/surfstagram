@@ -18,7 +18,7 @@ module.exports.delete = (req, res, next) => {
     const filename = url.substring(url.length - 36, url.length);
     const promise = s3
         .deleteObject({
-            Bucket: "aloha.surfbuddy",
+            Bucket: "aloha.surfspots",
             Key: filename,
         })
         .promise();
@@ -40,7 +40,7 @@ module.exports.upload = (req, res, next) => {
     const { filename, mimetype, size, path } = req.file;
     const promise = s3
         .putObject({
-            Bucket: "aloha.surfbuddy",
+            Bucket: "aloha.surfspots",
             ACL: "public-read",
             Key: filename,
             Body: fs.createReadStream(path),

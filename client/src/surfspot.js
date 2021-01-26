@@ -29,7 +29,7 @@ export default function SurfSpot({
         surfSpotRatings.reduce((a, b) => a + b.rating, 0) /
             surfSpotRatings.length
     );
-    console.log("following", following);
+    console.log("surfSpotFollowers", surfSpotFollowers.length);
     if (following.length == 1) {
         following = true;
     } else {
@@ -55,9 +55,18 @@ export default function SurfSpot({
                         />
                         <Follow
                             following={following}
-                            // following={false}
                             surfSpotId={selected.id}
                         />
+                        <h3
+                            className="follower-number"
+                            style={
+                                following
+                                    ? { color: "#e6007e" }
+                                    : { color: "#1f3234" }
+                            }
+                        >
+                            {surfSpotFollowers.length}
+                        </h3>
                     </div>
                     <div className="surfspot-info-container">
                         <div className="rating-header">
