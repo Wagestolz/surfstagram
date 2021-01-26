@@ -212,6 +212,13 @@ app.get("/user", function (req, res) {
         })
         .catch((err) => console.log("error in db.getUserInfo():", err));
 });
+app.get("/allusers", function (req, res) {
+    db.getAllUsers(req.session.userId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => console.log("error in db.getAllUsers():", err));
+});
 
 app.get("/surfspots", function (req, res) {
     db.getSurfSpots()
@@ -346,7 +353,7 @@ app.post("/deleteimg", s3.delete, (req, res) => {
     const id = req.session.userId;
     db.deleteImage(id)
         .then(({ rows }) => {
-            res.json(rows);
+            res.json(rows[0]);
         })
         .catch((err) => {
             console.log("error in db.deleteImage: ", err);

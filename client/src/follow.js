@@ -67,7 +67,6 @@ export default function Follow({ following, surfSpotId }) {
         }
     }, [following]);
     const handleFollow = () => {
-        console.log("clicked me");
         dispatch(
             followerAction({
                 surfSpotId: surfSpotId,

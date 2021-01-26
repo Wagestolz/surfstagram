@@ -3,7 +3,13 @@ import { useDispatch } from "react-redux";
 import { storeSurfSpotPost } from "./actions";
 const allowed = ["image/png", "image/jpeg", "image/jpg"];
 
-export default function FeedPost({ selected, userId, userFirst, userLast }) {
+export default function FeedPost({
+    selected,
+    userId,
+    userFirst,
+    userLast,
+    userPic,
+}) {
     const dispatch = useDispatch();
     const [surfSpotPost, setsurfSpotPost] = useState({
         surfSpotId: selected.id,
@@ -52,7 +58,7 @@ export default function FeedPost({ selected, userId, userFirst, userLast }) {
         <div className="post-container">
             <div className="post-center">
                 <div className="comment-container">
-                    <img src="/logo3.gif" className="post-thumb" alt="logo" />
+                    <img src={userPic} className="post-thumb" alt="logo" />
                     <textarea
                         id="text"
                         onChange={handleChange}

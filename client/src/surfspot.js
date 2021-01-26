@@ -15,6 +15,7 @@ export default function SurfSpot({
     surfSpotRatings,
     following,
     surfSpotFollowers,
+    userPic,
 }) {
     function round(value, precision) {
         var multiplier = Math.pow(10, precision || 0);
@@ -87,6 +88,7 @@ export default function SurfSpot({
                     userId={userId}
                     userFirst={userFirst}
                     userLast={userLast}
+                    userPic={userPic}
                 ></FeedPost>
                 <SurfSpotFeed selected={selected}></SurfSpotFeed>
             </div>

@@ -5,6 +5,7 @@ import {
     getSurfSpotPosts,
     getRatings,
     getFollower,
+    // StoreLocation,
 } from "./actions";
 import {
     GoogleMap,
@@ -82,6 +83,12 @@ export default function MainPage() {
                     lat: location.coords.latitude,
                     lng: location.coords.longitude,
                 });
+                // dispatch(
+                //     StoreLocation({
+                //         lat: location.coords.latitude,
+                //         lng: location.coords.longitude,
+                //     })
+                // );
             },
             () => null,
             options
@@ -159,6 +166,7 @@ export default function MainPage() {
                             userId={user.id}
                             userFirst={user.first}
                             userLast={user.last}
+                            userPic={user.profile_pic}
                             userRating={ratings.filter((rating) => {
                                 return (
                                     rating.user_id === user.id &&
@@ -308,7 +316,7 @@ function Search({ panTo }) {
                 <ComboboxPopover className="search-listbox">
                     <ComboboxList className="search-results">
                         {status === "OK" &&
-                            data.map(({ id, description }) => (
+                            data.map(({ description }) => (
                                 <ComboboxOption
                                     key={description}
                                     value={description}

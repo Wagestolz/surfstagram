@@ -18,11 +18,14 @@ export default function SurfSpotFeed({ selected }) {
                         <div key={post.id}>
                             <div className="feedcomment-container">
                                 <img
-                                    src="/logo3.gif"
+                                    src={post.profile_pic}
                                     className="post-thumb"
                                     alt="logo"
                                 />
                                 <div className="post-user-info">
+                                    <p className="created_timestamp">
+                                        {post.created_at.slice(0, 10)}
+                                    </p>
                                     <h2>
                                         {post.user_first} {post.user_last}
                                     </h2>

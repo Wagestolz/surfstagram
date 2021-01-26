@@ -816,6 +816,9 @@ POSTFEED WINDOW
     margin: 0;
     padding: 0;
 }
+.created_timestamp {
+    color: var(--offBlue);
+}
 
 .feed-pic-container {
     padding: 2rem 0;
@@ -1055,6 +1058,9 @@ PROFILE
     width: 250px;
     height: 250px;
 }
+.noModal {
+    cursor: none;
+}
 
 /*
 =============== 
@@ -1134,7 +1140,7 @@ Modal
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     overflow: auto;
-    z-index: 10;
+    z-index: 5000;
     display: grid;
     justify-items: center;
     align-items: center;

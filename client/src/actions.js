@@ -7,6 +7,19 @@ export async function getUserData() {
         user: data[0],
     };
 }
+export async function getUsers() {
+    const { data } = await axios.get("/allusers");
+    return {
+        type: "GET_ALLUSERS",
+        allUsers: data,
+    };
+}
+export async function StoreLocation(location) {
+    return {
+        type: "STORE_LOCATION",
+        location: location,
+    };
+}
 export async function getSurfSpots() {
     const { data } = await axios.get("/surfspots");
     console.log("get surfspots: ", data);
@@ -48,11 +61,11 @@ export async function storeSurfSpot(formData) {
     };
 }
 export async function storeSurfSpotPost(formData) {
-    const { data } = await axios.post("/createsurfspotpost", formData);
-    console.log("stored post: ", data);
+    await axios.post("/createsurfspotpost", formData);
+    const { data } = await axios.get("/surfspotposts");
     return {
-        type: "STORE_SURFSPOTPOST",
-        surfSpotPost: data,
+        type: "GET_SURFSPOTPOSTS",
+        surfSpotPosts: data.surfSpotPosts,
     };
 }
 
@@ -80,6 +93,25 @@ export async function followerAction({ surfSpotId, following }) {
     return {
         type: "FOLLOWER_ACTION",
         follow: data,
+    };
+}
+
+export async function deleteImage(profile_pic) {
+    const { data } = await axios.post("/deleteimg", {
+        params: {
+            url: profile_pic,
+        },
+    });
+    return {
+        type: "DELETE_IMAGE",
+        user: data,
+    };
+}
+export async function uploadImage(formData) {
+    const { data } = await axios.post("/imageupload", formData);
+    return {
+        type: "UPLOAD_IMAGE",
+        user: data,
     };
 }
 

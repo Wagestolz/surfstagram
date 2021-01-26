@@ -5,6 +5,12 @@ export function reducer(state = {}, action) {
             user: action.user,
         };
     }
+    if (action.type == "GET_ALLUSERS") {
+        state = {
+            ...state,
+            allUsers: action.allUsers,
+        };
+    }
     if (action.type == "GET_SURFSPOTS") {
         state = {
             ...state,
@@ -29,6 +35,12 @@ export function reducer(state = {}, action) {
             followers: action.followers,
         };
     }
+    if (action.type == "STORE_LOCATION") {
+        state = {
+            ...state,
+            location: action.location,
+        };
+    }
     if (action.type == "STORE_SURFSPOT") {
         state = {
             ...state,
@@ -38,7 +50,7 @@ export function reducer(state = {}, action) {
     if (action.type == "STORE_SURFSPOTPOST") {
         state = {
             ...state,
-            surfSpotPosts: [...state.surfSpotPosts, action.surfSpotPost],
+            surfSpotPosts: [action.surfSpotPost, ...state.surfSpotPosts],
         };
     }
     if (action.type == "STORE_RATING") {
@@ -64,17 +76,10 @@ export function reducer(state = {}, action) {
         }
     }
     if (action.type == "FOLLOWER_ACTION") {
-        console.log("action: ", action);
-        console.log("action.follow.unfollow: ", action.follow.unfollow);
         if (action.follow.unfollow) {
             state = {
                 ...state,
                 followers: state.followers.filter((item) => {
-                    console.log(
-                        "checkup: ",
-                        item.user_id != action.follow.userId &&
-                            item.surfspot_id != action.follow.surfSpotId
-                    );
                     return !(
                         item.user_id == action.follow.userId &&
                         item.surfspot_id == action.follow.surfSpotId
@@ -87,6 +92,34 @@ export function reducer(state = {}, action) {
                 followers: [...state.followers, action.follow],
             };
         }
+    }
+    if (action.type == "DELETE_IMAGE") {
+        const index = state.allUsers.findIndex(
+            (user) => user.id === action.user.id
+        );
+        state = {
+            ...state,
+            allUsers: state.allUsers.map((each, idx) => {
+                if (idx == index) {
+                    return action.user;
+                } else return each;
+            }),
+            user: action.user,
+        };
+    }
+    if (action.type == "UPLOAD_IMAGE") {
+        const index = state.allUsers.findIndex(
+            (user) => user.id === action.user.id
+        );
+        state = {
+            ...state,
+            allUsers: state.allUsers.map((each, idx) => {
+                if (idx == index) {
+                    return action.user;
+                } else return each;
+            }),
+            user: action.user,
+        };
     }
     if (action.type == "RECEIVE_USERS") {
         state = {

@@ -56,6 +56,11 @@ module.exports.getUserInfo = (userId) => {
         [userId]
     );
 };
+module.exports.getAllUsers = () => {
+    return db.query(
+        `SELECT email, id, first, last, profile_pic, bio FROM users`
+    );
+};
 
 module.exports.getSurfSpots = () => {
     return db.query(
@@ -66,10 +71,14 @@ module.exports.getSurfSpots = () => {
 
 module.exports.getSurfSpotPosts = () => {
     return db.query(
-        `SELECT id, surfspot_id, surfspot_name, user_id, user_first, user_last, text, img, created_at 
-        FROM surfspotposts`
+        `SELECT surfspotposts.id, surfspot_id, surfspot_name, user_id, user_first, user_last, text, img, surfspotposts.created_at, users.profile_pic 
+        FROM surfspotposts
+        JOIN users
+        ON surfspotposts.user_id = users.id
+        ORDER BY surfspotposts.id DESC`
     );
 };
+
 module.exports.getRatings = () => {
     return db.query(
         `SELECT id, surfspot_id, user_id, rating, created_at
@@ -161,7 +170,7 @@ module.exports.storeNewImage = (upUrl, userId) => {
     return db.query(
         `UPDATE users SET profile_pic = $1
         WHERE id = $2
-        RETURNING profile_pic`,
+        RETURNING *`,
         [upUrl, userId]
     );
 };
@@ -170,7 +179,7 @@ module.exports.deleteImage = (id) => {
     return db.query(
         `UPDATE users SET profile_pic = null
         WHERE id = $1
-        RETURNING profile_pic`,
+        RETURNING *`,
         [id]
     );
 };
