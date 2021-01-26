@@ -13,6 +13,8 @@ export default function SurfSpot({
     userLast,
     userRating,
     surfSpotRatings,
+    following,
+    surfSpotFollowers,
 }) {
     function round(value, precision) {
         var multiplier = Math.pow(10, precision || 0);
@@ -27,7 +29,12 @@ export default function SurfSpot({
         surfSpotRatings.reduce((a, b) => a + b.rating, 0) /
             surfSpotRatings.length
     );
-    let following = false;
+    console.log("following", following);
+    if (following.length == 1) {
+        following = true;
+    } else {
+        following = false;
+    }
     return (
         <div className="surfspot-modal">
             <div className="surfspot-container">
@@ -48,7 +55,8 @@ export default function SurfSpot({
                         />
                         <Follow
                             following={following}
-                            // onClick={handleFollow}
+                            // following={false}
+                            surfSpotId={selected.id}
                         />
                     </div>
                     <div className="surfspot-info-container">

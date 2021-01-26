@@ -76,6 +76,12 @@ module.exports.getRatings = () => {
         FROM surfspotratings`
     );
 };
+module.exports.getFollower = () => {
+    return db.query(
+        `SELECT id, surfspot_id, user_id, created_at
+        FROM followers`
+    );
+};
 
 module.exports.storeNewSurfSpot = (
     lat,
@@ -113,6 +119,22 @@ module.exports.storeRating = (surfSpotId, userId, rating) => {
         DO UPDATE SET rating = $3
         RETURNING *`,
         [surfSpotId, userId, rating]
+    );
+};
+module.exports.follow = (surfSpotId, userId) => {
+    return db.query(
+        `INSERT INTO followers (surfspot_id, user_id) 
+        VALUES ($1, $2)
+        RETURNING *`,
+        [surfSpotId, userId]
+    );
+};
+module.exports.unfollow = (surfSpotId, userId) => {
+    return db.query(
+        `DELETE FROM followers 
+        WHERE surfspot_id = $1
+        AND user_id = $2`,
+        [surfSpotId, userId]
     );
 };
 

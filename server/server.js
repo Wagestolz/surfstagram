@@ -235,6 +235,13 @@ app.get("/ratings", function (req, res) {
         })
         .catch((err) => console.log("error in db.getRatings():", err));
 });
+app.get("/follower", function (req, res) {
+    db.getFollower()
+        .then(({ rows }) => {
+            res.json({ followers: rows });
+        })
+        .catch((err) => console.log("error in db.getFollower():", err));
+});
 
 app.post("/createsurfspot", uploader.single("img"), s3.upload, (req, res) => {
     const url = `${s3Url}${req.file.filename}`;
@@ -294,6 +301,30 @@ app.post("/createrating", (req, res) => {
         .catch((err) => {
             console.log("error in db.storeRating: ", err);
         });
+});
+app.post("/followeraction", (req, res) => {
+    let { surfSpotId, following } = req.body;
+    if (!following) {
+        db.follow(surfSpotId, req.session.userId)
+            .then(({ rows }) => {
+                res.json(rows[0]);
+            })
+            .catch((err) => {
+                console.log("error in db.follow: ", err);
+            });
+    } else {
+        db.unfollow(surfSpotId, req.session.userId)
+            .then(() => {
+                res.json({
+                    unfollow: true,
+                    userId: req.session.userId,
+                    surfSpotId: surfSpotId,
+                });
+            })
+            .catch((err) => {
+                console.log("error in db.unfollow: ", err);
+            });
+    }
 });
 
 app.post("/imageupload", uploader.single("image"), s3.upload, (req, res) => {

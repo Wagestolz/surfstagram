@@ -898,10 +898,6 @@ POSTFEED WINDOW
     fill: var(--pinkOpac);
     stroke-width: 15;
 }
-.surfvan-follow:hover {
-    stroke-width: 10;
-    fill: #152123;
-}
 
 /*
 =============== 

@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { followerAction } from "./actions";
 
 function SurfVanIcon({ styling }) {
     return (
@@ -55,7 +57,9 @@ function SurfVanIcon({ styling }) {
     );
 }
 
-export default function Follow({ following }) {
+export default function Follow({ following, surfSpotId }) {
+    const dispatch = useDispatch();
+    console.log("following", following);
     const style = useMemo(() => {
         if (following) {
             return "surfvan-follow";
@@ -63,8 +67,17 @@ export default function Follow({ following }) {
             return "surfvan-unfollow";
         }
     }, [following]);
+    const handleFollow = () => {
+        console.log("clicked me");
+        dispatch(
+            followerAction({
+                surfSpotId: surfSpotId,
+                following: following,
+            })
+        );
+    };
     return (
-        <div className="surfvan">
+        <div className="surfvan" onClick={handleFollow}>
             <SurfVanIcon styling={style} />
         </div>
     );

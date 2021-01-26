@@ -1,6 +1,11 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSurfSpots, getSurfSpotPosts, getRatings } from "./actions";
+import {
+    getSurfSpots,
+    getSurfSpotPosts,
+    getRatings,
+    getFollower,
+} from "./actions";
 import {
     GoogleMap,
     useLoadScript,
@@ -53,10 +58,12 @@ export default function MainPage() {
         dispatch(getSurfSpots());
         dispatch(getSurfSpotPosts());
         dispatch(getRatings());
+        dispatch(getFollower());
     }, []);
     const surfSpots = useSelector((state) => state && state.surfSpots);
     const user = useSelector((state) => state && state.user);
     const ratings = useSelector((state) => state && state.ratings);
+    const followers = useSelector((state) => state && state.followers);
 
     const { isLoaded, loadError } = useLoadScript({
         id: "google-map-script",
@@ -135,7 +142,7 @@ export default function MainPage() {
     }, []);
 
     if (loadError) return "Error loading Map";
-    if (!isLoaded || !surfSpots || !ratings) {
+    if (!isLoaded || !surfSpots || !ratings || !followers) {
         return null;
     }
     return (
@@ -160,6 +167,15 @@ export default function MainPage() {
                             })}
                             surfSpotRatings={ratings.filter((rating) => {
                                 return rating.surfspot_id == selected.id;
+                            })}
+                            following={followers.filter((follow) => {
+                                return (
+                                    follow.user_id === user.id &&
+                                    follow.surfspot_id == selected.id
+                                );
+                            })}
+                            surfSpotFollowers={followers.filter((follow) => {
+                                return follow.surfspot_id == selected.id;
                             })}
                         />
                     )}

@@ -23,6 +23,12 @@ export function reducer(state = {}, action) {
             ratings: action.ratings,
         };
     }
+    if (action.type == "GET_FOLLOWER") {
+        state = {
+            ...state,
+            followers: action.followers,
+        };
+    }
     if (action.type == "STORE_SURFSPOT") {
         state = {
             ...state,
@@ -50,18 +56,38 @@ export function reducer(state = {}, action) {
                     } else return each;
                 }),
             };
-        }
-
-        // (state.ratings[index].rating = action.rating.rating),
-        // (state.ratings[index].rating = action.rating.rating),
-        else {
+        } else {
             state = {
                 ...state,
                 ratings: [...state.ratings, action.rating],
             };
         }
     }
-
+    if (action.type == "FOLLOWER_ACTION") {
+        console.log("action: ", action);
+        console.log("action.follow.unfollow: ", action.follow.unfollow);
+        if (action.follow.unfollow) {
+            state = {
+                ...state,
+                followers: state.followers.filter((item) => {
+                    console.log(
+                        "checkup: ",
+                        item.user_id != action.follow.userId &&
+                            item.surfspot_id != action.follow.surfSpotId
+                    );
+                    return !(
+                        item.user_id == action.follow.userId &&
+                        item.surfspot_id == action.follow.surfSpotId
+                    );
+                }),
+            };
+        } else {
+            state = {
+                ...state,
+                followers: [...state.followers, action.follow],
+            };
+        }
+    }
     if (action.type == "RECEIVE_USERS") {
         state = {
             ...state,
@@ -105,23 +131,6 @@ export function reducer(state = {}, action) {
             onliners: action.onliners,
         };
     }
-    // if (action.type == "FRIEND_REQUESTS") {
-    //     state = {
-    //         ...state,
-    //         requests: action.requests,
-    //     };
-    // }
 
     return state;
 }
-
-// const obj = {
-//     first: "Thorsten",
-// };
-// const newObj = {
-//     ...obj,
-//     last: "Ständer",
-// };
-
-// const arr = [1, 2, 3];
-// const newArr = [...arr];

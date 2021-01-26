@@ -31,6 +31,14 @@ export async function getRatings() {
         ratings: data.ratings,
     };
 }
+export async function getFollower() {
+    const { data } = await axios.get("/follower");
+    console.log("get follower: ", data);
+    return {
+        type: "GET_FOLLOWER",
+        followers: data.followers,
+    };
+}
 export async function storeSurfSpot(formData) {
     const { data } = await axios.post("/createsurfspot", formData);
     console.log("stored surfspot: ", data);
@@ -59,6 +67,19 @@ export async function storeRating({ surfSpotId, userId, rating }) {
     return {
         type: "STORE_RATING",
         rating: data,
+    };
+}
+
+export async function followerAction({ surfSpotId, following }) {
+    console.log("following: ", following);
+    const { data } = await axios.post("/followeraction", {
+        surfSpotId: surfSpotId,
+        following: following,
+    });
+    console.log("followerAction: ", data);
+    return {
+        type: "FOLLOWER_ACTION",
+        follow: data,
     };
 }
 
