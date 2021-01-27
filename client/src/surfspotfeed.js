@@ -3,13 +3,11 @@ import { useSelector } from "react-redux";
 export default function SurfSpotFeed({ selected }) {
     const posts = useSelector(
         (state) =>
-            state &&
+            state.surfSpotPosts &&
             state.surfSpotPosts.filter(
                 (post) => post.surfspot_id == selected.id
             )
     );
-    console.log("posts: ", posts);
-
     return (
         <div className="feedpost-container">
             <div className="feedpost-center">

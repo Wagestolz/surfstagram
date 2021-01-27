@@ -2,6 +2,7 @@ import axios from "./axios";
 
 import Uploader from "./uploader";
 import Profile from "./profile";
+import Beachfeed from "./beachfeed";
 import OtherProfile from "./otherprofile";
 import FindPeople from "./findpeople";
 import Friends from "./friends";
@@ -107,6 +108,7 @@ export default function App() {
                     />
                 )}
                 <Route exact path="/" render={() => <MainPage />} />
+                <Route exact path="/beachfeed" render={() => <Beachfeed />} />
                 <Route
                     exact
                     path="/profile"

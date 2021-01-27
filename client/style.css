@@ -1017,7 +1017,116 @@ CREATE SURFSPOT
     display: block;
     width: 100%;
 }
+/*
+=============== 
+BEACHFEED
+===============
+*/
 
+.beachfeed-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.beachfeed-center {
+    /* min-height: calc(100vh - 10rem);
+    min-height: calc(50vh - 10rem); */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 4rem;
+    width: 90vw;
+    max-width: var(--max-width);
+}
+
+.following-heading {
+    margin-bottom: 2rem;
+}
+.following {
+    margin-bottom: 2rem;
+}
+
+.beach-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 1rem;
+
+    margin-bottom: 1rem;
+}
+.beach-pic {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--bright);
+    cursor: pointer;
+}
+.beach-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+}
+.beach-info h3 {
+    color: var(--bright);
+    font-family: var(--ff-heading);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.unfollow-btn {
+    width: 100px;
+    font-size: 0.6rem;
+    background: var(--pink);
+    color: var(--bright);
+    border-radius: var(--radius);
+    padding: 0.325rem 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: var(--spacing);
+    /* justify-self: end; */
+    /* display: inline-block; */
+    transition: var(--transition);
+    border-color: transparent;
+    cursor: pointer;
+}
+.unfollow-btn:hover {
+    background: var(--bright);
+    color: var(--pink);
+}
+
+@media screen and (max-width: 800px) {
+    .beach-info h3 {
+        font-size: 1.3rem;
+    }
+    .unfollow-btn {
+        font-size: 0.55rem;
+        width: 90px;
+    }
+    .beachfeed-center {
+        grid-template-columns: 1fr;
+    }
+}
+.feed-heading {
+    justify-self: start;
+    margin-bottom: 0;
+}
+.following-feed {
+    border-radius: var(--radius);
+    background-color: var(--offBlueDark);
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    justify-items: center;
+    max-width: 700px;
+}
+
+@media screen and (max-width: 800px) {
+    .following-feed {
+        padding: 1rem;
+    }
+}
 /*
 =============== 
 PROFILE
