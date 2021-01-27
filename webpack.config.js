@@ -1,6 +1,11 @@
 const path = require("path");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require("webpack");
+if (process.env.NODE_ENV !== "production") {
+    // Already set on heroku production
+    process.env.API_KEY = require("./secrets.json").API_KEY;
+}
 
 module.exports = () => ({
     entry: [
@@ -40,5 +45,8 @@ module.exports = () => ({
             },
         ],
     },
-    plugins: [new MiniCssExtractPlugin()],
+    plugins: [
+        new MiniCssExtractPlugin(),
+        new webpack.EnvironmentPlugin(["API_KEY"]),
+    ],
 });

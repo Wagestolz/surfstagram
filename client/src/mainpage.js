@@ -1,12 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    getSurfSpots,
-    getSurfSpotPosts,
-    getRatings,
-    getFollower,
-    // StoreLocation,
-} from "./actions";
+import { useSelector } from "react-redux";
 import {
     GoogleMap,
     useLoadScript,
@@ -30,13 +23,13 @@ import mapSytyles from "./mapstyles";
 import SurfSpot from "./surfspot";
 import CreateSurfSpot from "./createsurfspot";
 
-let secrets;
-if (process.env.NODE_ENV == "production") {
-    secrets = process.env;
-} else {
-    secrets = require("../../secrets");
-}
-const key = secrets.API_KEY;
+// let secrets;
+// if (process.env.NODE_ENV == "production") {
+//     secrets = process.env;
+// } else {
+//     secrets = require("../../secrets");
+// }
+// const key = secrets.API_KEY;
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -54,13 +47,6 @@ const options = {
 };
 
 export default function MainPage() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getSurfSpots());
-        dispatch(getSurfSpotPosts());
-        dispatch(getRatings());
-        dispatch(getFollower());
-    }, []);
     const surfSpots = useSelector((state) => state && state.surfSpots);
     const user = useSelector((state) => state && state.user);
     const ratings = useSelector((state) => state && state.ratings);
@@ -68,7 +54,7 @@ export default function MainPage() {
 
     const { isLoaded, loadError } = useLoadScript({
         id: "google-map-script",
-        googleMapsApiKey: key,
+        googleMapsApiKey: process.env.API_KEY,
         libraries,
     });
     const [location, setLocation] = useState(null);

@@ -12,7 +12,14 @@ import { socket } from "./socket";
 // new
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData, getUsers } from "./actions";
+import {
+    getUserData,
+    getUsers,
+    getSurfSpots,
+    getSurfSpotPosts,
+    getRatings,
+    getFollower,
+} from "./actions";
 import MainPage from "./mainpage";
 import ProfilePic from "./profilepic";
 
@@ -21,6 +28,10 @@ export default function App() {
     useEffect(() => {
         dispatch(getUserData());
         dispatch(getUsers());
+        dispatch(getSurfSpots());
+        dispatch(getSurfSpotPosts());
+        dispatch(getRatings());
+        dispatch(getFollower());
     }, []);
     const user = useSelector((state) => state && state.user);
     const [uploaderModal, SetUploaderModal] = useState(false);
