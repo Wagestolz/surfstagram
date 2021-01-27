@@ -1,5 +1,6 @@
-// import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { followerAction } from "./actions";
 
 export default function Beachfeed() {
     const user = useSelector((state) => state.user);
@@ -28,7 +29,17 @@ export default function Beachfeed() {
                     })
             )
     );
-    console.log("posts: ", posts);
+    const dispatch = useDispatch();
+    const handleFollow = (surfSpotId) => {
+        dispatch(
+            followerAction({
+                surfSpotId: surfSpotId,
+                following: following.find((y) => {
+                    return y.surfspot_id == surfSpotId;
+                }),
+            })
+        );
+    };
     return (
         <>
             <div className="beachfeed-container">
@@ -45,16 +56,15 @@ export default function Beachfeed() {
                                 <div key={beach.id} className="beach-container">
                                     <img
                                         className="beach-pic"
-                                        // onClick={handleClick}
                                         src={beach.img}
-                                        // alt={first + " " + last}
-                                        // src={profile_pic}
                                     />
                                     <div className="beach-info">
                                         <h3>{beach.name}</h3>
                                         <button
                                             className="unfollow-btn"
-                                            // onClick={handleClick}
+                                            onClick={() =>
+                                                handleFollow(beach.id)
+                                            }
                                         >
                                             unfollow
                                         </button>
@@ -63,7 +73,7 @@ export default function Beachfeed() {
                             ))}
                     </div>
                     <div className="following-feed">
-                        {myBeaches && myBeaches.length == 0 && (
+                        {posts && posts.length == 0 && (
                             <p className="following-heading">
                                 not following anything 🤙
                             </p>
@@ -72,11 +82,19 @@ export default function Beachfeed() {
                             posts.map((post) => (
                                 <div key={post.id}>
                                     <div className="feedcomment-container">
-                                        <img
-                                            src={post.profile_pic}
-                                            className="post-thumb"
-                                            alt="logo"
-                                        />
+                                        {post.profile_pic ? (
+                                            <img
+                                                src={post.profile_pic}
+                                                className="post-thumb"
+                                                alt="logo"
+                                            />
+                                        ) : (
+                                            <img
+                                                src="../logo3.gif"
+                                                className="post-thumb"
+                                                alt="logo"
+                                            />
+                                        )}
                                         <div className="post-user-info">
                                             <p className="created_timestamp">
                                                 {post.created_at.slice(0, 10)}

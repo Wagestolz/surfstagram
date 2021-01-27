@@ -23,14 +23,6 @@ import mapSytyles from "./mapstyles";
 import SurfSpot from "./surfspot";
 import CreateSurfSpot from "./createsurfspot";
 
-// let secrets;
-// if (process.env.NODE_ENV == "production") {
-//     secrets = process.env;
-// } else {
-//     secrets = require("../../secrets");
-// }
-// const key = secrets.API_KEY;
-
 const libraries = ["places"];
 const mapContainerStyle = {
     height: "100%",

@@ -83,6 +83,13 @@ export async function storeRating({ surfSpotId, userId, rating }) {
     };
 }
 
+export async function setBio(bio) {
+    return {
+        type: "SET_BIO",
+        bio: bio,
+    };
+}
+
 export async function followerAction({ surfSpotId, following }) {
     console.log("following: ", following);
     const { data } = await axios.post("/followeraction", {

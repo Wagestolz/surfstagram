@@ -20,6 +20,7 @@ import {
     getSurfSpotPosts,
     getRatings,
     getFollower,
+    setBio,
 } from "./actions";
 import MainPage from "./mainpage";
 import ProfilePic from "./profilepic";
@@ -33,12 +34,55 @@ export default function App() {
         dispatch(getSurfSpotPosts());
         dispatch(getRatings());
         dispatch(getFollower());
+        dispatch(setBio());
     }, []);
     const user = useSelector((state) => state && state.user);
     const [uploaderModal, SetUploaderModal] = useState(false);
     const toggleUploader = () => {
         SetUploaderModal(!uploaderModal);
     };
+    const [sidebar, setSidebar] = useState(false);
+    const toggleSidebar = () => {
+        setSidebar(!sidebar);
+    };
+    const logout = () => {
+        axios.get("/logout").then(() => location.replace("/welcome"));
+        socket.emit("disconnect");
+    };
+    const updateBio = (bioDraft) => {
+        // let self = this;
+        axios
+            .post("/updateBio", {
+                bioDraft: bioDraft,
+            })
+            .then(({ data }) => {
+                // self.setState({
+                //     bio: data[0].bio,
+                // });
+                dispatch(
+                    setBio({
+                        bio: data[0].bio,
+                    })
+                );
+            })
+            .catch((err) => {
+                console.log("error at POST /updateBio", err);
+            });
+    };
+    // const deleteProfile = () => {
+    //     let self = this;
+    //     console.log("delete profile fired!");
+    //     this.deleteImg();
+    //     axios
+    //         .post("/deleteprofile")
+    //         .then((res) => {
+    //             console.log("deletion resolved: ", res);
+    //             self.logout();
+    //         })
+    //         .catch((err) => {
+    //             console.log("error at POST /deleteprofile", err);
+    //         });
+    // };
     if (!user) {
         return null;
     }
@@ -48,15 +92,18 @@ export default function App() {
                 {/* navbar */}
                 <nav className="navbar">
                     <div className="nav-center">
-                        {/* <button className="toggle-nav" onClick={this.toggleSidebar}>
-                        <i className="fas fa-bars"></i>
-                    </button> */}
+                        <button className="toggle-nav" onClick={toggleSidebar}>
+                            <i className="fas fa-bars"></i>
+                        </button>
                         {/* logo */}
                         <img
                             src="/surfspot2.png"
                             className="nav-logo"
                             alt="logo"
                         />
+                        <button className="btn logoutBtn" onClick={logout}>
+                            logout
+                        </button>
                         <div className="links-container">
                             {/* links */}
                             <ul className="nav-links">
@@ -70,21 +117,11 @@ export default function App() {
                                         Beachfeed
                                     </Link>
                                 </li>
-                                {/* <li>
-                                    <Link className="nav-link" to="/users">
-                                        Connect
-                                    </Link>
-                                </li> */}
                                 <li className="releative">
                                     <Link className="nav-link" to="/profile">
                                         Profile
                                     </Link>
                                 </li>
-                                {/* <li>
-                                    <Link className="nav-link" to="/chat">
-                                        Chat
-                                    </Link>
-                                </li> */}
                             </ul>
                         </div>
                         {/* Profile Pic */}
@@ -95,12 +132,56 @@ export default function App() {
                                 profile_pic={user.profile_pic}
                                 toggleUploader={toggleUploader}
                             />
-                            {/* <button className="btn logoutBtn" onClick={this.logout}>
-                            logout
-                        </button> */}
                         </div>
                     </div>
                 </nav>
+                {/* <!-- sidebar --> */}
+                <div
+                    className={
+                        sidebar ? "sidebar-overlay show" : "sidebar-overlay"
+                    }
+                >
+                    <aside className="sidebar">
+                        <button
+                            className="sidebar-close"
+                            onClick={toggleSidebar}
+                        >
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <ul className="sidebar-links">
+                            <li>
+                                <Link
+                                    className="sidebar-link"
+                                    to="/"
+                                    onClick={toggleSidebar}
+                                >
+                                    <i className="fas fa-globe-americas"></i>
+                                    Map
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="sidebar-link"
+                                    to="/beachfeed"
+                                    onClick={toggleSidebar}
+                                >
+                                    <i className="fas fa-water"></i>
+                                    Beachfeed
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="sidebar-link"
+                                    to="/profile"
+                                    onClick={toggleSidebar}
+                                >
+                                    <i className="fas fa-umbrella-beach"></i>
+                                    Profile
+                                </Link>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
                 {uploaderModal && (
                     <Uploader
                         profile_pic={user.profile_pic}
@@ -119,8 +200,8 @@ export default function App() {
                             profile_pic={user.profile_pic}
                             bio={user.bio}
                             toggleUploader={toggleUploader}
-                            // updateBio={this.updateBio}
-                            // deleteProfile={this.deleteProfile}
+                            updateBio={updateBio}
+                            // deleteProfile={deleteProfile}
                         />
                     )}
                 />

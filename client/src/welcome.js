@@ -10,9 +10,9 @@ export default function Welcome() {
             <div className="register-container">
                 <div className="register-center">
                     <div className="welcome-container">
-                        <h1>Surfbuddies</h1>
-                        <img src="logo6.gif" alt="logo" className="logo" />
-                        <h2>it&apos;s always better together</h2>
+                        <h1>Surfspots</h1>
+                        <img src="/surfspot2.png" alt="logo" className="logo" />
+                        <h2>Worldmap</h2>
                     </div>
                     <HashRouter>
                         <div className="form-container">

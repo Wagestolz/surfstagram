@@ -29,7 +29,7 @@ export default function FeedPost({
         formData.append("userId", surfSpotPost.userId);
         formData.append("userFirst", surfSpotPost.userFirst);
         formData.append("userLast", surfSpotPost.userLast);
-        if (surfSpotPost.img || surfSpotPost.name) {
+        if (surfSpotPost.img && surfSpotPost.text) {
             dispatch(storeSurfSpotPost(formData));
             setImgPreview(null);
         }
@@ -54,11 +54,20 @@ export default function FeedPost({
             });
         }
     };
+    console.log("userPic", userPic);
     return (
         <div className="post-container">
             <div className="post-center">
                 <div className="comment-container">
-                    <img src={userPic} className="post-thumb" alt="logo" />
+                    {userPic ? (
+                        <img src={userPic} className="post-thumb" alt="logo" />
+                    ) : (
+                        <img
+                            src="../logo3.gif"
+                            className="post-thumb"
+                            alt="logo"
+                        />
+                    )}
                     <textarea
                         id="text"
                         onChange={handleChange}

@@ -53,6 +53,12 @@ export function reducer(state = {}, action) {
             surfSpotPosts: [action.surfSpotPost, ...state.surfSpotPosts],
         };
     }
+    if (action.type == "SET_BIO") {
+        state = {
+            ...state,
+            user: { ...state.user, ...action.bio },
+        };
+    }
     if (action.type == "STORE_RATING") {
         const index = state.ratings.findIndex(
             (rating) =>

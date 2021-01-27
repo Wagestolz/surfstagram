@@ -15,11 +15,19 @@ export default function SurfSpotFeed({ selected }) {
                     posts.map((post) => (
                         <div key={post.id}>
                             <div className="feedcomment-container">
-                                <img
-                                    src={post.profile_pic}
-                                    className="post-thumb"
-                                    alt="logo"
-                                />
+                                {post.profile_pic ? (
+                                    <img
+                                        src={post.profile_pic}
+                                        className="post-thumb"
+                                        alt="logo"
+                                    />
+                                ) : (
+                                    <img
+                                        src="../logo3.gif"
+                                        className="post-thumb"
+                                        alt="logo"
+                                    />
+                                )}
                                 <div className="post-user-info">
                                     <p className="created_timestamp">
                                         {post.created_at.slice(0, 10)}

@@ -1,6 +1,5 @@
 import ProfilePic from "./profilepic";
 import BioEditer from "./bioediter";
-import { useState, useEffect } from "react";
 
 export default function Profile({
     first,
@@ -9,11 +8,11 @@ export default function Profile({
     bio,
     toggleUploader,
     updateBio,
-    deleteProfile,
+    // deleteProfile,
 }) {
-    function handleClick() {
-        deleteProfile();
-    }
+    // function handleClick() {
+    //     deleteProfile();
+    // }
     return (
         <>
             <div className="profile-container">
@@ -29,16 +28,10 @@ export default function Profile({
                         <h3>
                             {first} {last}
                         </h3>
-                        {/* <div className="online-location">
-                            <div className="online"></div>
-                            <h6>
-                                {location.city}, {location.country_name}
-                            </h6>
-                        </div> */}
                         <BioEditer bio={bio} updateBio={updateBio} />
-                        <button className="btn" onClick={handleClick}>
+                        {/* <button className="btn" onClick={handleClick}>
                             Delete
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
