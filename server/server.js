@@ -12,11 +12,6 @@ const multer = require("multer"); // middleware for handling multipart/form-data
 const uidSafe = require("uid-safe"); // generating unique names for uploaded images
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
-// const server = require("http").Server(app);
-// const io = require("socket.io")(server, {
-//     allowRequest: (req, callback) =>
-//         callback(null, req.headers.referer.startsWith("http://localhost:3000")),
-// });
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -45,9 +40,7 @@ app.use(compression());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 app.use(cookieSessionMiddleware);
-// io.use(function (socket, next) {
-//     cookieSessionMiddleware(socket.request, socket.request.res, next);
-// });
+
 app.use(csurf());
 app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
@@ -391,34 +384,6 @@ app.post("/updateBio", (req, res) => {
         });
 });
 
-// app.get(`/getuser/:id`, (req, res) => {
-//     if (req.query.id == req.session.userId) {
-//         res.json({ ownProfile: true });
-//     } else {
-//         db.getUserInfo(req.query.id)
-//             .then(({ rows }) => {
-//                 res.json(rows);
-//             })
-//             .catch((err) => console.log("error in db.getUserInfo():", err));
-//     }
-// });
-
-// app.get(`/usersLatest`, (req, res) => {
-//     db.getLastJoiners()
-//         .then(({ rows }) => {
-//             res.json(rows);
-//         })
-//         .catch((err) => console.log("error in db.getLastJoiners():", err));
-// });
-
-// app.get(`/userSearch`, (req, res) => {
-//     db.userSearch(req.query.searchValue)
-//         .then(({ rows }) => {
-//             res.json(rows);
-//         })
-//         .catch((err) => console.log("error in db.userSearch():", err));
-// });
-
 app.get("/user", function (req, res) {
     db.getUserInfo(req.session.userId)
         .then(({ rows }) => {
@@ -426,43 +391,6 @@ app.get("/user", function (req, res) {
         })
         .catch((err) => console.log("error in db.getUserInfo():", err));
 });
-
-// app.get("/friendstatus", function (req, res) {
-//     db.friendStatus(req.query.friendId, req.session.userId)
-//         .then(({ rows }) => {
-//             res.json({ rows: rows, userId: req.session.userId });
-//         })
-//         .catch((err) => console.log("error in db.friendStatus():", err));
-// });
-
-// app.post("/friendaction", function (req, res) {
-//     let { action, friendStatus, friendId } = req.body;
-//     if (action == "accept") {
-//         db.acceptRequest(req.session.userId, friendId).then(({ rows }) => {
-//             res.json({ rows: rows, userId: req.session.userId });
-//         });
-//     } else if (action == "make request") {
-//         db.friendRequest(req.session.userId, friendId).then(({ rows }) => {
-//             res.json({ rows: rows, userId: req.session.userId });
-//         });
-//     } else if (action == "unfriend") {
-//         db.unfriend(friendId, req.session.userId).then(() => {
-//             res.json({ rows: [], userId: req.session.userId });
-//         });
-//     } else if (action == "cancel request") {
-//         db.cancelRequest(friendId, req.session.userId).then(() => {
-//             res.json({ rows: [], userId: req.session.userId });
-//         });
-//     }
-// });
-
-// app.get("/getfriends", (req, res) => {
-//     db.getFriends(req.session.userId)
-//         .then(({ rows }) => {
-//             res.json({ users: rows });
-//         })
-//         .catch((err) => console.log("error in db.getFriends():", err));
-// });
 
 app.get("/logout", (req, res) => {
     req.session = null;
@@ -476,74 +404,6 @@ app.get("*", function (req, res) {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
-
-// let onliners = [];
-// let socketToIds = {};
-
-// io.on("connection", (socket) => {
-//     console.log(`socket with id ${socket.id} just connected`);
-//     socketToIds[socket.id] = socket.request.session.userId;
-//     onliners.push(socket.request.session.userId);
-//     let uniqOnliners = [...new Set(onliners)];
-//     db.getOnliners(uniqOnliners)
-//         .then(({ rows }) => {
-//             io.sockets.emit("who is online", rows);
-//         })
-//         .catch((err) => console.log("error in db.getOnliners():", err));
-//     socket.on("disconnect", () => {
-//         delete socketToIds[socket.id];
-//         const index = onliners.indexOf(socket.request.session.userId);
-//         if (index > -1) {
-//             onliners.splice(index, 1);
-//             let uniqOnliners = [...new Set(onliners)];
-//             return db
-//                 .getOnliners(uniqOnliners)
-//                 .then(({ rows }) => {
-//                     // onliners = uniqOnliners;
-//                     io.sockets.emit("who is online", rows);
-//                 })
-//                 .catch((err) => console.log("error in db.getOnliners():", err));
-//         }
-//     });
-//     socket.on("friend request", (targetId) => {
-//         // console.log("Who I friended: ", targetId);
-//         // console.log("Who I am: ", socket.request.session.userId);
-//         for (const key in socketToIds) {
-//             if (socketToIds[key] == targetId) {
-//                 io.sockets.sockets.get(key).emit("friend request", {
-//                     fromUser: socket.request.session.userId,
-//                 });
-//             }
-//         }
-//     });
-//     db.getTenLastMessages()
-//         .then(({ rows }) => {
-//             socket.emit("10 last messages", rows);
-//         })
-//         .catch((err) => console.log("error in db.getTenLastMessages():", err));
-//     socket.on("post Message", (message) => {
-//         db.postMessage(socket.request.session.userId, message)
-//             .then(({ rows }) => {
-//                 const { message, sender_id, created_at } = rows[0];
-//                 return db.getUserInfo(sender_id).then(({ rows }) => {
-//                     const { first, last, profile_pic } = rows[0];
-//                     io.sockets.emit("render new Message", {
-//                         message: message,
-//                         id: sender_id,
-//                         first: first,
-//                         last: last,
-//                         profile_pic: profile_pic,
-//                         created_at: created_at,
-//                     });
-//                 });
-//             })
-//             .catch((err) => console.log("error in db.postMessage():", err));
-//     });
-// });
-
-// server.listen(process.env.PORT || 3001, function () {
-//     console.log("I'm listening.");
-// });
 
 app.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
