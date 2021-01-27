@@ -7,9 +7,6 @@ export default function Uploader({ toggleUploader, profile_pic }) {
     const dispatch = useDispatch();
     const [image, SetImage] = useState(null);
     const [imgPreview, setImgPreview] = useState(null);
-    // const handleFileChange = (e) => {
-    //     SetImage(e.target.files[0]);
-    // };
     const handleFileChange = (e) => {
         const selectedImg = e.target.files[0];
         if (allowed.includes(e.target.files[0].type)) {

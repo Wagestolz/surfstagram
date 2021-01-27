@@ -54,7 +54,6 @@ export default function FeedPost({
             });
         }
     };
-    console.log("userPic", userPic);
     return (
         <div className="post-container">
             <div className="post-center">

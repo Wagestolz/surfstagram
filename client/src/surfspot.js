@@ -30,7 +30,6 @@ export default function SurfSpot({
         surfSpotRatings.reduce((a, b) => a + b.rating, 0) /
             surfSpotRatings.length
     );
-    console.log("surfSpotFollowers", surfSpotFollowers.length);
     if (following.length == 1) {
         following = true;
     } else {

@@ -6,7 +6,7 @@ import { reducer } from "./reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import Welcome from "./welcome";
 import App from "./app";
-import { init } from "./socket";
+// import { init } from "./socket";
 
 const store = createStore(
     reducer,
@@ -17,7 +17,7 @@ let element;
 if (location.pathname === "/welcome") {
     element = <Welcome />;
 } else {
-    init(store);
+    // init(store);
     element = (
         <Provider store={store}>
             <App />
@@ -26,20 +26,3 @@ if (location.pathname === "/welcome") {
 }
 
 ReactDOM.render(element, document.querySelector("main"));
-
-/*
-Welcome(parent)
-    - Registration (child)
-    - Login (child)
-    - Reset (child)
-App (parent)
-    - ProfilePic (child)
-    - Uploader (grandchild)   
-    - Profile (child)
-        - ProfilePic (grandchild)
-            - Uploader (great grandchild) 
-        - BioEditor (grandchild) 
-    - FindPeople (child)
-    - Friends (child)
-
-*/

@@ -1,15 +1,9 @@
 import axios from "./axios";
-
 import Uploader from "./uploader";
 import Profile from "./profile";
 import Beachfeed from "./beachfeed";
-import OtherProfile from "./otherprofile";
-import FindPeople from "./findpeople";
-import Friends from "./friends";
-import Chat from "./chat";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { socket } from "./socket";
 // new
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,18 +41,13 @@ export default function App() {
     };
     const logout = () => {
         axios.get("/logout").then(() => location.replace("/welcome"));
-        socket.emit("disconnect");
     };
     const updateBio = (bioDraft) => {
-        // let self = this;
         axios
             .post("/updateBio", {
                 bioDraft: bioDraft,
             })
             .then(({ data }) => {
-                // self.setState({
-                //     bio: data[0].bio,
-                // });
                 dispatch(
                     setBio({
                         bio: data[0].bio,

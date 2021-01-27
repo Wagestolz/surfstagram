@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "./axios";
 
 export default function Weather({ selected }) {
-    console.log("selected: ", selected);
     const time = new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -34,7 +33,6 @@ export default function Weather({ selected }) {
                 `https://api.openweathermap.org/data/2.5/onecall?lat=${selected.lat}&lon=${selected.lng}&exclude=hourly,minutely&appid=ec3e7aaed207a3f2e54d02f3b057b45f&units=metric`
             )
             .then(({ data }) => {
-                // console.log("weather data: ", data);
                 setWeather(data);
             });
     }, []);

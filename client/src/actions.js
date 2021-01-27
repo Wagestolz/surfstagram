@@ -2,6 +2,7 @@ import axios from "./axios";
 
 export async function getUserData() {
     const { data } = await axios.get("/user");
+    // console.log("user: ", data);
     return {
         type: "GET_USER",
         user: data[0],
@@ -9,6 +10,7 @@ export async function getUserData() {
 }
 export async function getUsers() {
     const { data } = await axios.get("/allusers");
+    // console.log("all users: ", data);
     return {
         type: "GET_ALLUSERS",
         allUsers: data,
@@ -22,7 +24,7 @@ export async function StoreLocation(location) {
 }
 export async function getSurfSpots() {
     const { data } = await axios.get("/surfspots");
-    console.log("get surfspots: ", data);
+    // console.log("get surfspots: ", data);
     return {
         type: "GET_SURFSPOTS",
         surfSpots: data.surfSpots,
@@ -30,7 +32,7 @@ export async function getSurfSpots() {
 }
 export async function getSurfSpotPosts() {
     const { data } = await axios.get("/surfspotposts");
-    console.log("get surfspotposts: ", data);
+    // console.log("get surfspotposts: ", data);
     return {
         type: "GET_SURFSPOTPOSTS",
         surfSpotPosts: data.surfSpotPosts,
@@ -38,7 +40,7 @@ export async function getSurfSpotPosts() {
 }
 export async function getRatings() {
     const { data } = await axios.get("/ratings");
-    console.log("get ratings: ", data);
+    // console.log("get ratings: ", data);
     return {
         type: "GET_RATINGS",
         ratings: data.ratings,
@@ -46,7 +48,7 @@ export async function getRatings() {
 }
 export async function getFollower() {
     const { data } = await axios.get("/follower");
-    console.log("get follower: ", data);
+    // console.log("get follower: ", data);
     return {
         type: "GET_FOLLOWER",
         followers: data.followers,
@@ -54,7 +56,7 @@ export async function getFollower() {
 }
 export async function storeSurfSpot(formData) {
     const { data } = await axios.post("/createsurfspot", formData);
-    console.log("stored surfspot: ", data);
+    // console.log("stored surfspot: ", data);
     return {
         type: "STORE_SURFSPOT",
         surfSpot: data,
@@ -70,13 +72,12 @@ export async function storeSurfSpotPost(formData) {
 }
 
 export async function storeRating({ surfSpotId, userId, rating }) {
-    console.log(surfSpotId, userId, rating);
     const { data } = await axios.post("/createrating", {
         surfSpotId: surfSpotId,
         userId: userId,
         rating: rating,
     });
-    console.log("stored Rating: ", data);
+    // console.log("stored Rating: ", data);
     return {
         type: "STORE_RATING",
         rating: data,
@@ -91,12 +92,11 @@ export async function setBio(bio) {
 }
 
 export async function followerAction({ surfSpotId, following }) {
-    console.log("following: ", following);
     const { data } = await axios.post("/followeraction", {
         surfSpotId: surfSpotId,
         following: following,
     });
-    console.log("followerAction: ", data);
+    // console.log("followerAction: ", data);
     return {
         type: "FOLLOWER_ACTION",
         follow: data,
@@ -122,61 +122,54 @@ export async function uploadImage(formData) {
     };
 }
 
-export async function receiveUsers() {
-    const { data } = await axios.get("/getfriends");
-    return {
-        type: "RECEIVE_USERS",
-        users: data.users,
-    };
-}
-
-export async function unfriend(buttonText, friendStatus, otherUserId) {
-    const { data } = await axios.post(`/friendaction`, {
-        action: buttonText,
-        friendStatus: friendStatus,
-        friendId: Number(otherUserId),
-    });
-    return {
-        type: "UNFRIEND",
-        friendId: Number(otherUserId),
-    };
-}
-
-export async function accept(buttonText, friendStatus, otherUserId) {
-    const { data } = await axios.post(`/friendaction`, {
-        action: buttonText,
-        friendStatus: friendStatus,
-        friendId: Number(otherUserId),
-    });
-    return {
-        type: "ACCEPT",
-        friendId: Number(otherUserId),
-    };
-}
-
-export async function renderRecentMessages(TenLastMessages) {
-    return {
-        type: "LAST_TEN",
-        messages: TenLastMessages,
-    };
-}
-export async function postNewMessage(newMessage) {
-    return {
-        type: "POST_MESSAGE",
-        message: newMessage,
-    };
-}
-
-export async function getOnliners(usersArray) {
-    return {
-        type: "WHOS_ONLINE",
-        onliners: usersArray,
-    };
-}
-// export async function renderRequests(requester) {
-//     console.log("friend request from", requester.fromUser);
+// export async function receiveUsers() {
+//     const { data } = await axios.get("/getfriends");
 //     return {
-//         type: "FRIEND_REQUEST",
-//         fromUser: requester.fromUser,
+//         type: "RECEIVE_USERS",
+//         users: data.users,
+//     };
+// }
+
+// export async function unfriend(buttonText, friendStatus, otherUserId) {
+//     const { data } = await axios.post(`/friendaction`, {
+//         action: buttonText,
+//         friendStatus: friendStatus,
+//         friendId: Number(otherUserId),
+//     });
+//     return {
+//         type: "UNFRIEND",
+//         friendId: Number(otherUserId),
+//     };
+// }
+
+// export async function accept(buttonText, friendStatus, otherUserId) {
+//     const { data } = await axios.post(`/friendaction`, {
+//         action: buttonText,
+//         friendStatus: friendStatus,
+//         friendId: Number(otherUserId),
+//     });
+//     return {
+//         type: "ACCEPT",
+//         friendId: Number(otherUserId),
+//     };
+// }
+
+// export async function renderRecentMessages(TenLastMessages) {
+//     return {
+//         type: "LAST_TEN",
+//         messages: TenLastMessages,
+//     };
+// }
+// export async function postNewMessage(newMessage) {
+//     return {
+//         type: "POST_MESSAGE",
+//         message: newMessage,
+//     };
+// }
+
+// export async function getOnliners(usersArray) {
+//     return {
+//         type: "WHOS_ONLINE",
+//         onliners: usersArray,
 //     };
 // }

@@ -36,7 +36,6 @@ function AvgRating(props) {
 }
 
 export default function DisplayRating({ avgRating }) {
-    console.log("avgRating:", avgRating);
     return (
         <div className="avg-rating-container">
             {[1, 2, 3, 4, 5].map((index) => {

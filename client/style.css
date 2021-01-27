@@ -1039,6 +1039,7 @@ CREATE SURFSPOT
     margin-bottom: 0.7rem;
     border-radius: var(--radius);
     border: 2px solid var(--bright);
+    object-fit: cover;
 }
 .create-btn {
     display: block;

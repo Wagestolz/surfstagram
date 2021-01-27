@@ -66,5 +66,3 @@ export default class Login extends Component {
         );
     }
 }
-
-// a) <button onClick={this.incrementCount}>Click Me!</button>
