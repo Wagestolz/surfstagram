@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { followerAction } from "./actions";
+import WeatherWidget from "./weatherwidget";
 
 export default function Beachfeed() {
     const user = useSelector((state) => state.user);
@@ -40,37 +41,49 @@ export default function Beachfeed() {
             })
         );
     };
+    if (!myBeaches) {
+        return null;
+    }
     return (
         <>
             <div className="beachfeed-container">
                 <div className="beachfeed-center">
-                    <div className="following">
-                        <h2 className="following-heading">Following</h2>
-                        {myBeaches && myBeaches.length == 0 && (
-                            <p className="following-heading">
-                                not following anything 🤙
-                            </p>
-                        )}
-                        {myBeaches &&
-                            myBeaches.map((beach) => (
-                                <div key={beach.id} className="beach-container">
-                                    <img
-                                        className="beach-pic"
-                                        src={beach.img}
-                                    />
-                                    <div className="beach-info">
-                                        <h3>{beach.name}</h3>
-                                        <button
-                                            className="unfollow-btn"
-                                            onClick={() =>
-                                                handleFollow(beach.id)
-                                            }
-                                        >
-                                            unfollow
-                                        </button>
+                    <div className="widget-container">
+                        <div className="following">
+                            <h2 className="following-heading">Following</h2>
+                            {myBeaches && myBeaches.length == 0 && (
+                                <p className="following-heading">
+                                    not following anything 🤙
+                                </p>
+                            )}
+                            {myBeaches &&
+                                myBeaches.map((beach) => (
+                                    <div
+                                        key={beach.id}
+                                        className="beach-container"
+                                    >
+                                        <img
+                                            className="beach-pic"
+                                            src={beach.img}
+                                        />
+                                        <div className="beach-info">
+                                            <h3>{beach.name}</h3>
+                                            <button
+                                                className="unfollow-btn"
+                                                onClick={() =>
+                                                    handleFollow(beach.id)
+                                                }
+                                            >
+                                                unfollow
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                        </div>
+                        <div className="weather-widget-container">
+                            <h2 className="following-heading">Forecast</h2>
+                            {/* <WeatherWidget myBeaches={myBeaches} /> */}
+                        </div>
                     </div>
                     <div className="following-feed">
                         {posts && posts.length == 0 && (

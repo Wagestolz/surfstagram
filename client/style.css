@@ -1065,7 +1065,8 @@ BEACHFEED
     align-items: start;
     column-gap: 4rem;
     width: 90vw;
-    max-width: var(--max-width);
+    /* max-width: var(--max-width); */
+    max-width: 1100px;
 }
 
 .following-heading {
@@ -1144,16 +1145,23 @@ BEACHFEED
     border-radius: var(--radius);
     background-color: var(--offBlueDark);
     padding: 1rem 2rem;
+    margin-right: 1rem;
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
     justify-items: center;
+    justify-self: end;
     max-width: 700px;
 }
 
 @media screen and (max-width: 800px) {
     .following-feed {
         padding: 1rem;
+    }
+}
+@media screen and (max-width: 900px) {
+    .following-feed {
+        justify-self: start;
     }
 }
 /*

@@ -30,7 +30,7 @@ export default function Weather({ selected }) {
     useEffect(() => {
         axios
             .get(
-                `https://api.openweathermap.org/data/2.5/onecall?lat=${selected.lat}&lon=${selected.lng}&exclude=hourly,minutely&appid=ec3e7aaed207a3f2e54d02f3b057b45f&units=metric`
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${selected.lat}&lon=${selected.lng}&exclude=hourly,minutely&appid=6e974c2fa9160b030c0785bac2a5a3c6&units=metric`
             )
             .then(({ data }) => {
                 setWeather(data);
