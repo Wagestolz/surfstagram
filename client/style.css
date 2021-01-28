@@ -686,6 +686,42 @@ WEATHER
     }
 }
 
+.single-weather {
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    justify-items: center;
+    grid-template-columns: auto 1fr;
+    /* grid-template-rows: 1fr; */
+    /* row-gap: 0.5rem; */
+    margin-bottom: 1rem;
+}
+.single-weather-heading {
+    font-size: 24px;
+}
+.single-weather-img-container {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+}
+.single-weather-img {
+    width: 80px;
+}
+.single-weather-info {
+    display: grid;
+    align-items: end;
+    justify-content: start;
+    justify-items: start;
+    justify-self: start;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    row-gap: 0.5rem;
+}
+.single-weather-info h2 {
+    margin: 0;
+}
+
 /*
 =============== 
 POSTFEED WINDOW

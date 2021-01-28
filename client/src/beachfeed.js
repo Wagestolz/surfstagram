@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { followerAction } from "./actions";
-import WeatherWidget from "./weatherwidget";
+// import WeatherWidget from "./weatherwidget";
 
 export default function Beachfeed() {
     const user = useSelector((state) => state.user);
