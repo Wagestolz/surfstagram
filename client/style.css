@@ -882,6 +882,13 @@ POSTFEED WINDOW
 .created_timestamp {
     color: var(--offBlue);
 }
+.created_timestamp a {
+    color: var(--bright);
+    font-family: var(--ff-heading);
+}
+.created_timestamp a:hover {
+    color: var(--pink);
+}
 
 .feed-pic-container {
     padding: 2rem 0;

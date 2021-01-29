@@ -16,7 +16,7 @@ export default function WeatherWidget({ myBeaches }) {
     async function processBeaches(Beaches) {
         for (const beach of Beaches) {
             const { data } = await axios.get(
-                `https://api.openweathermap.org/data/2.5/onecall?lat=${beach.lat}&lon=${beach.lng}&exclude=hourly,minutely&appid=6e974c2fa9160b030c0785bac2a5a3c6&units=metric`
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${beach.lat}&lon=${beach.lng}&exclude=hourly,minutely&appid=${process.env.OWM_KEY}&units=metric`
             );
             console.log("Data: ", data);
             setWeather((currentWeather) => {

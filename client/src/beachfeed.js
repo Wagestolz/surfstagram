@@ -18,6 +18,8 @@ export default function Beachfeed() {
                 following.find((y) => x.id == y.surfspot_id)
             )
     );
+    console.log("myBeaches: ", myBeaches);
+
     const posts = useSelector(
         (state) =>
             state.surfSpotPosts &&
@@ -30,6 +32,7 @@ export default function Beachfeed() {
                     })
             )
     );
+    console.log("surfSpotPosts: ", posts);
     const dispatch = useDispatch();
     const handleFollow = (surfSpotId) => {
         dispatch(
@@ -110,7 +113,11 @@ export default function Beachfeed() {
                                         )}
                                         <div className="post-user-info">
                                             <p className="created_timestamp">
-                                                {post.created_at.slice(0, 10)}
+                                                {post.created_at.slice(0, 10)}{" "}
+                                                <span>at</span>{" "}
+                                                <a href="#">
+                                                    {post.surfspot_name}
+                                                </a>
                                             </p>
                                             <h2>
                                                 {post.user_first}{" "}

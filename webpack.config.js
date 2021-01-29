@@ -5,6 +5,8 @@ const webpack = require("webpack");
 if (process.env.NODE_ENV !== "production") {
     // Already set on heroku production
     process.env.API_KEY = require("./secrets.json").API_KEY;
+    process.env.OWM_KEY = require("./secrets.json").OWM_KEY;
+    process.env.STORMGLASS_KEY = require("./secrets.json").STORMGLASS_KEY;
 }
 
 module.exports = () => ({
@@ -47,6 +49,7 @@ module.exports = () => ({
     },
     plugins: [
         new MiniCssExtractPlugin(),
-        new webpack.EnvironmentPlugin(["API_KEY"]),
+        new webpack.EnvironmentPlugin(["API_KEY", "OWM_KEY", "STORMGLASS_KEY"]),
+        // new webpack.EnvironmentPlugin(["OWM_KEY"]),
     ],
 });
