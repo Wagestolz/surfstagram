@@ -4,6 +4,7 @@ import SurfSpotFeed from "./surfspotfeed";
 import GiveRating from "./giverating";
 import DisplayRating from "./rating";
 import Follow from "./follow";
+import BarChart from "./barchart";
 
 export default function SurfSpot({
     selected,
@@ -81,6 +82,7 @@ export default function SurfSpot({
                         <p>{selected.description}</p>
                     </div>
                 </div>
+                <BarChart selected={selected}></BarChart>
                 <Weather selected={selected}></Weather>
                 <FeedPost
                     selected={selected}

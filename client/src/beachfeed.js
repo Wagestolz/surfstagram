@@ -18,8 +18,6 @@ export default function Beachfeed() {
                 following.find((y) => x.id == y.surfspot_id)
             )
     );
-    console.log("myBeaches: ", myBeaches);
-
     const posts = useSelector(
         (state) =>
             state.surfSpotPosts &&
@@ -32,7 +30,6 @@ export default function Beachfeed() {
                     })
             )
     );
-    console.log("surfSpotPosts: ", posts);
     const dispatch = useDispatch();
     const handleFollow = (surfSpotId) => {
         dispatch(
