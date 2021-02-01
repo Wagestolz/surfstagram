@@ -87,7 +87,7 @@ export default function BarChart({ selected }) {
     }
     return (
         <div className="weather-container">
-            <h2 className="weather-heading">Wave Height</h2>
+            <h2 className="weather-heading">Forecast</h2>
             <div className="weather-center">
                 <div className="curr-weather barchart">
                     <Bar

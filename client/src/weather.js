@@ -41,7 +41,7 @@ export default function Weather({ selected }) {
     }
     return (
         <div className="weather-container">
-            <h2 className="weather-heading">Surf Forecast</h2>
+            <h2 className="weather-heading">Weather</h2>
             <div className="weather-center">
                 <div className="curr-weather">
                     <h5>
