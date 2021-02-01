@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { followerAction } from "./actions";
+import { Link } from "react-router-dom";
 // import WeatherWidget from "./weatherwidget";
 
 export default function Beachfeed() {
@@ -62,12 +63,16 @@ export default function Beachfeed() {
                                         key={beach.id}
                                         className="beach-container"
                                     >
-                                        <img
-                                            className="beach-pic"
-                                            src={beach.img}
-                                        />
+                                        <Link to={"/surfspot/" + beach.id}>
+                                            <img
+                                                className="beach-pic"
+                                                src={beach.img}
+                                            />
+                                        </Link>
                                         <div className="beach-info">
-                                            <h3>{beach.name}</h3>
+                                            <Link to={"/surfspot/" + beach.id}>
+                                                <h3>{beach.name}</h3>
+                                            </Link>
                                             <button
                                                 className="unfollow-btn"
                                                 onClick={() =>
@@ -112,9 +117,14 @@ export default function Beachfeed() {
                                             <p className="created_timestamp">
                                                 {post.created_at.slice(0, 10)}{" "}
                                                 <span>at</span>{" "}
-                                                <a href="#">
+                                                <Link
+                                                    to={
+                                                        "/surfspot/" +
+                                                        post.surfspot_id
+                                                    }
+                                                >
                                                     {post.surfspot_name}
-                                                </a>
+                                                </Link>
                                             </p>
                                             <h2>
                                                 {post.user_first}{" "}

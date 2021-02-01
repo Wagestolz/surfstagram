@@ -55,7 +55,7 @@ export default function BarChart({ selected }) {
     useEffect(() => {
         axios
             .get(
-                `https://api.stormglass.io/v2/tide/extremes/point?lat=${selected.lat}&lng=${selected.lng}&start=${start}&end=${end}`,
+                `https://api.stormglass.io/v2/tide/sea-level/point?lat=${selected.lat}&lng=${selected.lng}&start=${start}&end=${end}`,
                 {
                     headers: {
                         Authorization: `${process.env.STORMGLASS_KEY}`,
@@ -70,7 +70,7 @@ export default function BarChart({ selected }) {
     useEffect(() => {
         axios
             .get(
-                `https://api.stormglass.io/v2/tide/extremes/point?lat=${selected.lat}&lng=${selected.lng}&start=${start}&end=${end}`,
+                `https://api.stormglass.io/v2/astronomy/point?lat=${selected.lat}&lng=${selected.lng}&start=${start}&end=${end}`,
                 {
                     headers: {
                         Authorization: `${process.env.STORMGLASS_KEY}`,
@@ -89,76 +89,37 @@ export default function BarChart({ selected }) {
         <div className="weather-container">
             <h2 className="weather-heading">Wave Height</h2>
             <div className="weather-center">
-                <div className="curr-weather">
+                <div className="curr-weather barchart">
                     <Bar
                         data={{
-                            labels: [
-                                stormglassWeather.hours[0].time.substring(
-                                    11,
-                                    16
-                                ),
-                                stormglassWeather.hours[1].time.substring(
-                                    11,
-                                    16
-                                ),
-                                stormglassWeather.hours[2].time.substring(
-                                    11,
-                                    16
-                                ),
-                                stormglassWeather.hours[3].time.substring(
-                                    11,
-                                    16
-                                ),
-                                stormglassWeather.hours[4].time.substring(
-                                    11,
-                                    16
-                                ),
-                                stormglassWeather.hours[5].time.substring(
-                                    11,
-                                    16
-                                ),
-                            ],
+                            labels: stormglassWeather.hours.map((value) =>
+                                value.time.substring(11, 16)
+                            ),
                             datasets: [
                                 {
-                                    label: "Wave Height",
-                                    data: [
-                                        stormglassWeather.hours[0].waveHeight
-                                            .noaa,
-                                        stormglassWeather.hours[1].waveHeight
-                                            .noaa,
-                                        stormglassWeather.hours[2].waveHeight
-                                            .noaa,
-                                        stormglassWeather.hours[3].waveHeight
-                                            .noaa,
-                                        stormglassWeather.hours[4].waveHeight
-                                            .noaa,
-                                        stormglassWeather.hours[5].waveHeight
-                                            .noaa3,
-                                    ],
-                                    backgroundColor: [
-                                        "#e5cf6192",
-                                        "#e5cf6192",
-                                        "#e5cf6192",
-                                        "#e5cf6192",
-                                        "#e5cf6192",
-                                        "#e5cf6192",
-                                    ],
-                                    borderColor: [
-                                        "#e5cf61",
-                                        "#e5cf61",
-                                        "#e5cf61",
-                                        "#e5cf61",
-                                        "#e5cf61",
-                                        "#e5cf61",
-                                    ],
+                                    label: "Wave Height (in m)",
+                                    data: stormglassWeather.hours.map(
+                                        (value) => value.waveHeight.noaa
+                                    ),
+                                    backgroundColor: "#e5cf6192",
+                                    borderColor: "#e5cf61",
                                     // barThickness:
-
+                                    borderWidth: 1,
+                                },
+                                {
+                                    label: "Wind Speed (in kmh)",
+                                    data: stormglassWeather.hours.map(
+                                        (value) => value.windSpeed.noaa
+                                    ),
+                                    backgroundColor: "#e6007f8e",
+                                    borderColor: "#e6007e",
+                                    // barThickness:
                                     borderWidth: 1,
                                 },
                             ],
                         }}
-                        height={400}
-                        width={600}
+                        // height={400}
+                        // width={600}
                         options={{
                             maintainAspectRatio: false,
                             scales: {
@@ -189,8 +150,8 @@ export default function BarChart({ selected }) {
                         }}
                         legend={{
                             labels: {
-                                fontColor: "white",
-                                fontFamily: "Open Sans Condensed",
+                                fontColor: "#e5cf61",
+                                fontFamily: "Original Surfer",
                             },
                         }}
                     />

@@ -18,6 +18,7 @@ import {
 } from "./actions";
 import MainPage from "./mainpage";
 import ProfilePic from "./profilepic";
+import SurfSpot from "./surfspot";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -30,7 +31,19 @@ export default function App() {
         dispatch(getFollower());
         dispatch(setBio());
     }, []);
-    const user = useSelector((state) => state && state.user);
+    const user = useSelector((state) => state.user && state.user);
+    const surfSpots = useSelector(
+        (state) => state.surfSpots && state.surfSpots
+    );
+    const ratings = useSelector((state) => state.ratings && state.ratings);
+    const followers = useSelector(
+        (state) => state.followers && state.followers
+    );
+    const [surfSpotModal, SetSurfSpotModal] = useState(false);
+    const unselect = () => {
+        // SetSurfSpotModal(!surfSpotModal);
+        history.push("/");
+    };
     const [uploaderModal, SetUploaderModal] = useState(false);
     const toggleUploader = () => {
         SetUploaderModal(!uploaderModal);
@@ -72,7 +85,7 @@ export default function App() {
     //             console.log("error at POST /deleteprofile", err);
     //         });
     // };
-    if (!user) {
+    if (!user || !ratings || !surfSpots || !followers) {
         return null;
     }
     return (
@@ -191,6 +204,46 @@ export default function App() {
                             toggleUploader={toggleUploader}
                             updateBio={updateBio}
                             // deleteProfile={deleteProfile}
+                        />
+                    )}
+                />
+                <Route
+                    path="/surfspot/:id"
+                    render={(props) => (
+                        <SurfSpot
+                            match={props.match}
+                            history={props.history}
+                            key={props.match.url}
+                            selected={surfSpots.find((surfSpot) => {
+                                return surfSpot.id == props.match.params.id;
+                            })}
+                            // unselect={unselect}
+                            userId={user.id}
+                            userFirst={user.first}
+                            userLast={user.last}
+                            userPic={user.profile_pic}
+                            userRating={ratings.filter((rating) => {
+                                return (
+                                    rating.user_id === user.id &&
+                                    rating.surfspot_id == props.match.params.id
+                                );
+                            })}
+                            surfSpotRatings={ratings.filter((rating) => {
+                                return (
+                                    rating.surfspot_id == props.match.params.id
+                                );
+                            })}
+                            following={followers.filter((follow) => {
+                                return (
+                                    follow.user_id === user.id &&
+                                    follow.surfspot_id == props.match.params.id
+                                );
+                            })}
+                            surfSpotFollowers={followers.filter((follow) => {
+                                return (
+                                    follow.surfspot_id == props.match.params.id
+                                );
+                            })}
                         />
                     )}
                 />

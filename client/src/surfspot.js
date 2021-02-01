@@ -17,6 +17,7 @@ export default function SurfSpot({
     following,
     surfSpotFollowers,
     userPic,
+    history,
 }) {
     function round(value, precision) {
         var multiplier = Math.pow(10, precision || 0);
@@ -31,6 +32,8 @@ export default function SurfSpot({
         surfSpotRatings.reduce((a, b) => a + b.rating, 0) /
             surfSpotRatings.length
     );
+    const close = () => history.push("/beachfeed");
+
     if (following.length == 1) {
         following = true;
     } else {
@@ -39,7 +42,7 @@ export default function SurfSpot({
     return (
         <div className="surfspot-modal">
             <div className="surfspot-container">
-                <h2 className="close-btn" onClick={unselect}>
+                <h2 className="close-btn" onClick={unselect ? unselect : close}>
                     <i className="fas fa-times"></i>
                 </h2>
                 <div className="surfspot-header">

@@ -23,6 +23,7 @@ Fonts (Pacifico, Open Sans)
     /* --pink: #e541a5; */
     --pink: #e6007e;
     --pinkOpac: #e6007fe9;
+    --pinkOpac: #e6007f8e;
     --pinkLight: #f349b2;
     --sun: #ecc03a;
     /* --bright: #f0e047; */
@@ -69,15 +70,7 @@ Global Styles
 }
 body {
     font-family: var(--ff-text);
-    /* height: 100vh; */
-    /* background: linear-gradient(
-        0deg,
-        rgba(69, 123, 204, 0.9),
-        rgba(69, 166, 204, 1)
-    ); */
-    /* background: var(--babyDark); */
     background: var(--offBlue);
-    /* url("../public/surfbuddies1.PNG"); */
     color: var(--bright);
     line-height: 1.5;
     font-size: 0.875rem;
@@ -720,6 +713,17 @@ WEATHER
 }
 .single-weather-info h2 {
     margin: 0;
+}
+
+/*
+=============== 
+BARCHART
+===============
+*/
+
+.barchart {
+    width: 600px;
+    height: 400px;
 }
 
 /*
